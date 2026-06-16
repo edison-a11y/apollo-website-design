@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <!-- 镜片产品渲染（代码生成占位；正式实拍图命名 card.jpg 放同目录自动替换） -->
+  <defs>
+    <linearGradient id="face" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".95"/>
+      <stop offset="40%" stop-color="#CDEBDD" stop-opacity=".75"/>
+      <stop offset="100%" stop-color="#CDEBDD"/>
+    </linearGradient>
+    <linearGradient id="coat" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0E6B4F" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#0E6B4F" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#0E6B4F" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="flare" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#fff" stop-opacity=".95"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="200" cy="246" rx="138" ry="16" fill="#000" opacity=".12"/>
+  <g transform="rotate(-14 200 150)">
+    <ellipse cx="200" cy="160" rx="142" ry="64" fill="#A8D8C2"/>
+    <ellipse cx="200" cy="150" rx="142" ry="64" fill="url(#face)" stroke="#0E6B4F" stroke-opacity=".45" stroke-width="2.5"/>
+    <ellipse cx="200" cy="150" rx="120" ry="50" fill="none" stroke="url(#coat)" stroke-width="3.5"/>
+    <rect x="98" y="108" width="170" height="13" rx="6.5" transform="rotate(-9 183 114)" fill="url(#flare)"/>
+    <rect x="150" y="135" width="95" height="7" rx="3.5" transform="rotate(-9 197 138)" fill="url(#flare)" opacity=".65"/>
+  </g>
+</svg>
