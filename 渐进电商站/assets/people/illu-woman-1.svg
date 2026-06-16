@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <!-- 扁平插画·女性肖像1（代码绘制，可改色） -->
+  <rect width="400" height="400" rx="0" fill="#CFE8F0"/>
+  <circle cx="318" cy="76" r="26" fill="#FFD84D"/>
+  <circle cx="62" cy="318" r="10" fill="#C8102E" opacity=".75"/>
+  <path d="M70 330 q8 -26 34 -22" stroke="#0E4F48" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <!-- 肩/上衣 -->
+  <path d="M88 400 q4 -86 112 -86 q108 0 112 86 Z" fill="#0E4F48"/>
+  <!-- 颈 -->
+  <rect x="178" y="268" width="44" height="52" rx="20" fill="#E8B68F"/>
+  <!-- 头发后层 -->
+  <path d="M118 192 q-6 -118 82 -118 q88 0 82 118 q-3 78 -28 96 l-108 0 q-25 -18 -28 -96z" fill="#3B2A22"/>
+  <!-- 脸 -->
+  <ellipse cx="200" cy="186" rx="66" ry="74" fill="#F2C49B"/>
+  <!-- 刘海 -->
+  <path d="M134 168 q-4 -86 66 -86 q70 0 66 86 q-34 -30 -66 -30 q-32 0 -66 30z" fill="#3B2A22"/>
+  <!-- 耳 -->
+  <circle cx="132" cy="194" r="13" fill="#E8B68F"/><circle cx="268" cy="194" r="13" fill="#E8B68F"/>
+  <circle cx="132" cy="206" r="4" fill="#FFD84D"/>
+  <!-- 眼镜 -->
+  <rect x="142" y="172" width="50" height="40" rx="16" fill="rgba(255,255,255,.45)" stroke="#17181C" stroke-width="6"/>
+  <rect x="208" y="172" width="50" height="40" rx="16" fill="rgba(255,255,255,.45)" stroke="#17181C" stroke-width="6"/>
+  <path d="M192 188 q8 -8 16 0" stroke="#17181C" stroke-width="6" fill="none"/>
+  <!-- 眼睛 -->
+  <circle cx="167" cy="192" r="5" fill="#17181C"/><circle cx="233" cy="192" r="5" fill="#17181C"/>
+  <!-- 眉/鼻/唇 -->
+  <path d="M152 162 q15 -8 30 -2M218 160 q15 -6 30 2" stroke="#3B2A22" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M198 206 q4 8 -2 14" stroke="#D99A6C" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M178 236 q22 14 44 0" stroke="#B5453C" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <circle cx="150" cy="226" r="9" fill="#EFA286" opacity=".55"/><circle cx="250" cy="226" r="9" fill="#EFA286" opacity=".55"/>
+</svg>
