@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>方向B v2 · Zenni风格复刻 — 样张（非最终版）</title>
+<style>
+/* ============================================================
+   ★ 配置区（改颜色/字号/间距只动这里）
+   设计语言对标 Zenni：白底 + 超粗黑标题 + 平色块瓷砖 + 黑胶囊按钮
+   ============================================================ */
+:root{
+  --墨: #111111;            /* 主文字/黑色按钮 */
+  --白: #FFFFFF;
+  --卡灰: #F4F4F2;          /* 产品卡底（Zenni同款浅暖灰） */
+  --描边: #E8E8E6;
+  --薄荷: #D9F0E6;          /* 「热销」小标签底（Zenni mint） */
+  --薄荷字: #0B5C43;
+  --红: #C8102E;            /* 阿波罗红：仅用于Logo/促销/价格点缀 */
+  --黄: #FFD84D;            /* 瓷砖色1 */
+  --浅蓝: #CFE8F0;          /* 瓷砖色2 */
+  --深青: #0E4F48;          /* 满幅价格专区底（Zenni UNDER$30同款气质） */
+  --灰: #6E6E6E;
+
+  --字-巨: 44px;            /* 区块巨标题（手机） */
+  --字-大: 26px;
+  --字-中: 18px;
+  --字-正文: 16.5px;
+  --行高: 1.65;
+  --圆角-砖: 18px;          /* 大瓷砖圆角 */
+  --圆角-卡: 12px;
+  --间距: 18px;
+
+  --字体: -apple-system, "PingFang SC", "HarmonyOS Sans SC", "MiSans", "Source Han Sans SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--字体);font-size:var(--字-正文);line-height:var(--行高);color:var(--墨);background:var(--白);padding-bottom:70px}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 var(--间距)}
+.specimen-note{background:var(--墨);color:#fff;text-align:center;font-size:12.5px;padding:5px 10px;font-weight:600}
+
+/* —— 巨型区块标题（Zenni BEST SELLERS式）—— */
+.mega{font-size:var(--字-巨);font-weight:900;letter-spacing:-0.02em;line-height:1.05}
+
+/* —— 按钮：黑/白胶囊（Zenni式），红只做促销 —— */
+.pill{display:inline-flex;align-items:center;gap:7px;background:var(--墨);color:#fff;font-weight:700;font-size:15px;padding:11px 22px;border-radius:999px;border:1.5px solid var(--墨);cursor:pointer}
+.pill:hover{background:#333}
+.pill.white{background:#fff;color:var(--墨)}
+.pill.sm{padding:8px 16px;font-size:13.5px}
+
+/* —— 顶栏：logo + 大搜索框 + 功能图标 —— */
+.topbar{display:flex;align-items:center;gap:18px;padding:14px var(--间距);max-width:1120px;margin:0 auto}
+.topbar img{height:26px}
+.search{flex:1;display:flex;align-items:center;gap:9px;background:#fff;border:1.5px solid #CFCFCF;border-radius:999px;padding:10px 18px;color:var(--灰);font-size:14.5px}
+.search svg{width:17px;height:17px;flex:none}
+.icons{display:flex;gap:18px}
+.icons a{display:flex;flex-direction:column;align-items:center;font-size:11px;color:var(--墨);gap:2px}
+.icons svg{width:21px;height:21px}
+nav.cats{border-bottom:1px solid var(--描边)}
+nav.cats .wrap{display:flex;gap:26px;justify-content:center;padding:10px var(--间距);font-size:14.5px;font-weight:600;flex-wrap:wrap}
+nav.cats .hot{color:var(--红)}
+
+/* —— Hero瓷砖轮播（Zenni式平色块+照片+白pill）—— */
+.hero{padding:16px 0 6px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tile{border-radius:var(--圆角-砖);overflow:hidden;display:grid;grid-template-columns:1.05fr 1fr;min-height:250px}
+.tile .txt{padding:26px 22px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:12px}
+.tile h2{font-size:30px;font-weight:900;line-height:1.12;letter-spacing:-0.01em}
+.tile p{font-size:14px;opacity:.85}
+.tile img{width:100%;height:100%;object-fit:cover}
+.arrows{display:flex;gap:8px;padding:12px 0 0}
+.arrows button{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--墨);background:#fff;font-size:15px;cursor:pointer}
+
+/* —— 人群入口圆圈条（EYEWEAR FOR EVERYONE式）—— */
+.circles{text-align:center;padding:46px 0 40px}
+.circles .mega{margin-bottom:4px}
+.circles .sub{color:var(--灰);font-size:14px;margin-bottom:26px}
+.circles .row{display:flex;justify-content:center;gap:26px;flex-wrap:wrap}
+.cir{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:13px;font-weight:600;width:86px}
+.cir i{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.cir svg{width:30px;height:30px;color:var(--墨)}
+
+/* —— 产品区（BEST SELLERS式）—— */
+.sec{padding:34px 0 44px}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:6px;flex-wrap:wrap}
+.tabs{display:flex;gap:18px;font-size:14.5px;font-weight:600;color:var(--灰);margin:6px 0 18px}
+.tabs .on{color:var(--墨);border-bottom:2.5px solid var(--墨);padding-bottom:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:14px}
+.grid.fit{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))} /* 卡片少时铺满整行，不留空轨 */
+.pcard{background:var(--卡灰);border-radius:var(--圆角-卡);padding:14px;position:relative;display:flex;flex-direction:column}
+.pcard .tag{position:absolute;top:12px;left:12px;background:var(--薄荷);color:var(--薄荷字);font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px}
+.pcard .tag.red{background:#FBDDE2;color:var(--红)}
+.pcard .fav{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#fff;border:1px solid var(--描边);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.pcard .fav svg{width:15px;height:15px;color:var(--墨)}
+/* —— 产品卡翻转图：默认模特图，悬停翻成产品图 —— */
+.pcard .ph{height:175px;margin:26px 0 8px;perspective:900px}
+.pcard .flip{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s ease}
+.pcard:hover .flip,.pcard .flip.flipped{transform:rotateY(180deg)} /* 桌面悬停翻转；手机点按翻转 */
+.pcard .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.pcard .face.front img{width:100%;height:100%;object-fit:cover;object-position:center 22%} /* 人像取景偏上，保脸 */
+.pcard .face.back{transform:rotateY(180deg);background:#fff}
+.pcard .face.back img{max-height:88%;width:auto;mix-blend-mode:multiply}
+.pcard .face.back svg{width:170px;height:auto}
+
+/* —— 模特实拍横条（Zenni lifestyle band式）—— */
+.models{padding:8px 0 40px}
+.models .strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.models .strip img{width:100%;height:230px;object-fit:cover;border-radius:var(--圆角-砖)}
+.models .cap{text-align:center;font-size:13px;color:var(--灰);margin-top:10px}
+@media(max-width:760px){.models .strip{grid-template-columns:repeat(3,1fr);gap:8px}.models .strip img{height:120px}}
+.pcard h3{font-size:15.5px;font-weight:800}
+.pcard .who{font-size:12.5px;color:var(--灰);margin-bottom:7px}
+.pcard .pr{display:flex;align-items:baseline;gap:7px;margin-bottom:8px}
+.pcard .pr b{font-size:20px;font-weight:900}
+.pcard .pr b::before{content:"¥";font-size:13px}
+.pcard .pr span{font-size:12px;color:var(--灰)}
+.pcard .dots{display:flex;gap:5px;margin-bottom:12px}
+.pcard .dots i{width:15px;height:15px;border-radius:50%;border:1.5px solid #fff;outline:1px solid #C9C9C9;display:inline-block}
+.pcard .pill{justify-content:center;margin-top:auto}
+
+/* —— 满幅深色价格专区（UNDER $30 PICKS式）—— */
+.deep{background:var(--深青);color:#fff;padding:40px 0 48px;margin:14px 0}
+.deep .sec-head{margin-bottom:20px}
+.deep .pill{background:#fff;color:var(--墨);border-color:#fff}
+.deep .pcard{background:#fff;color:var(--墨)}
+
+/* —— 技术瓷砖（SMARTER DEFENSE式）—— */
+.feat{padding:40px 0 50px;text-align:center}
+.feat .sub{color:var(--灰);font-size:14px;margin-bottom:24px}
+.ftiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;text-align:left}
+.ftile{border-radius:var(--圆角-砖);padding:24px 22px 22px;min-height:190px;display:flex;flex-direction:column;gap:8px}
+.ftile h3{font-size:21px;font-weight:900}
+.ftile p{font-size:13.5px;opacity:.8;flex:1}
+
+/* —— 手机吸底CTA —— */
+.dock{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--描边);padding:9px var(--间距);display:flex;gap:10px;align-items:center;z-index:9}
+.dock .p{font-size:12px;color:var(--灰)}
+.dock .p b{display:block;color:var(--墨);font-size:17px;font-weight:900}
+.dock a{flex:1;text-align:center;background:var(--墨);color:#fff;font-weight:700;padding:13px;border-radius:999px;font-size:15px}
+
+footer{text-align:center;font-size:13px;color:var(--灰);padding:26px 0 20px}
+
+@media(max-width:760px){
+  .tiles{grid-template-columns:1fr}
+  .tile{grid-template-columns:1fr 1fr;min-height:190px}
+  .tile h2{font-size:22px}
+  :root{--字-巨:32px}
+  .icons a span{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="specimen-note">样张 v2 · 方向B「转化电商型」Zenni风格复刻 · 非最终版</div>
+
+<!-- 顶栏：Zenni式 logo+大搜索+功能图标 -->
+<div class="topbar">
+  <img src="../assets/logo-02.png" alt="阿波罗镜片">
+  <div class="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="7"/><path d="M21 21l-6-6"/></svg>
+    搜索镜片，或让AI帮你推荐
+  </div>
+  <div class="icons">
+    <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg><span>登录</span></a>
+    <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21S3 14 3 8.5A4.5 4.5 0 0 1 12 6a4.5 4.5 0 0 1 9 2.5C21 14 12 21 12 21z"/></svg><span>收藏</span></a>
+    <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.4 2.3c-.8.3-.9 1-.9 1.7m0 3h.01"/></svg><span>帮助</span></a>
+    <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 8.5H7.7L6 3H3"/><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/></svg><span>购物车</span></a>
+  </div>
+</div>
+<nav class="cats"><div class="wrap">
+  <a href="#">渐进镜片</a><a href="#">找到我的镜片</a><a href="#">技术对比</a><a href="#">价格一览</a><a href="#">售后服务</a><a class="hot" href="#">🔥 新客立减</a>
+</div></nav>
+
+<!-- Hero：平色块瓷砖 + 照片 + 白pill（Zenni轮播tile式） -->
+<div class="hero wrap">
+  <div class="tiles">
+    <div class="tile" style="background:var(--黄)">
+      <div class="txt">
+        <h2>看远看近<br>一副就够</h2>
+        <p>渐进定制镜片 ¥1280 起，工厂直营。</p>
+        <a class="pill white" href="#">看价格</a>
+      </div>
+      <img src="../assets/hero/hero-1.jpg" alt="渐进镜片佩戴者"
+        onerror="this.onerror=null;this.src='https://images.pexels.com/photos/20418916/pexels-photo-20418916/free-photo-of-smiling-woman-face.jpeg?auto=compress&cs=tinysrgb&w=900&h=900&fit=crop'">
+    </div>
+    <div class="tile" style="background:var(--浅蓝)">
+      <div class="txt">
+        <h2>3分钟<br>找到你的镜片</h2>
+        <p>不懂度数？答几道题，匹配折射率和产品。</p>
+        <a class="pill" href="#">开始测试</a>
+      </div>
+      <img src="../assets/hero/hero-2.jpg" alt="测试入口"
+        onerror="this.onerror=null;this.src='https://images.pexels.com/photos/8837240/pexels-photo-8837240.jpeg?auto=compress&cs=tinysrgb&w=900&h=900&fit=crop'">
+    </div>
+  </div>
+  <div class="arrows"><button>←</button><button>→</button></div>
+</div>
+
+<!-- 人群入口圆圈条 -->
+<section class="circles wrap">
+  <div class="mega">每双眼睛 都有答案</div>
+  <div class="sub">按你的情况进入，30秒到对的产品</div>
+  <div class="row">
+    <a class="cir" href="#"><i style="background:var(--黄)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="12" r="3.2"/><circle cx="18" cy="12" r="3.2"/><path d="M9.2 12h5.6M2 10l1-1M22 10l-1-1"/></svg></i>初戴老花</a>
+    <a class="cir" href="#"><i style="background:var(--薄荷)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12a8 8 0 0 1 14-5M20 12a8 8 0 0 1-14 5"/><path d="M18 3v4h-4M6 21v-4h4"/></svg></i>换片升级</a>
+    <a class="cir" href="#"><i style="background:var(--浅蓝)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg></i>电脑办公</a>
+    <a class="cir" href="#"><i style="background:#F6D9DE"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></i>户外驾驶</a>
+    <a class="cir" href="#"><i style="background:#E4E0F5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></i>高度数</a>
+    <a class="cir" href="#"><i style="background:var(--卡灰)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></i>有验光单</a>
+  </div>
+</section>
+
+<!-- 明星渐进（BEST SELLERS式） -->
+<section class="sec wrap">
+  <div class="sec-head">
+    <div class="mega">明星渐进</div>
+    <a class="pill sm" href="#">查看全部</a>
+  </div>
+  <div class="tabs"><span class="on">全部</span><span>初戴推荐</span><span>55+推荐</span><span>办公</span></div>
+  <div class="grid" id="cards"></div>
+</section>
+
+<!-- 模特实拍横条：图取自 assets/products/{id}/main.jpg（2026价目册官方模特，可随时替换） -->
+<section class="models wrap">
+  <div class="strip">
+    <img src="../assets/strip/strip-1.jpg" alt="办公场景佩戴"
+      onerror="this.onerror=null;this.src='https://images.pexels.com/photos/8837201/pexels-photo-8837201.jpeg?auto=compress&cs=tinysrgb&w=1000&h=700&fit=crop'">
+    <img src="../assets/strip/strip-2.jpg" alt="驾驶场景佩戴"
+      onerror="this.onerror=null;this.src='https://images.pexels.com/photos/5835344/pexels-photo-5835344.jpeg?auto=compress&cs=tinysrgb&w=1000&h=700&fit=crop'">
+    <img src="../assets/strip/strip-3.jpg" alt="家庭场景佩戴"
+      onerror="this.onerror=null;this.src='https://images.pexels.com/photos/6975192/pexels-photo-6975192.jpeg?auto=compress&cs=tinysrgb&w=1000&h=700&fit=crop'">
+  </div>
+  <div class="cap">真实佩戴 · 40-65岁，她们和他们都找到了自己的渐进</div>
+</section>
+
+<!-- 深色满幅价格专区（UNDER $30式） -->
+<section class="deep">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="mega" style="color:#fff">¥2000 以内入门精选</div>
+      <a class="pill sm" href="#">全部入门款</a>
+    </div>
+    <div class="grid fit" id="cards2"></div>
+  </div>
+</section>
+
+<!-- 技术瓷砖（SMARTER DEFENSE式） -->
+<section class="feat wrap">
+  <div class="mega">更聪明的渐进 从这里开始</div>
+  <div class="sub">每一片阿波罗渐进，都带着这些与市面不同的东西</div>
+  <div class="ftiles">
+    <div class="ftile" style="background:var(--浅蓝)">
+      <h3>视野更宽</h3><p>内表面研磨贴近眼球，远中近三区可用视野更大，告别「找焦点」。</p>
+      <a class="pill sm" href="#">看对比图</a>
+    </div>
+    <div class="ftile" style="background:var(--黄)">
+      <h3>泳动感更小</h3><p>利斯廷法则设计＋散光像差优化，按眼球真实转动规律修正，走路不晃。</p>
+      <a class="pill sm" href="#">看技术</a>
+    </div>
+    <div class="ftile" style="background:#F6D9DE">
+      <h3>不适应？退换</h3><p>无忧渐进系列自带退换保障，第一副渐进零心理负担。</p>
+      <a class="pill sm" href="#">了解保障</a>
+    </div>
+  </div>
+</section>
+
+<footer>样张v2 · 完整8幕见MVP · 阿波罗渐进电商站（非最终版）</footer>
+
+<div class="dock">
+  <div class="p">渐进镜片<b>¥1280 起</b></div>
+  <a href="#">3分钟测试 · 找到我的镜片</a>
+</div>
+
+<script>
+/* ============================================================
+   ★ 产品数据（正式版独立为 data/products.js）
+   - 加新产品：加一条记录
+   - 产品图：正式版优先读 assets/products/{id}/card.jpg（Peter上传），
+     缺图时自动回退到下方代码绘制的镜片插画（lensSVG），保证不开天窗
+   ============================================================ */
+function lensSVG(c){ /* 代码绘制的眼镜占位插画，参数=镜腿颜色 */
+  return `<svg viewBox="0 0 340 120" fill="none">
+    <path d="M10 38 Q14 30 30 30 H90" stroke="${c}" stroke-width="7" stroke-linecap="round"/>
+    <path d="M330 38 Q326 30 310 30 H250" stroke="${c}" stroke-width="7" stroke-linecap="round"/>
+    <rect x="62" y="28" width="100" height="70" rx="26" stroke="${c}" stroke-width="7" fill="rgba(190,220,235,.35)"/>
+    <rect x="178" y="28" width="100" height="70" rx="26" stroke="${c}" stroke-width="7" fill="rgba(190,220,235,.35)"/>
+    <path d="M162 46 Q170 38 178 46" stroke="${c}" stroke-width="7" stroke-linecap="round"/>
+    <path d="M84 44 q14 -8 28 0" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+  </svg>`;
+}
+const tagRed = c => c ? ' red' : '';
+const heart = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21S3 14 3 8.5A4.5 4.5 0 0 1 12 6a4.5 4.5 0 0 1 9 2.5C21 14 12 21 12 21z"/></svg>`;
+
+/* pxm=模特图Pexels编号 pxc=实物图Pexels编号（在线兜底；本地图优先） */
+const products = [
+  { id:"wuyou",  name:"无忧渐进 优享版", who:"40-54岁初戴首选", tag:"可退换", red:true,  price:1880, note:"1.50起", frame:"#8A5A2B", dots:["#C9A227","#8A5A2B","#111"], pxm:"30976000", pxc:"1438409" },
+  { id:"zh-i",   name:"智慧镜 I 悦享型", who:"55+推荐 · 全年龄ADD", tag:"热销", red:false, price:2080, note:"1.50起", frame:"#274472", dots:["#274472","#111","#7A8B99"], pxm:"8065097", pxc:"32398468" },
+  { id:"zh-spro",name:"智慧镜 S PRO",   who:"验光师推荐 · 亚洲人设计", tag:"专业之选", red:false, price:2680, note:"1.50起", frame:"#111111", dots:["#111","#5C4033"], pxm:"7652508", pxc:"25389282" },
+  { id:"zh-u",   name:"智慧镜 U 尊尚型", who:"全参数高端定制", tag:"旗舰", red:false, price:7600, note:"1.50起", frame:"#3E3A39", dots:["#3E3A39","#C9A227"], pxm:"10223872", pxc:"12585542" },
+];
+const entry = [
+  { id:"zh-b",   name:"智慧镜 B 轻松型", who:"入门级渐进之选", tag:"超值", red:true, price:1280, note:"1.50 钻朗膜", frame:"#356859", dots:["#356859","#111"], pxm:"11989338", pxc:"7063515" },
+  { id:"wuyou",  name:"无忧渐进 优享版", who:"5维定制 · 可退换", tag:"最多人选", red:true, price:1880, note:"1.50 钻朗膜", frame:"#8A5A2B", dots:["#8A5A2B","#111"], pxm:"30976000", pxc:"1438409" },
+  { id:"zhiyue", name:"智阅办公渐进",   who:"办公第二副 · 室内专用", tag:"场景款", red:false, price:2180, note:"1.60 钻朗膜", frame:"#274472", dots:["#274472","#7A8B99"], pxm:"9304662", pxc:"9201655" },
+];
+/* 翻转图：正面=模特图 / 悬停翻转 → 背面=产品实物图
+   回退链（本地优先）：本地图 → Pexels在线图(免费可商用,临时) → card.svg → 内联插画
+   Peter上传本地图到 assets/products/{id}/ 后自动优先使用本地图 */
+const PX=(path,sz)=>`https://images.pexels.com/photos/${path}.jpeg?auto=compress&cs=tinysrgb&${sz}`;
+const phFlip = p => `
+  <div class="flip">
+    <div class="face front"><img src="../assets/products/${p.id}/main.jpg" alt="${p.name}模特佩戴图"
+      onerror="this.onerror=null;this.src='${PX(p.pxm+"/pexels-photo-"+p.pxm,"w=700&h=600&fit=crop")}'"></div>
+    <div class="face back"><img src="../assets/products/${p.id}/card.jpg" alt="${p.name}产品图"
+      onerror="if(!this.dataset.f){this.dataset.f=1;this.src='${PX(p.pxc+"/pexels-photo-"+p.pxc,"w=700&h=600&fit=crop")}'}else if(this.dataset.f==1){this.dataset.f=2;this.src='../assets/products/${p.id}/card.svg'}else{this.outerHTML=lensSVG('${p.frame}')}"></div>
+  </div>`;
+const card = p => `
+  <div class="pcard">
+    <span class="tag${tagRed(p.red)}">${p.tag}</span>
+    <span class="fav">${heart}</span>
+    <div class="ph">${phFlip(p)}</div>
+    <h3>${p.name}</h3><div class="who">${p.who}</div>
+    <div class="pr"><b>${p.price}</b><span>起 · ${p.note}</span></div>
+    <div class="dots">${p.dots.map(c=>`<i style="background:${c}"></i>`).join("")}</div>
+    <a class="pill sm" href="#">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10h18M7 15h4"/><rect x="3" y="5" width="18" height="14" rx="2"/></svg>
+      查看价格表</a>
+  </div>`;
+document.getElementById("cards").innerHTML = products.map(card).join("");
+document.getElementById("cards2").innerHTML = entry.map(card).join("");
+/* 手机端：点按图片区域翻转（桌面悬停即可） */
+document.querySelectorAll(".pcard .ph").forEach(el=>{
+  el.addEventListener("click",()=>el.querySelector(".flip").classList.toggle("flipped"));
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+body{font-family:sans-serif;background:#fff;margin:10px}
+.g{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.c{font-size:10px;text-align:center}
+.c img{width:100%;height:150px;object-fit:cover;display:block}
+.c b{color:#C8102E}
+</style></head><body><div class="g" id="g"></div><script>
+const cand=[
+["hero1-A","20418916/pexels-photo-20418916/free-photo-of-smiling-woman-face.jpeg"],["hero1-B","8837240"],["hero2-A","4429394"],["hero2-B","2532076"],
+["wuyou-A","18165007"],["wuyou-B","38033786"],["zhb-A","4078393"],["zhb-B","11989338"],
+["zhi-定","8065097"],["spro-A","7652508"],["spro-B","8250204"],["zhu-A","26068377"],
+["zhiyue-A","8553944"],["zhiyue-B","9304662"],["strip1-A","8278966"],["strip1-B","8837201"],
+["strip2-A","2381638"],["strip2-B","5835344"],["strip3-A","6975192"],["strip3-B","5637848"],
+["prod-1","1438409"],["prod-2","9201655"],["prod-3","32398468"],["prod-4","5752242"],
+["prod-5","7063515"],["prod-6","25389282"],["prod-7","4037163"],["prod-8","12585542"]];
+document.getElementById("g").innerHTML=cand.map(([n,p])=>{
+const u=p.includes("/")?p:p+"/pexels-photo-"+p+".jpeg";
+return `<div class="c"><img src="https://images.pexels.com/photos/${u}?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop"><b>${n}</b> ${p.split("/")[0]}</div>`}).join("");
+</script></body></html>

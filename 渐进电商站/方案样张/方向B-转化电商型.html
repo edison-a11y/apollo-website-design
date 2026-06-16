@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>方向B · 净白转化电商型 — 样张（非最终版）</title>
+<style>
+/* ============================================================
+   ★ 配置区：颜色 / 字号 / 间距（改这里即可换肤，无需懂代码）
+   ============================================================ */
+:root{
+  --红: #E11D33;          /* CTA/价格专用红（电商亮红） */
+  --红深: #B91229;
+  --白: #FFFFFF;
+  --浅灰: #F5F6F8;        /* 区块分隔底 */
+  --墨: #17181C;          /* 正文字色 */
+  --灰: #707683;
+  --描边: #E5E7EB;
+  --绿: #0A8754;          /* 「在线」「有货」等正向提示 */
+
+  --字-特大: 32px;
+  --字-大: 22px;
+  --字-中: 18px;
+  --字-正文: 17px;       /* 中老年可读基线 */
+  --字-价格: 30px;       /* 电商型：价格是最大的字 */
+  --行高: 1.7;
+  --圆角: 10px;
+  --间距: 16px;
+
+  --字体-正文: -apple-system, "PingFang SC", "HarmonyOS Sans SC", "MiSans", "Source Han Sans SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--字体-正文);font-size:var(--字-正文);line-height:var(--行高);color:var(--墨);background:var(--白);padding-bottom:74px}
+img{max-width:100%;display:block}
+.wrap{max-width:980px;margin:0 auto;padding:0 var(--间距)}
+.specimen-note{background:#17181C;color:#fff;text-align:center;font-size:13px;padding:6px 12px;font-weight:600}
+
+/* —— 顶栏：白底，红只出现在CTA —— */
+header{background:var(--白);border-bottom:1px solid var(--描边);position:sticky;top:0;z-index:5}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:10px var(--间距)}
+.nav img{height:30px}
+.nav .mini{font-size:13px;color:var(--绿);display:flex;align-items:center;gap:5px}
+.nav .mini i{width:8px;height:8px;border-radius:50%;background:var(--绿)}
+
+/* —— 首屏：白底大字报价 + 工具入口 —— */
+.hero{padding:40px 0 30px;text-align:center}
+.hero .tag{display:inline-block;background:#FDECEE;color:var(--红);font-size:13px;font-weight:700;padding:4px 14px;border-radius:999px;margin-bottom:12px}
+.hero h1{font-size:var(--字-特大);font-weight:800;line-height:1.3}
+.hero h1 b{color:var(--红)}
+.hero p{color:var(--灰);margin:10px auto 22px;max-width:30em}
+.btn{display:inline-block;background:var(--红);color:#fff;text-decoration:none;font-size:var(--字-中);font-weight:700;padding:15px 30px;border-radius:var(--圆角)}
+.btn:hover{background:var(--红深)}
+.btn.ghost{background:#fff;color:var(--墨);border:1.5px solid var(--描边);margin-left:10px}
+.steps{display:flex;justify-content:center;gap:6px;margin-top:18px;font-size:13px;color:var(--灰);flex-wrap:wrap}
+.steps b{color:var(--墨)}
+
+/* —— 信任条：单行紧凑 —— */
+.trust{background:var(--浅灰);padding:12px 0}
+.trust .wrap{display:flex;justify-content:center;gap:22px;font-size:13px;color:var(--墨);flex-wrap:wrap}
+.trust div{display:flex;gap:6px;align-items:center}
+.trust svg{width:18px;height:18px;color:var(--红)}
+
+/* —— 产品区 —— */
+section{padding:40px 0}
+h2{font-size:var(--字-大);font-weight:800;margin-bottom:4px}
+.sub{color:var(--灰);font-size:14px;margin-bottom:22px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--间距)}
+.card{border:1px solid var(--描边);border-radius:var(--圆角);overflow:hidden;position:relative;background:#fff}
+.card.hot{border:2px solid var(--红)}
+.card .badge{position:absolute;top:0;left:0;background:var(--红);color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:0 0 var(--圆角) 0}
+.card img{height:170px;width:100%;object-fit:cover}
+.card .body{padding:14px 16px 16px}
+.card h3{font-size:var(--字-中);font-weight:700}
+.card .who{color:var(--灰);font-size:13px;margin-bottom:8px}
+.card .price{margin:6px 0 10px}
+.card .price b{color:var(--红);font-size:var(--字-价格);font-weight:800}
+.card .price b::before{content:"¥";font-size:16px;font-weight:700}
+.card .price span{font-size:13px;color:var(--灰);margin-left:6px}
+.card ul{list-style:none;margin-bottom:12px}
+.card li{font-size:13.5px;color:#3A3F47;padding-left:20px;position:relative;margin-bottom:3px}
+.card li svg{position:absolute;left:0;top:4px;width:14px;height:14px;color:var(--绿)}
+.card .go{display:block;text-align:center;background:var(--红);color:#fff;text-decoration:none;font-weight:700;padding:11px;border-radius:8px;font-size:15px}
+.card .go.sub2{background:#fff;color:var(--墨);border:1.5px solid var(--描边)}
+
+/* —— 吸底CTA（手机电商标配）—— */
+.dock{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--描边);padding:10px var(--间距);display:flex;gap:10px;align-items:center;z-index:9}
+.dock .p{font-size:13px;color:var(--灰)}
+.dock .p b{display:block;color:var(--红);font-size:18px;font-weight:800}
+.dock a{flex:1;text-align:center;background:var(--红);color:#fff;text-decoration:none;font-weight:700;padding:13px;border-radius:10px;font-size:16px}
+
+/* —— 规范展示 —— */
+.spec{background:var(--浅灰)}
+.row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:18px}
+.swatch{width:84px;text-align:center;font-size:12px;color:var(--灰)}
+.swatch i{display:block;height:44px;border-radius:8px;border:1px solid var(--描边);margin-bottom:5px}
+.icons svg{width:28px;height:28px;color:var(--红);margin:0 10px}
+footer{text-align:center;font-size:13px;color:var(--灰);padding:20px}
+@media(min-width:768px){:root{--字-特大:42px}}
+</style>
+</head>
+<body>
+
+<div class="specimen-note">样张 · 方向B「净白·转化电商型」· 非最终版，仅供选方向</div>
+
+<header><div class="nav wrap" style="padding-left:0;padding-right:0">
+  <img src="../assets/logo-02.png" alt="阿波罗镜片" style="filter:none">
+  <div class="mini"><i></i>客服在线 · 今日下单6月18日出厂</div>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <span class="tag">工厂直营 · 无中间加价</span>
+  <h1>渐进定制镜片 <b>¥1280 起</b></h1>
+  <p>看远看近一副搞定。3分钟测试，匹配你的度数、折射率和预算。</p>
+  <a class="btn" href="#">开始测试 找到我的镜片</a><a class="btn ghost" href="#">我有验光单，直接选</a>
+  <div class="steps"><span><b>①</b> 做测试/填验光单</span><span>→</span><span><b>②</b> 匹配镜片下单</span><span>→</span><span><b>③</b> 7天定制发货</span></div>
+</div></div>
+
+<div class="trust"><div class="wrap">
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>无忧退换</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="13" height="12" rx="2"/><path d="M15 10h4l3 3v5h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg>顺丰包邮</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>7天出厂</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7L9 18l-5-5"/></svg>正品防伪可查</div>
+</div></div>
+
+<section><div class="wrap">
+  <h2>渐进镜片价格一览</h2>
+  <p class="sub">6款全系 · 按预算/年龄/度数匹配 · 产品卡由数据自动生成，加新品只需加一条记录</p>
+  <div class="cards" id="cards"></div>
+</div></section>
+
+<section class="spec"><div class="wrap">
+  <h2 style="text-align:center">本方向视觉规范</h2>
+  <p class="sub" style="text-align:center">色板 / 代码图标 / 字体样本</p>
+  <div class="row">
+    <div class="swatch"><i style="background:#E11D33"></i>CTA红</div>
+    <div class="swatch"><i style="background:#FFFFFF"></i>纯白底</div>
+    <div class="swatch"><i style="background:#F5F6F8"></i>结构灰</div>
+    <div class="swatch"><i style="background:#0A8754"></i>正向绿</div>
+  </div>
+  <div class="row icons">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="12" r="3.2"/><circle cx="18" cy="12" r="3.2"/><path d="M9.2 12h5.6M2 10l1-1M22 10l-1-1"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="7"/><path d="M21 21l-6-6"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 8.5H7.7L6 3H3"/><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/></svg>
+  </div>
+  <p style="text-align:center;font-weight:800;font-size:20px">标题字样本：渐进定制镜片 ¥1280 起</p>
+  <p style="text-align:center;color:var(--灰)">正文字样本（17px系统栈）：渐进镜片让远、中、近三个距离在一片镜片上自然过渡。</p>
+</div></section>
+
+<footer>样张仅演示首屏/产品卡/规范 · 完整8幕见MVP · 阿波罗渐进电商站</footer>
+
+<div class="dock">
+  <div class="p">渐进镜片<b>¥1280起</b></div>
+  <a href="#">3分钟测试 · 找到我的镜片</a>
+</div>
+
+<script>
+/* ★ 产品数据演示：正式版独立为 data/products.js */
+const tick = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 7L9 18l-5-5"/></svg>`;
+const products = [
+  { id:"zh-b", name:"智慧镜 B 轻松型", badge:"超值入门", who:"预算优先 · 轻度老花", hot:false,
+    points:["入门级渐进之选","利斯廷法则设计","ADD +1.00 ~ +2.50"], price:1280, note:"1.50 钻朗膜" },
+  { id:"wuyou", name:"无忧渐进 优享版", badge:"最多人选 · 可退换", who:"40-54岁初戴首选", hot:true,
+    points:["5维个性化定制","不适应无忧退换","左右眼面弯相配"], price:1880, note:"1.50 钻朗膜" },
+  { id:"zh-i", name:"智慧镜 I 悦享型", badge:"55+ 推荐", who:"全年龄ADD覆盖", hot:false,
+    points:["户外/均衡双设计","散光像差优化","ADD 最高 +3.50"], price:2080, note:"1.50 钻朗膜" },
+];
+document.getElementById("cards").innerHTML = products.map(p => `
+  <div class="card${p.hot?" hot":""}">
+    <span class="badge">${p.badge}</span>
+    <img src="../assets/products/${p.id}/main.jpg" alt="${p.name}">
+    <div class="body">
+      <h3>${p.name}</h3><div class="who">${p.who}</div>
+      <div class="price"><b>${p.price}</b><span>起 · ${p.note}</span></div>
+      <ul>${p.points.map(x=>`<li>${tick}${x}</li>`).join("")}</ul>
+      <a class="go${p.hot?"":" sub2"}" href="#">${p.hot?"查看完整价格表":"查看详情"}</a>
+    </div>
+  </div>`).join("");
+</script>
+</body>
+</html>

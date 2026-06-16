@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>方向A · 登月红品牌信任型 — 样张（非最终版）</title>
+<style>
+/* ============================================================
+   ★ 配置区：颜色 / 字号 / 间距（改这里即可换肤，无需懂代码）
+   ============================================================ */
+:root{
+  --红: #C8102E;          /* 阿波罗品牌红 */
+  --红深: #9E0B22;        /* 按钮按下/悬停 */
+  --深空: #101820;        /* 深空蓝黑（首屏底色） */
+  --米白: #FAF7F2;        /* 页面底色 */
+  --金: #C9A227;          /* 点缀金 */
+  --墨: #1E2228;          /* 正文字色 */
+  --灰: #6B7280;          /* 次要文字 */
+  --卡白: #FFFFFF;        /* 卡片底 */
+  --描边: #E8E2D8;        /* 卡片描边 */
+
+  --字-特大: 34px;  /* 首屏主标题（手机） */
+  --字-大: 24px;    /* 章节标题 */
+  --字-中: 19px;    /* 卡片标题 */
+  --字-正文: 17px;  /* 中老年可读基线：≥17px */
+  --字-小: 14px;
+  --行高: 1.75;
+  --圆角: 16px;
+  --间距: 20px;
+
+  /* 字体栈：系统字体，零下载零版权风险；正式版可换思源宋体子集 */
+  --字体-标题: "Songti SC", "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+  --字体-正文: -apple-system, "PingFang SC", "HarmonyOS Sans SC", "MiSans", "Source Han Sans SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--字体-正文);font-size:var(--字-正文);line-height:var(--行高);color:var(--墨);background:var(--米白)}
+img{max-width:100%;display:block}
+.wrap{max-width:980px;margin:0 auto;padding:0 var(--间距)}
+
+/* —— 样张提示条 —— */
+.specimen-note{background:var(--金);color:#3A2E00;text-align:center;font-size:var(--字-小);padding:6px 12px;font-weight:600}
+
+/* —— 顶栏 —— */
+header{background:var(--深空);padding:14px 0}
+.nav{display:flex;align-items:center;justify-content:space-between}
+.nav img{height:34px}
+.nav a{color:#fff;text-decoration:none;font-size:var(--字-小);margin-left:18px;opacity:.85}
+
+/* —— 首屏：深空+星空底图（背景图可换：assets/bg-stars.jpg）—— */
+.hero{background:var(--深空) url("../assets/bg-stars.jpg") center/cover;background-blend-mode:lighten;color:#fff;padding:64px 0 56px;text-align:center}
+.hero h1{font-family:var(--字体-标题);font-size:var(--字-特大);font-weight:700;letter-spacing:.04em;margin-bottom:14px}
+.hero h1 em{color:var(--金);font-style:normal}
+.hero p{opacity:.88;max-width:34em;margin:0 auto 28px}
+.btn{display:inline-block;background:var(--红);color:#fff;text-decoration:none;font-size:var(--字-中);font-weight:700;padding:16px 34px;border-radius:999px;box-shadow:0 6px 18px rgba(200,16,46,.35)}
+.btn:hover{background:var(--红深)}
+.btn small{display:block;font-size:13px;font-weight:400;opacity:.85;margin-top:2px}
+
+/* —— 信任带（内联SVG图标，可换色：currentColor）—— */
+.trust{background:var(--卡白);border-bottom:1px solid var(--描边)}
+.trust .wrap{display:flex;justify-content:space-between;gap:8px;padding:18px var(--间距);flex-wrap:wrap}
+.trust div{display:flex;align-items:center;gap:8px;font-size:var(--字-小);color:var(--墨)}
+.trust svg{width:22px;height:22px;color:var(--红);flex:none}
+
+/* —— 章节 —— */
+section{padding:52px 0}
+h2{font-family:var(--字体-标题);font-size:var(--字-大);text-align:center;margin-bottom:8px}
+.sub{text-align:center;color:var(--灰);margin-bottom:32px;font-size:var(--字-小)}
+
+/* —— 产品卡（由 products 数据自动渲染）—— */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:var(--间距)}
+.card{background:var(--卡白);border:1px solid var(--描边);border-radius:var(--圆角);overflow:hidden;position:relative}
+.card .badge{position:absolute;top:12px;left:12px;background:var(--红);color:#fff;font-size:13px;font-weight:600;padding:4px 12px;border-radius:999px}
+.card img{height:200px;width:100%;object-fit:cover}
+.card .body{padding:18px}
+.card h3{font-size:var(--字-中);margin-bottom:4px}
+.card .who{color:var(--灰);font-size:var(--字-小);margin-bottom:10px}
+.card ul{list-style:none;margin-bottom:14px}
+.card li{font-size:var(--字-小);padding-left:20px;position:relative;margin-bottom:4px}
+.card li::before{content:"";position:absolute;left:2px;top:7px;width:7px;height:7px;border-radius:50%;background:var(--金)}
+.card .price{display:flex;align-items:baseline;justify-content:space-between}
+.card .price b{color:var(--红);font-size:22px}
+.card .price b::before{content:"¥";font-size:14px}
+.card .price span{color:var(--灰);font-size:13px}
+
+/* —— 样式规范展示区（仅样张用）—— */
+.spec{background:var(--卡白);border-top:1px solid var(--描边)}
+.spec .row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:20px}
+.swatch{width:84px;text-align:center;font-size:12px;color:var(--灰)}
+.swatch i{display:block;height:48px;border-radius:10px;border:1px solid var(--描边);margin-bottom:5px}
+.icons svg{width:30px;height:30px;color:var(--红);margin:0 10px}
+footer{background:var(--深空);color:#fff;opacity:.92;text-align:center;font-size:var(--字-小);padding:22px}
+@media(min-width:768px){:root{--字-特大:46px}}
+</style>
+</head>
+<body>
+
+<div class="specimen-note">样张 · 方向A「登月红·品牌信任型」· 非最终版，仅供选方向</div>
+
+<header><div class="wrap nav">
+  <img src="../assets/logo-03.png" alt="阿波罗镜片">
+  <nav><a href="#">渐进技术</a><a href="#">找到我的镜片</a><a href="#">产品价格</a><a href="#">售后服务</a></nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <h1>看远清楚，看近也清楚<br><em>一副就够</em></h1>
+  <p>手机要拿远才看清？标签要眯眼？这是老花，不是病。源自1972年香港的阿波罗渐进镜片，让眼睛回到40岁以前。</p>
+  <a class="btn" href="#">找到我的镜片<small>渐进定制镜片 ¥1280 起 · 3分钟测试</small></a>
+</div></div>
+
+<div class="trust"><div class="wrap">
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 5.3 5.6.6-4.2 3.9 1.2 5.6L12 14.8 7 17.4l1.2-5.6L4 7.9l5.6-.6z"/></svg>1972年香港创立</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg>15间工厂自产</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>无忧退换保障</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>7天定制交付</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 20l1-4.9a8.4 8.4 0 1 1 17-3.6z"/></svg>在线客服</div>
+</div></div>
+
+<section><div class="wrap">
+  <h2>明星渐进系列</h2>
+  <p class="sub">产品卡由数据自动生成 · 换图＝覆盖 assets/products/{id}/main.jpg · 加产品＝data里加一条</p>
+  <div class="cards" id="cards"></div>
+</div></section>
+
+<section class="spec"><div class="wrap">
+  <h2>本方向视觉规范</h2>
+  <p class="sub">色板 / 图标（代码绘制可改色） / 字体样本</p>
+  <div class="row">
+    <div class="swatch"><i style="background:#C8102E"></i>阿波罗红</div>
+    <div class="swatch"><i style="background:#101820"></i>深空蓝黑</div>
+    <div class="swatch"><i style="background:#FAF7F2"></i>米白底</div>
+    <div class="swatch"><i style="background:#C9A227"></i>点缀金</div>
+  </div>
+  <div class="row icons">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="12" r="3.2"/><circle cx="18" cy="12" r="3.2"/><path d="M9.2 12h5.6M2 10l1-1M22 10l-1-1"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5m0 14h16M7 15l3.5-4 3 2.5L18 8"/></svg>
+  </div>
+  <p style="text-align:center;font-family:var(--字体-标题);font-size:21px">标题字样本：视，有不同 — 全球经验 服务中国</p>
+  <p style="text-align:center;color:var(--灰)">正文字样本（17px系统栈）：渐进镜片让远、中、近三个距离在一片镜片上自然过渡。</p>
+</div></section>
+
+<footer>样张仅演示首屏/产品卡/规范 · 完整8幕见MVP · 阿波罗渐进电商站</footer>
+
+<script>
+/* ★ 产品数据演示：正式版独立为 data/products.js
+   加新产品：复制一条改字段，图放 assets/products/{id}/main.jpg */
+const products = [
+  { id:"wuyou", name:"无忧渐进", badge:"40-54岁最多人选", who:"渐进初戴者 · 怕不适应人群",
+    points:["5维个性化参数定制","不适应可退换","ADD +0.75 ~ +2.00"], price:1880, note:"优享版 1.50起" },
+  { id:"zh-i", name:"智慧镜 I 悦享型", badge:"55+ 推荐", who:"全年龄 · 换片升级人群",
+    points:["户外/均衡双设计","散光像差优化","ADD +0.50 ~ +3.50"], price:2080, note:"钻朗膜 1.50起" },
+  { id:"zh-spro", name:"智慧镜 S PRO", badge:"验光师推荐", who:"追求高视觉品质人群",
+    points:["专为亚洲人眼型设计","瞳孔环修正技术","ADD +0.75 ~ +3.50"], price:2680, note:"蜂朗膜 1.50起" },
+];
+document.getElementById("cards").innerHTML = products.map(p => `
+  <div class="card">
+    <span class="badge">${p.badge}</span>
+    <img src="../assets/products/${p.id}/main.jpg" alt="${p.name}">
+    <div class="body">
+      <h3>${p.name}</h3><div class="who">${p.who}</div>
+      <ul>${p.points.map(x=>`<li>${x}</li>`).join("")}</ul>
+      <div class="price"><b>${p.price}<i style="font-style:normal;font-size:14px"> 起</i></b><span>${p.note}</span></div>
+    </div>
+  </div>`).join("");
+</script>
+</body>
+</html>
