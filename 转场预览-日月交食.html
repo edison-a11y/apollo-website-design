@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>转场预览 v3 · 日月交食（Canvas影像级）</title>
+<style>
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.5/300.css');
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.5/700.css');
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.5/900.css');
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#020204}
+body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;color:#fff;overflow-x:hidden}
+.topnote{position:fixed;top:0;left:0;right:0;z-index:99;background:rgba(2,2,4,.6);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06);padding:10px 24px;font-size:11px;letter-spacing:.3em;color:#5C6168;text-align:center}
+.topnote b{color:#C9B27A;font-weight:500}
+.pre{min-height:94vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 24px 60px;position:relative;background:#020204}
+.pre .k{font-size:11px;letter-spacing:.6em;color:#5C6168;margin-bottom:36px}
+.pre h1{font-size:54px;font-weight:900;letter-spacing:.08em;line-height:1.45}
+.pre p{color:#7c828d;font-size:14px;margin-top:28px;line-height:2.3;letter-spacing:.14em;font-weight:300}
+.pre .down{margin-top:72px;font-size:10px;letter-spacing:.5em;color:#3C4148;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(8px);opacity:1}}
+.stagewrap{height:430vh;position:relative}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;background:#020204}
+#cv{position:absolute;inset:0;width:100%;height:100%}
+.quote{position:absolute;left:50%;top:69%;transform:translateX(-50%);text-align:center;width:94vw;max-width:980px;z-index:3}
+.quote .l1{font-size:clamp(16px,2vw,22px);font-weight:300;letter-spacing:.5em;color:#9aa0ab;opacity:0;transform:translateY(18px);text-indent:.5em}
+.quote .l2{font-size:clamp(22px,3.2vw,36px);font-weight:700;letter-spacing:.32em;margin-top:28px;opacity:0;transform:translateY(18px);text-indent:.32em;color:#6E6856;position:relative}
+.quote .l2 .gold{position:absolute;left:0;top:0;width:100%;color:#ECCB80;clip-path:inset(0 100% 0 0);text-shadow:0 0 26px rgba(232,194,104,.35)}
+.pnum{position:absolute;left:50%;bottom:5%;transform:translateX(-50%);font-size:10px;letter-spacing:.7em;color:#3C4148;text-indent:.7em;z-index:3}
+.post{min-height:96vh;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:110px 24px;background:
+  radial-gradient(140vw 80vh at 50% -24%,rgba(244,222,168,.36) 0%,rgba(150,115,50,.12) 42%,transparent 70%),
+  linear-gradient(180deg,#181206 0%,#0A0804 58%,#020204 100%)}
+.post .k{font-size:11px;letter-spacing:.6em;color:#A8966A;margin-bottom:42px;text-indent:.6em}
+.post h2{font-size:50px;font-weight:900;letter-spacing:.1em;line-height:1.62;color:#F2E3BC}
+.post h2 small{display:block;font-size:18px;font-weight:300;letter-spacing:.5em;color:#A8966A;margin-top:24px}
+.post .note{margin-top:80px;background:rgba(0,0,0,.3);border:1px solid rgba(217,184,106,.16);padding:26px 36px;font-size:13px;color:#A8966A;line-height:2.2;max-width:780px;text-align:left;font-weight:300}
+.post .note b{color:#E2C075;font-weight:500}
+@media (max-width:760px){.pre h1{font-size:32px}.post h2{font-size:27px}.quote{top:65%}}
+</style>
+</head>
+<body>
+<div class="topnote">TRANSITION PREVIEW v3 ｜ <b>日月交食 · Canvas 影像级 · 黑瞳收缩版</b> ｜ 滚动体验</div>
+
+<section class="pre">
+  <div>
+    <div class="k">第一篇 · 登月篇 末尾</div>
+    <h1>曲率差之毫厘<br>视界谬以千里</h1>
+    <p>继续下滑 · 进入两篇之间的转场</p>
+    <div class="down">SCROLL</div>
+  </div>
+</section>
+
+<div class="stagewrap" id="wrap">
+  <div class="stage">
+    <canvas id="cv"></canvas>
+    <div class="quote">
+      <div class="l1" id="l1">月亮，是人类到过最远的地方</div>
+      <div class="l2" id="l2">但我们真正追逐的，从来都是光<span class="gold" id="l2g">但我们真正追逐的，从来都是光</span></div>
+    </div>
+    <div class="pnum" id="pnum">I</div>
+  </div>
+</div>
+
+<section class="post">
+  <div class="k">第二篇 · 逐日篇 · CHASING THE SUN</div>
+  <h2>阿波罗是太阳神<small>而镜片，生来就是为了驾驭光</small></h2>
+  <div class="note"><b>v3 重制</b> ｜ 整段交食改为 Canvas 逐帧绘制（加法发光合成）：星场含视差与闪烁；日冕为多束丝状流光，缓慢旋转呼吸；钻石环带变形镜头横向光斑；漫光阶段以纯亮度吞没画面；全程叠胶片颗粒与暗角。可调：节奏 / 钻石环角度强度 / 流光数量 / 漫光上限。</div>
+</section>
+
+<script>
+(function(){
+var cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+var wrap=document.getElementById('wrap');
+var pnum=document.getElementById('pnum');
+var W=0,H=0,stars=[],grain=null;
+function lerp(a,b,t){return a+(b-a)*t}
+function clamp(v,a,b){return Math.min(b,Math.max(a,v))}
+function eio(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2}
+function eo(t){return 1-Math.pow(1-t,3)}
+function resize(){
+  var D=Math.min(window.devicePixelRatio||1,2);
+  W=cv.clientWidth;H=cv.clientHeight;
+  cv.width=W*D;cv.height=H*D;ctx.setTransform(D,0,0,D,0,0);
+  stars=[];var n=Math.floor(W*H/3800);
+  for(var i=0;i<n;i++){stars.push({x:Math.random()*W,y:Math.random()*H,
+    r:Math.random()<.88?Math.random()*.9+.3:Math.random()*1.6+1,
+    a:Math.random()*.55+.12,tw:Math.random()*6.28,ts:Math.random()*1.6+.4})}
+  grain=document.createElement('canvas');grain.width=160;grain.height=160;
+  var g=grain.getContext('2d'),im=g.createImageData(160,160);
+  for(var j=0;j<im.data.length;j+=4){var v=Math.random()*255|0;
+    im.data[j]=v;im.data[j+1]=v;im.data[j+2]=v;im.data[j+3]=14}
+  g.putImageData(im,0,0)}
+window.addEventListener('resize',resize);resize();
+var streams=[];
+for(var i=0;i<11;i++){streams.push({ang:i/11*6.283+(i%3)*.21,len:1.7+(i%4)*.45,w:.16+(i%3)*.07,sp:(i%2?1:-1)*(.018+(i%3)*.01)})}
+var target=0,cur=0;
+function calc(){var r=wrap.getBoundingClientRect();
+  target=clamp(-r.top/(r.height-window.innerHeight),0,1)}
+window.addEventListener('scroll',calc,{passive:true});calc();
+var ANG=-.66;
+function draw(p,t){
+  var cx=W/2,cy=H*.46,R=Math.min(W,H)*.20;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#020204';ctx.fillRect(0,0,W,H);
+  var drift=p*26;
+  for(var i=0;i<stars.length;i++){var s=stars[i];
+    var tw=.55+.45*Math.sin(t*s.ts+s.tw);
+    ctx.globalAlpha=s.a*tw;ctx.fillStyle='#DCE0E8';
+    var sy=(s.y-drift*(s.r>1?1.6:.8)+H)%H;
+    ctx.fillRect(s.x,sy,s.r,s.r)}
+  ctx.globalAlpha=1;
+  var d=clamp((p-.16)/.24,0,1);
+  var flash=eo(clamp(d/.4,0,1))*clamp((1-d)/.3,0,1);
+  var rg=eio(clamp((p-.34)/.28,0,1));
+  var fl=eio(clamp((p-.58)/.27,0,1));
+  var swallow=eio(clamp((fl-.1)/.8,0,1));
+  var mR=R*(1-swallow*.94);     /* 黑瞳收缩 */
+  ctx.globalCompositeOperation='lighter';
+  if(rg>0){
+    var g1=ctx.createRadialGradient(cx,cy,R*.95,cx,cy,R*3);
+    g1.addColorStop(0,'rgba(255,248,232,'+(.5*rg)+')');
+    g1.addColorStop(.25,'rgba(250,232,184,'+(.22*rg)+')');
+    g1.addColorStop(1,'rgba(225,195,120,0)');
+    ctx.fillStyle=g1;ctx.fillRect(0,0,W,H);
+    for(var k=0;k<streams.length;k++){var st=streams[k];
+      var a=st.ang+t*st.sp;
+      ctx.save();ctx.translate(cx,cy);ctx.rotate(a);ctx.scale(1,st.w);
+      var rr=R*st.len*(1+.06*Math.sin(t*.9+k));
+      var sf=rg*(1-fl*.5);
+      var g2=ctx.createRadialGradient(0,0,R*.8,0,0,rr*2.4);
+      g2.addColorStop(0,'rgba(255,246,226,'+(.16*sf)+')');
+      g2.addColorStop(.5,'rgba(244,222,160,'+(.07*sf)+')');
+      g2.addColorStop(1,'rgba(244,222,160,0)');
+      ctx.fillStyle=g2;ctx.beginPath();ctx.arc(0,0,rr*2.4,0,6.283);ctx.fill();ctx.restore()}}
+  if(flash>0){
+    var fx=cx+Math.cos(ANG)*R,fy=cy+Math.sin(ANG)*R;
+    var g3=ctx.createRadialGradient(fx,fy,0,fx,fy,R*1.5*flash);
+    g3.addColorStop(0,'rgba(255,253,246,'+(.95*flash)+')');
+    g3.addColorStop(.12,'rgba(255,246,226,'+(.55*flash)+')');
+    g3.addColorStop(.45,'rgba(244,218,150,'+(.18*flash)+')');
+    g3.addColorStop(1,'rgba(244,218,150,0)');
+    ctx.fillStyle=g3;ctx.fillRect(0,0,W,H);
+    var lw=W*.62*flash;
+    var g4=ctx.createLinearGradient(fx-lw/2,0,fx+lw/2,0);
+    g4.addColorStop(0,'rgba(255,248,232,0)');
+    g4.addColorStop(.5,'rgba(255,248,232,'+(.8*flash)+')');
+    g4.addColorStop(1,'rgba(255,248,232,0)');
+    ctx.fillStyle=g4;ctx.fillRect(fx-lw/2,fy-1,lw,2);
+    ctx.beginPath();ctx.arc(fx,fy,2.4+3*flash,0,6.283);
+    ctx.fillStyle='rgba(255,255,252,'+flash+')';ctx.fill()}
+  if(fl>0){ /* 漫光限定在环形区域内，中心黑瞳不受染 */
+    var g5=ctx.createRadialGradient(cx,cy,mR,cx,cy,Math.min(W,H)*.62);
+    g5.addColorStop(0,'rgba(255,250,238,'+(.55*fl)+')');
+    g5.addColorStop(.45,'rgba(252,238,200,'+(.26*fl)+')');
+    g5.addColorStop(1,'rgba(252,238,200,0)');
+    ctx.fillStyle=g5;
+    ctx.beginPath();ctx.arc(cx,cy,Math.min(W,H)*.62,0,6.283);
+    ctx.arc(cx,cy,mR,0,6.283,true);ctx.fill()}
+  ctx.globalCompositeOperation='source-over';
+  if(swallow<.999){
+    var g6=ctx.createRadialGradient(cx-mR*.3,cy-mR*.34,mR*.2,cx,cy,mR);
+    g6.addColorStop(0,'#0B0D12');g6.addColorStop(.7,'#05060A');g6.addColorStop(1,'#020305');
+    ctx.fillStyle=g6;ctx.beginPath();ctx.arc(cx,cy,mR,0,6.283);ctx.fill()}
+  ctx.globalCompositeOperation='lighter';
+  if(rg>0){
+    ctx.save();ctx.strokeStyle='rgba(255,250,236,'+(.9*rg)+')';
+    ctx.lineWidth=1.6;ctx.shadowColor='rgba(255,246,226,.9)';ctx.shadowBlur=16*rg;
+    ctx.beginPath();ctx.arc(cx,cy,mR*1.01,0,6.283);ctx.stroke();ctx.restore()}
+  ctx.globalCompositeOperation='source-over';
+  var g7=ctx.createRadialGradient(cx,H*.48,Math.min(W,H)*.42,cx,H*.48,Math.max(W,H)*.85);
+  g7.addColorStop(0,'rgba(0,0,0,0)');g7.addColorStop(1,'rgba(0,0,0,.62)');
+  ctx.fillStyle=g7;ctx.fillRect(0,0,W,H);
+  ctx.globalAlpha=.45*(1-fl*.45);
+  ctx.drawImage(grain,Math.random()*-40,Math.random()*-40,W+80,H+80);
+  ctx.globalAlpha=1;
+  var l1=document.getElementById('l1'),l2=document.getElementById('l2');
+  l1.style.opacity=eo(clamp((p-.44)/.14,0,1))*.95;
+  l2.style.opacity=eo(clamp((p-.6)/.13,0,1));
+  var burn=clamp((p-.66)/.28,0,1);
+  var lg=document.getElementById('l2g');
+  if(lg)lg.style.clipPath='inset(0 '+(100-burn*100)+'% 0 0)';
+  pnum.textContent=p<.16?'I':p<.4?'II':p<.62?'III':'IV'}
+var t0=performance.now();
+function tick(now){
+  cur=lerp(cur,target,.09);
+  draw(cur,(now-t0)/1000);
+  requestAnimationFrame(tick)}
+requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

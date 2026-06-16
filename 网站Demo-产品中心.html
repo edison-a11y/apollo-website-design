@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>产品中心 ｜ 阿波罗镜片 APOLLO</title>
+<style>
+:root{
+  --红:#CF0A2C; --红深:#A30822;
+  --墨:#16181D; --夜:#0B0D11; --纸:#FAF9F7;
+  --灰:#6E737C; --线:#E7E4DE; --金:#C9962E;
+  --衬线:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  --黑体:"PingFang SC","Microsoft YaHei","Source Han Sans CN",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--黑体);color:var(--墨);background:#fff;line-height:1.85;font-size:15px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+header{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--线)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+.nav .logo img{height:40px}
+nav ul{display:flex;list-style:none;gap:2px}
+nav a{padding:10px 14px;font-size:14.5px;letter-spacing:.05em}
+nav a:hover{color:var(--红)}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--红);color:#fff;padding:13px 30px;font-size:13.5px;letter-spacing:.12em;border:none;cursor:pointer;transition:.3s;font-family:var(--黑体)}
+.btn::after{content:"→"}
+.btn:hover{background:var(--红深)}
+.btn.dark{background:var(--墨)}
+
+/* 页头横幅 */
+.phead{background:var(--夜);color:#fff;padding:70px 0 56px}
+.phead .k{font-family:var(--衬线);font-size:13px;letter-spacing:.5em;color:var(--红);font-weight:700;text-transform:uppercase}
+.phead h1{font-family:var(--衬线);font-size:42px;letter-spacing:.06em;margin:14px 0 8px}
+.phead p{color:#9aa0ab;font-size:14.5px;max-width:560px}
+
+/* 筛选器 */
+.filters{position:sticky;top:76px;z-index:150;background:#fff;border-bottom:1px solid var(--线);padding:18px 0}
+.frow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:4px 0}
+.frow .lab{font-size:11.5px;letter-spacing:.24em;color:var(--灰);min-width:52px}
+.chip{padding:8px 20px;border:1px solid var(--线);font-size:13.5px;cursor:pointer;transition:.2s;background:#fff;font-family:var(--黑体);letter-spacing:.04em}
+.chip:hover{border-color:var(--墨)}
+.chip.on{background:var(--墨);color:#fff;border-color:var(--墨)}
+.fcount{margin-left:auto;font-size:12.5px;color:var(--灰)}
+
+/* 产品网格 */
+.pgridwrap{padding:54px 0 90px;background:var(--纸)}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.pc{background:#fff;border:1px solid var(--线);overflow:hidden;cursor:pointer;transition:.3s;display:flex;flex-direction:column}
+.pc:hover{transform:translateY(-4px);box-shadow:0 24px 60px rgba(22,24,29,.13)}
+.pc .im{height:250px;overflow:hidden;position:relative}
+.pc .im img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:.8s}
+.pc:hover .im img{transform:scale(1.05)}
+.pc .chip2{position:absolute;top:16px;left:16px;background:rgba(12,14,18,.82);color:#fff;font-size:10.5px;letter-spacing:.2em;padding:6px 13px;backdrop-filter:blur(4px)}
+.pc .new{position:absolute;top:16px;right:16px;background:var(--红);color:#fff;font-size:10.5px;letter-spacing:.18em;padding:6px 13px}
+.pc .bd{padding:22px 26px 26px;flex:1;display:flex;flex-direction:column}
+.pc h4{font-family:var(--衬线);font-size:20px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.pc h4 small{font-size:11.5px;color:var(--灰);letter-spacing:.1em;font-family:var(--黑体)}
+.pc p{font-size:13px;color:var(--灰);margin:8px 0 12px;flex:1}
+.pc .meta{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--线);padding-top:14px}
+.pc .pr{font-size:13px;color:var(--红);font-weight:700;letter-spacing:.06em}
+.pc .more{font-size:11.5px;letter-spacing:.18em;color:var(--灰)}
+.pc:hover .more{color:var(--红)}
+.empty{grid-column:1/-1;text-align:center;color:var(--灰);padding:60px 0;font-size:14px}
+
+/* 详情弹层 */
+.modal{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;padding:30px}
+.modal.show{display:flex}
+.modal .mask{position:absolute;inset:0;background:rgba(10,11,14,.72);backdrop-filter:blur(4px)}
+.mbox{position:relative;background:#fff;max-width:980px;width:100%;max-height:88vh;overflow-y:auto;animation:up .35s}
+@keyframes up{from{opacity:0;transform:translateY(26px)}to{opacity:1}}
+.mclose{position:sticky;top:0;float:right;margin:14px 16px 0 0;width:40px;height:40px;border:1px solid var(--线);background:#fff;font-size:17px;cursor:pointer;z-index:5}
+.mclose:hover{background:var(--墨);color:#fff}
+.mgrid{display:grid;grid-template-columns:.95fr 1.05fr}
+.mgrid .im{min-height:430px;overflow:hidden}
+.mgrid .im img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.mgrid .bd{padding:46px 46px 40px}
+.mgrid .k{font-size:11px;letter-spacing:.3em;color:var(--红);font-weight:700}
+.mgrid h3{font-family:var(--衬线);font-size:32px;margin:10px 0 4px}
+.mgrid .sub{font-size:13px;color:var(--灰);letter-spacing:.08em;margin-bottom:18px}
+.mgrid .desc{font-size:14px;color:#3a3f47;margin-bottom:22px;line-height:2}
+.mrow{display:grid;grid-template-columns:86px 1fr;gap:14px;padding:13px 0;border-top:1px solid var(--线);font-size:13.5px}
+.mrow b{color:var(--灰);font-weight:500;font-size:12px;letter-spacing:.14em;padding-top:2px}
+.mrow span{line-height:1.9}
+.mfoot{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+
+/* 近视管理对比 */
+.cmpsec{padding:80px 0;background:#fff}
+.cmpsec .k{font-family:var(--衬线);font-size:13px;letter-spacing:.5em;color:var(--红);font-weight:700}
+.cmpsec h2{font-family:var(--衬线);font-size:30px;margin:12px 0 6px}
+.cmpsec .d{color:var(--灰);font-size:13.5px;margin-bottom:28px}
+.cmp-tabs{display:flex;border:1px solid var(--线);width:fit-content;margin-bottom:26px;flex-wrap:wrap;background:#fff}
+.cmp-tab{padding:11px 26px;border:none;border-left:1px solid var(--线);background:none;cursor:pointer;font-size:14px;font-family:var(--黑体)}
+.cmp-tab:first-child{border-left:none}
+.cmp-tab.on{background:var(--墨);color:#fff}
+table.cmp{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--线)}
+.cmp th,.cmp td{padding:18px 20px;font-size:13.5px;text-align:left;border-bottom:1px solid var(--线);vertical-align:top;line-height:1.9}
+.cmp th{width:115px;color:var(--灰);font-weight:500;background:var(--纸);font-size:12px;letter-spacing:.12em;border-right:1px solid var(--线)}
+.cmp td b{font-family:var(--衬线);font-size:15.5px}
+.cmp td.hl{background:#FBF0F2}
+.note{margin-top:14px;font-size:12.5px;color:var(--灰)}
+
+footer{background:var(--夜);color:#8a909b;padding:44px 0;font-size:13px;text-align:center}
+footer img{height:38px;margin:0 auto 14px}
+.demo-note{background:#141008;color:#B99745;font-size:12px;text-align:center;padding:11px;letter-spacing:.06em}
+
+@media (max-width:960px){
+  .pgrid{grid-template-columns:1fr}
+  .mgrid{grid-template-columns:1fr}
+  .mgrid .im{min-height:240px;max-height:300px}
+  .mgrid .bd{padding:28px 24px}
+  nav ul{display:none}
+  .filters{top:76px}
+  .fcount{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="网站Demo-A-登月红.html"><img src="demo-assets/logo-02.png" alt="阿波罗镜片"></a>
+    <nav><ul>
+      <li><a href="网站Demo-A-登月红.html#story">品牌故事</a></li>
+      <li><a href="网站Demo-A-登月红.html#q2">产品与技术</a></li>
+      <li><a href="网站Demo-A-登月红.html#finder">寻找阿波罗</a></li>
+      <li><a href="网站Demo-A-登月红.html#academy">阿波罗学院</a></li>
+    </ul></nav>
+    <a class="btn dark" style="padding:9px 20px;font-size:12px" href="网站Demo-A-登月红.html#finder">帮我选镜片</a>
+  </div>
+</header>
+
+<div class="phead">
+  <div class="wrap">
+    <div class="k">All Products</div>
+    <h1>产品中心</h1>
+    <p>按「给谁戴」和「解决什么问题」筛选。点击任意产品查看详情、技术与临床数据。</p>
+  </div>
+</div>
+
+<div class="filters">
+  <div class="wrap">
+    <div class="frow"><span class="lab">人群</span>
+      <button class="chip on" data-f="p" data-v="all">全部</button>
+      <button class="chip" data-f="p" data-v="kid">儿童青少年</button>
+      <button class="chip" data-f="p" data-v="work">学生上班族</button>
+      <button class="chip" data-f="p" data-v="mid">40岁以上</button>
+      <button class="chip" data-f="p" data-v="out">户外驾驶</button>
+      <span class="fcount" id="fcount"></span>
+    </div>
+    <div class="frow"><span class="lab">功能</span>
+      <button class="chip on" data-f="c" data-v="all">全部</button>
+      <button class="chip" data-f="c" data-v="myopia">近视管理</button>
+      <button class="chip" data-f="c" data-v="fatigue">抗疲劳/视功能</button>
+      <button class="chip" data-f="c" data-v="prog">渐进/双光</button>
+      <button class="chip" data-f="c" data-v="single">单光/数码</button>
+      <button class="chip" data-f="c" data-v="sun">太阳/驾驶</button>
+    </div>
+  </div>
+</div>
+
+<div class="pgridwrap"><div class="wrap"><div class="pgrid" id="grid"></div></div></div>
+
+<!-- 近视管理对比（从首页移入） -->
+<div class="cmpsec" id="cmpx">
+  <div class="wrap">
+    <div class="k">Myopia Management</div>
+    <h2>近视管理，三款怎么选</h2>
+    <p class="d">家长最常问的问题。点击切换，重点对比。</p>
+    <div class="cmp-tabs">
+      <button class="cmp-tab on" data-k="all">全部对比</button>
+      <button class="cmp-tab" data-k="lr">全适·乐蕊®</button>
+      <button class="cmp-tab" data-k="xts">新瞳学™/PRO</button>
+      <button class="cmp-tab" data-k="myo">睛鹰MyoDISC</button>
+    </div>
+    <table class="cmp">
+      <tr><th></th><td data-c="lr"><b>全适·乐蕊®</b></td><td data-c="xts"><b>新瞳学™ / PRO</b></td><td data-c="myo"><b>睛鹰 MyoDISC</b></td></tr>
+      <tr><th>核心技术</th><td data-c="lr">L.A.R.I.凹透镜匀光技术＋六边形全适网阵微结构</td><td data-c="xts">非对称周边离焦＋T型中心明视区</td><td data-c="myo">DISC多环离焦：18个环区，9个离焦环持续提供抑制信号</td></tr>
+      <tr><th>临床背书</th><td data-c="lr">温州医科大学附属眼视光医院双盲临床：近视管理效果68%，眼轴延缓51.4%</td><td data-c="xts">中山大学中山眼科中心：延缓近视进展约50.9%、眼轴增长约50%</td><td data-c="myo">香港理工大学双专利；2023日内瓦国际发明展「特别大奖」</td></tr>
+      <tr><th>适用人群</th><td data-c="lr">6–14岁轴性近视儿童及青少年</td><td data-c="xts">6–18岁轴性近视儿童及青少年</td><td data-c="myo">6–18岁轴性近视儿童及青少年</td></tr>
+      <tr><th>特点</th><td data-c="lr">视区通透美观，配戴满意度98.7%，验光师推荐</td><td data-c="xts">T型设计利于读写，入门之选；PRO含新鹰眼版本</td><td data-c="myo">聚碳酸酯抗冲击，超精密纳米结构，旗舰之选</td></tr>
+      <tr><th>价位参考</th><td data-c="lr">¥1,980 起</td><td data-c="xts">¥1,580 起</td><td data-c="myo">¥4,390 起</td></tr>
+    </table>
+    <p class="note">＊配套「瞳保计划」服务保障 ｜ 数据来源：2026价目册及临床注册研究（ChiCTR2200057210等），以最新资料为准</p>
+  </div>
+</div>
+
+<!-- 详情弹层 -->
+<div class="modal" id="modal">
+  <div class="mask" onclick="closeM()"></div>
+  <div class="mbox">
+    <button class="mclose" onclick="closeM()">✕</button>
+    <div class="mgrid" id="mcontent"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap"><img src="demo-assets/logo-03.png" alt="阿波罗镜片">全球经验 服务中国 ｜ Copyright © 阿波罗镜片 APOLLO ｜ 备案号占位</div>
+</footer>
+<div class="demo-note">内部演示 · 产品中心 ｜ 价格与数据引自2026价目册，对外发布前需审核</div>
+
+<script>
+/* ═══ 产品数据（来自2026价目册，新增产品在此数组加一行即可）═══ */
+const P=[
+{id:'shikewei',n:'适可维™',en:'NEUROLENS',img:'p-shikewei-15.jpg',cat:'fatigue',per:['work','mid'],new:1,
+ tag:'首款曲面棱镜镜片 · 告别数字视觉综合征(DVS)',pr:'¥8,380 起',
+ desc:'渐变棱镜专利技术（Contoured Prism Technology™）矫正双眼协同失调，从神经层面缓解头痛、颈肩痛、晕动感等DVS症状。配套N3检测仪获美国FDA批准使用，93%配戴者重获舒适视觉。',
+ tech:'渐变棱镜专利 · 视觉优化运算 · 3D自由曲面 · 蓝光过滤',clin:'Neurolens 360名患者45天跟踪：93%改善；连续配戴30天阅读速度提升60%',
+ fit:'长时间屏幕工作、有头痛颈肩痛困扰的成年人',ver:'单光NS / 渐进NP / 室内渐进NOM·NOC（会议/电脑专用）｜1.60/1.67/1.74'},
+{id:'shikede',n:'视可得™',en:'SEQUEL',img:'kv-shikede-11.jpg',cat:'fatigue',per:['kid','work','mid'],
+ tag:'新一代抗疲劳镜片 · 眼睛累 戴视可得™',pr:'¥2,880 起',
+ desc:'独有会聚增效™专利技术（Convergence Boost™）双效解决会聚与调节问题，让双眼回归自然位置。搭载舒适调节技术（Power Boost），四种眼模型覆盖全年龄段。',
+ tech:'会聚增效™专利（US 10048512 B2）· 防眩光镀膜 · 蓝光过滤 · 舒适调节',clin:'21–35岁配戴者偏好测试：满意度97%，91%表示眼疲劳有效缓解',
+ fit:'长时间电子产品使用或近距阅读人群，任何年龄段',ver:'SEQUEL 0学龄版 / 38青春版 / 67精英版 / PAL渐进版｜1.60/1.67/1.74'},
+{id:'lerui',n:'全适·乐蕊®',en:'L.A.R.I.',img:'p-lerui-19.jpg',cat:'myopia',per:['kid'],
+ tag:'L.A.R.I.匀光技术 · 卓效降低对比度',pr:'¥1,980 起',
+ desc:'不同于传统离焦技术：L.A.R.I.凹透镜匀光技术在镜片前表面形成独特微结构，降低视网膜周边对比度信号。六边形全适网阵排列，视区通透，配戴满意度98.7%。',
+ tech:'L.A.R.I.匀光技术 · 六边形全适网阵微结构 · 降低对比度｜3大发明专利',clin:'温州医科大学附属眼视光医院双盲临床：等效球镜延缓68.7%，眼轴延缓51.4%（注册号ChiCTR2200057210）',
+ fit:'6–14岁轴性近视儿童及青少年',ver:'1.56（库存）/ 1.60（定制）｜钻朗膜'},
+{id:'xintongxue',n:'新瞳学™ / PRO',en:'BESTIVUE',img:'p-xintongxue-23.jpg',cat:'myopia',per:['kid'],
+ tag:'T型离焦护成长 · 科学管理近视',pr:'¥1,580 起',
+ desc:'非对称周边离焦设计：根据眼球上方、颞侧、鼻侧的视野使用习惯分配不同离焦量。T型中心明视区水平方向无离焦干扰，利于阅读写作。PRO系列含新鹰眼版本。',
+ tech:'非对称周边离焦 · T型光学区 · 近距加抗疲劳设计｜发明专利 ZL 2013 1 0199327.1',clin:'中山大学中山眼科中心：延缓近视进展约50.9%、眼轴增长约50%（8–13岁中国儿童青少年）',
+ fit:'6–18岁轴性近视儿童及青少年',ver:'1.56/1.60/1.67｜清视系列钻朗膜 / 舒视系列星蓝·钻朗膜'},
+{id:'jingying',n:'睛鹰 MyoDISC',en:'PolyU Tech',img:'p-jingying-25.jpg',cat:'myopia',per:['kid'],
+ tag:'香港理工大学双专利近视管理镜片',pr:'¥4,390 起',
+ desc:'DISC专利技术：18个环区中9个离焦环持续提供近视抑制信号，近视管理效果达60%。超精密纳米结构研磨度数更精准，聚碳酸酯材料抗冲击，日常配戴更放心。',
+ tech:'DISC多环离焦光学设计｜双专利（ZL 200580041179.4 / HK 30060394）',clin:'2023日内瓦国际发明展最高殊荣「特别大奖」；香港理工大学近视研究中心研发',
+ fit:'6–18岁轴性近视儿童及青少年，运动量大的孩子尤其适合',ver:'1.586聚碳酸酯｜睛朗膜 / 睛蓝膜 / 睛锐膜'},
+{id:'danjiao',n:'单焦点系列',en:'SINGLE VISION',img:'p-danjiao-27.jpg',cat:'single',per:['kid','work','mid','out'],
+ tag:'看得更清 护得更全',pr:'¥680 起',
+ desc:'高透光技术，纯净度和透光率更高；真空离子技术复合多层膜耐磨损；非球面设计视物畸变更小。星蓝版片基防蓝光、底色洁白，可选唯光变色。',
+ tech:'人眼光学非球面优化设计 · 多层真空离子镀膜',clin:'符合QB/T 2506、GB10810国标',
+ fit:'屈光不正人群均适用，无年龄限制',ver:'1.56–1.74非球面｜钻朗膜 / 星蓝·钻朗膜｜唯光变色可选'},
+{id:'shuangfei',n:'双非淳薄',en:'BI-ASPHERIC',img:'scene-30.jpg',cat:'single',per:['work','mid'],
+ tag:'球柱双非球面 · 淳薄淳美',pr:'门店咨询',
+ desc:'球面与柱面双重非球面设计，高度数也能做到更薄更平更美观，视物畸变更小，侧脸不再有厚重的圈。',
+ tech:'球柱双非球面设计 · 个性化定制',clin:'—',fit:'中高度数、追求轻薄美观的人群',ver:'多折射率可选，支持正镜美薄工艺'},
+{id:'xinshuma',n:'新数码',en:'DIGITAL',img:'scene-37.jpg',cat:'single',per:['work'],
+ tag:'为数码世代缓解视疲劳',pr:'门店咨询',
+ desc:'针对一天多小时盯屏的数码生活设计，缓解调节压力，看屏看远切换更轻松，是抗疲劳的入门之选。',
+ tech:'数码型光学设计 · 近距支持',clin:'—',fit:'长时间使用电脑/手机的学生与上班族',ver:'多折射率与膜层可选'},
+{id:'wuyou',n:'无忧渐进',en:'EASY PAL',img:'scene-39.jpg',cat:'prog',per:['mid'],
+ tag:'5维定制 · 清晰舒适',pr:'门店咨询',
+ desc:'为初戴渐进者设计：5维定制参数，线上优化技术平衡双眼，自动通道设计让你快速找到阅读区，降低初戴眩晕感。',
+ tech:'5维定制 · 线上优化 · 自动通道设计 · 波面修正',clin:'—',fit:'第一次配渐进、担心不适应的40+人群',ver:'多折射率可选'},
+{id:'zhihuijing',n:'智慧镜系列',en:'SMART B/I/S PRO/U',img:'scene-45.jpg',cat:'prog',per:['mid'],
+ tag:'四档渐进矩阵 · 自由曲面',pr:'门店咨询',
+ desc:'轻松型B / 悦享型I / 专业型S PRO / 尊尚型U 四档渐进矩阵，按用眼需求与预算逐级升级；另有智阅办公型渐进专为室内办公设计。',
+ tech:'自由曲面 · 个人视觉偏好 · 像散区优化 · 瞳孔外修正（S PRO独有）等13项',clin:'—',fit:'40岁以上远近视力都要清晰的人群；智阅适合办公室场景',ver:'B/I/S PRO/U + 智阅办公型'},
+{id:'shibotai',n:'视博泰 / 偏光系列',en:'SPORT & SUN',img:'scene-53.jpg',cat:'sun',per:['out','work'],
+ tag:'高弯美学 · 阻隔眩光',pr:'门店咨询',
+ desc:'PVA偏光技术阻隔路面与水面反射光，驾驶更安全；视博泰高弯运动镜片为骑行等高速运动提供稳定清晰视野；染色/偏光/渐进多版本。',
+ tech:'PVA偏光技术 · 高基弯光学修正',clin:'—',fit:'驾驶通勤、骑行运动、海边旅行人群',ver:'视博泰染色 / 偏光 / 渐进；偏光处方太阳镜'},
+{id:'shuangguang',n:'双光镜片',en:'BIFOCAL',img:'scene-55.jpg',cat:'prog',per:['mid'],
+ tag:'远近兼顾 一目了然',pr:'门店咨询',
+ desc:'平顶/圆顶/隐线双光多种样式，远用近用分区明确，适应快，是渐进之外的经济实用之选。',
+ tech:'平顶双光 / 圆顶双光 / 隐线双光',clin:'—',fit:'习惯双光、预算友好的中老年人群',ver:'另有纤度美薄、玻璃镜片、OMEGA、双凹等特殊工艺'}];
+
+/* 渲染 + 筛选 */
+let fp='all',fc='all';
+const grid=document.getElementById('grid');
+function render(){
+  const list=P.filter(p=>(fp==='all'||p.per.includes(fp))&&(fc==='all'||p.cat===fc));
+  document.getElementById('fcount').textContent=`共 ${list.length} 个系列`;
+  grid.innerHTML=list.length?list.map(p=>
+  `<div class="pc" onclick="openM('${p.id}')">
+    <div class="im"><img src="demo-assets/${p.img}" alt="${p.n}">
+      <span class="chip2">${{'myopia':'近视管理','fatigue':'抗疲劳·视功能','prog':'渐进·双光','single':'单光·数码','sun':'太阳·驾驶'}[p.cat]}</span>
+      ${p.new?'<span class="new">2026 新品</span>':''}</div>
+    <div class="bd"><h4>${p.n} <small>${p.en}</small></h4><p>${p.tag}</p>
+      <div class="meta"><span class="pr">${p.pr}</span><span class="more">查看详情 →</span></div></div>
+  </div>`).join(''):'<div class="empty">该组合下暂无产品，换个筛选试试。</div>'}
+document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
+  document.querySelectorAll(`.chip[data-f="${c.dataset.f}"]`).forEach(x=>x.classList.remove('on'));
+  c.classList.add('on');
+  if(c.dataset.f==='p')fp=c.dataset.v;else fc=c.dataset.v;render()});
+render();
+
+/* 详情弹层 */
+function openM(id){
+  const p=P.find(x=>x.id===id);if(!p)return;
+  document.getElementById('mcontent').innerHTML=
+  `<div class="im"><img src="demo-assets/${p.img}"></div>
+   <div class="bd">
+     <div class="k">${p.en}${p.new?' · 2026 NEW':''}</div>
+     <h3>${p.n}</h3>
+     <div class="sub">${p.tag}</div>
+     <p class="desc">${p.desc}</p>
+     <div class="mrow"><b>核心技术</b><span>${p.tech}</span></div>
+     <div class="mrow"><b>临床/背书</b><span>${p.clin}</span></div>
+     <div class="mrow"><b>适合谁</b><span>${p.fit}</span></div>
+     <div class="mrow"><b>版本规格</b><span>${p.ver}</span></div>
+     <div class="mrow"><b>价位参考</b><span style="color:var(--红);font-weight:700">${p.pr}</span></div>
+     <div class="mfoot">
+       <a class="btn" href="网站Demo-A-登月红.html#finder">到门店验配</a>
+       ${p.cat==='myopia'?'<a class="btn dark" href="#cmpx" onclick="closeM()">对比三款近视管理</a>':''}
+     </div>
+   </div>`;
+  document.getElementById('modal').classList.add('show');
+  document.body.style.overflow='hidden'}
+function closeM(){document.getElementById('modal').classList.remove('show');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
+
+/* 对比器 */
+document.querySelectorAll('.cmp-tab').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.cmp-tab').forEach(x=>x.classList.remove('on'));t.classList.add('on');
+  const k=t.dataset.k;
+  document.querySelectorAll('.cmp td[data-c]').forEach(td=>td.classList.toggle('hl',k!=='all'&&td.dataset.c===k))});
+
+/* 哈希直达：#shikewei 直接打开详情 */
+addEventListener('load',()=>{const h=location.hash.slice(1);
+  if(h&&h!=='cmpx'&&P.find(x=>x.id===h))setTimeout(()=>openM(h),300)});
+</script>
+</body>
+</html>

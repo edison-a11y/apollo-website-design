@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>阿波罗镜片 APOLLO ｜ 全球经验 服务中国</title>
+<style>
+/* ════════ 配置区：品牌色与字体（Pantone 186C）════════ */
+:root{
+  --红:#CF0A2C; --红深:#A30822;
+  --墨:#16181D; --夜:#0B0D11; --纸:#FAF9F7; --白:#FFFFFF;
+  --灰:#6E737C; --线:#E7E4DE;
+  --金:#E8C268; --金深:#C9962E;
+  --衬线:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  --黑体:"PingFang SC","Microsoft YaHei","Source Han Sans CN",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--黑体);color:var(--墨);background:var(--白);line-height:1.85;font-size:15px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+section{padding:100px 0}
+.qnum{font-family:var(--衬线);font-size:13px;letter-spacing:.5em;color:var(--红);font-weight:700;display:flex;align-items:center;gap:16px;text-transform:uppercase}
+.qnum::before{content:"";width:38px;height:1px;background:var(--红)}
+h2.t{font-family:var(--衬线);font-size:40px;font-weight:700;letter-spacing:.05em;line-height:1.35;margin:18px 0 10px}
+p.d{color:var(--灰);max-width:640px;margin-bottom:50px}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--红);color:#fff;padding:14px 34px;font-size:14px;letter-spacing:.12em;border:none;cursor:pointer;transition:.3s;font-family:var(--黑体)}
+.btn::after{content:"→";transition:.3s}
+.btn:hover{background:var(--红深);gap:16px}
+.btn.line{background:transparent;border:1px solid rgba(255,255,255,.55);color:#fff}
+.btn.line:hover{background:#fff;color:var(--墨);border-color:#fff}
+.btn.dark{background:var(--墨)}.btn.dark:hover{background:#000}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
+
+/* ── 顶栏与导航 ── */
+.topbar{background:var(--夜);color:#9aa0ab;font-size:12px;letter-spacing:.08em}
+.topbar .wrap{display:flex;justify-content:space-between;height:36px;align-items:center}
+header{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--线)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+.nav .logo img{height:40px}
+nav ul{display:flex;list-style:none;gap:2px}
+nav a{padding:10px 14px;font-size:14.5px;letter-spacing:.05em;position:relative}
+nav a::after{content:"";position:absolute;left:14px;right:14px;bottom:2px;height:2px;background:var(--红);transform:scaleX(0);transition:.25s;transform-origin:left}
+nav a:hover::after,nav a.on::after{transform:scaleX(1)}
+.nav-cta{font-size:12.5px;letter-spacing:.1em;border:1px solid var(--墨);padding:9px 20px;transition:.25s}
+.nav-cta:hover{background:var(--墨);color:#fff}
+.burger{display:none;font-size:24px;background:none;border:none;cursor:pointer}
+
+/* ── 首屏 ── */
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;color:#fff;overflow:hidden;padding:0}
+.hero .bg{position:absolute;inset:0;background:url("demo-assets/hero-wide.jpg") center right/cover no-repeat var(--夜)}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,9,12,.93) 0%,rgba(8,9,12,.55) 48%,rgba(8,9,12,.05) 78%)}
+.hero .wrap{position:relative;z-index:2;width:100%;padding-top:60px;padding-bottom:110px}
+.hero .en{font-size:12px;letter-spacing:.5em;color:#c8ccd4;text-transform:uppercase;margin-bottom:28px;display:flex;align-items:center;gap:16px}
+.hero .en::before{content:"";width:46px;height:1px;background:var(--红)}
+.hero h1{font-family:var(--衬线);font-size:66px;line-height:1.26;font-weight:700;letter-spacing:.06em}
+.hero h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1.2px rgba(255,255,255,.85)}
+.hero .since{margin:28px 0 42px;color:#b6bcc6;font-size:15.5px;max-width:480px;line-height:2.1}
+.hero .since b{color:#fff}
+.hero .actions{display:flex;gap:16px;flex-wrap:wrap}
+/* （SCROLL指示已按反馈移除） */
+
+/* ════ Q1 品牌故事：星线贯穿的双篇章 ════ */
+.story{padding:0;color:#fff;background:var(--夜);position:relative}
+/* 星线 */
+.sline{position:absolute;left:50%;top:0;height:0;width:1px;background:rgba(255,255,255,.10);z-index:5;pointer-events:none}
+.sline::after{content:"";position:absolute;left:50%;bottom:-5px;transform:translateX(-50%) rotate(45deg);width:9px;height:9px;background:var(--金);box-shadow:0 0 12px 2px rgba(232,194,104,.7)}
+.sline .fill{position:absolute;top:0;left:0;width:1px;height:0;background:linear-gradient(180deg,rgba(207,10,44,.0),var(--红) 30%,var(--金));box-shadow:0 0 8px rgba(232,194,104,.8)}
+.sline .star{position:absolute;left:50%;top:0;transform:translate(-50%,-50%) rotate(45deg);width:9px;height:9px;background:var(--金);box-shadow:0 0 14px 3px rgba(232,194,104,.75);transition:top .1s linear}
+.story .chapterhead{text-align:center;padding:110px 28px 80px;position:relative;z-index:6}
+.story .chapterhead .qnum{justify-content:center;background:var(--夜);width:fit-content;margin:0 auto;padding:0 20px}
+.story .chapterhead h2{font-family:var(--衬线);font-size:42px;letter-spacing:.08em;margin:20px auto 14px;background:var(--夜);display:table;padding:0 32px}
+.story .chapterhead p{color:#9aa0ab;font-family:var(--衬线);font-size:17px;letter-spacing:.06em;line-height:2.3;background:var(--夜);display:inline-block;padding:0 24px}
+/* 登月篇 */
+.moon{background:url("demo-assets/bg-stars.jpg") center/cover no-repeat fixed var(--夜);position:relative;padding:110px 0;z-index:2}
+.moon .grid{display:grid;grid-template-columns:1fr 1fr;gap:116px;align-items:center}
+.cbadge{display:inline-flex;align-items:center;gap:12px;border:1px solid rgba(255,255,255,.3);padding:9px 22px;font-size:12px;letter-spacing:.4em;margin-bottom:30px;background:rgba(11,13,17,.6)}
+.cbadge i{font-style:normal;color:var(--红)}
+.moon h3,.sun h3{font-family:var(--衬线);font-size:36px;letter-spacing:.08em;line-height:1.5}
+.verse{margin:30px 0;font-family:var(--衬线);font-size:16.5px;line-height:2.5;color:#c9cdd6;letter-spacing:.04em}
+.verse b{color:#fff;font-weight:700}
+.keywords{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14);margin-top:38px}
+.kw{background:rgba(11,13,17,.85);padding:22px 10px;text-align:center}
+.kw b{font-family:var(--衬线);font-size:21px;display:block;letter-spacing:.2em}
+.kw span{font-size:10.5px;color:#8a909b;letter-spacing:.24em}
+.moon .imwrap{position:relative}
+.moon .imwrap img{width:100%;max-height:560px;object-fit:cover;object-position:center top;border:1px solid rgba(255,255,255,.18)}
+.moon .imwrap .cap{position:absolute;left:-1px;bottom:-1px;background:var(--红);color:#fff;font-size:11.5px;letter-spacing:.26em;padding:10px 20px}
+.mfacts{display:grid;grid-template-columns:1fr 130px 1fr;margin-top:36px;border-top:1px solid rgba(255,255,255,.16)}
+.mfacts .mg{display:flex}
+.mfacts .mg div{flex:1;padding:24px 8px 0;text-align:center}
+.mfacts b{font-family:var(--衬线);font-size:32px;display:block}
+.mfacts b i{font-style:normal;color:var(--红);font-size:18px}
+.mfacts span{font-size:11px;color:#8a909b;letter-spacing:.12em}
+/* 转场：星线上的日出（滚动驱动光晕） */
+.bridge{background:var(--夜);text-align:center;padding:150px 28px 190px;position:relative;z-index:2;overflow:hidden}
+.bridge .glow{position:absolute;left:50%;bottom:-46%;transform:translateX(-50%) scale(.5);width:1300px;height:1300px;border-radius:50%;background:radial-gradient(circle,rgba(232,194,104,.55) 0%,rgba(232,194,104,.16) 36%,transparent 64%);opacity:0;pointer-events:none;will-change:opacity,transform}
+.bridge p{font-family:var(--衬线);font-size:25px;line-height:2.3;letter-spacing:.1em;color:#B9A05E;background:var(--夜);display:inline-block;padding:18px 34px;border:1px solid rgba(232,194,104,.25);position:relative;z-index:6}
+.bridge p b{color:var(--金)}
+/* 逐日篇：深空+金色日冕，滚动光芒旋转 */
+.sun{background:url("demo-assets/bg-sungod.jpg") center/cover no-repeat var(--夜);color:#EDE3C8;padding:120px 0 130px;position:relative;overflow:hidden;z-index:2}
+.sun::before{content:"";position:absolute;left:0;right:0;top:0;height:280px;background:linear-gradient(180deg,var(--夜) 0%,rgba(11,13,17,.55) 45%,transparent 100%);z-index:1;pointer-events:none}
+.sun .rays{position:absolute;right:-22%;top:-30%;width:1300px;height:1300px;background:repeating-conic-gradient(rgba(232,194,104,.07) 0deg 4deg,transparent 4deg 14deg);border-radius:50%;will-change:transform;pointer-events:none}
+.sun .wrap{position:relative;z-index:2}
+.sun .sungrid{display:grid;grid-template-columns:1fr 1fr;gap:120px;align-items:start}
+.sun .cbadge{border-color:rgba(232,194,104,.4);color:#EDE3C8;background:rgba(11,13,17,.55)}
+.sun .cbadge i{color:var(--金)}
+.sun .verse{color:#CBB67E}
+.sun .verse b{color:#F4E7BF}
+.lightlines{display:flex;flex-direction:column;gap:16px}
+.ll{background:rgba(14,12,6,.55);backdrop-filter:blur(5px);border:1px solid rgba(232,194,104,.22);border-left:3px solid var(--金深);padding:24px 28px;transition:.3s;display:block}
+.ll:hover{background:rgba(28,22,8,.8);transform:translateY(-3px);border-color:rgba(232,194,104,.55)}
+.ll b{font-family:var(--衬线);font-size:18px;display:block;margin-bottom:6px;color:#F4E7BF}
+.ll p{font-size:13.5px;color:#B9A05E}
+.ll span{display:inline-block;margin-top:10px;font-size:11.5px;letter-spacing:.2em;color:var(--金);font-weight:700}
+.sunend{text-align:center;margin-top:90px}
+.sunend .box{display:inline-block;background:rgba(12,9,3,.6);border:1px solid rgba(232,194,104,.3);padding:30px 56px;backdrop-filter:blur(3px)}
+.sunend p{font-family:var(--衬线);font-size:30px;letter-spacing:.18em;color:#F4E7BF;font-weight:700;line-height:2.2}
+.sunend small{display:block;font-size:14px;letter-spacing:.3em;color:#B9A05E;margin-top:6px}
+
+/* ════ Q2 LensLab：技术×明星产品 ════ */
+.pair{display:grid;grid-template-columns:.95fr 1.05fr;border:1px solid var(--线);margin-bottom:26px;background:#fff;transition:.3s}
+.pair:hover{box-shadow:0 24px 60px rgba(22,24,29,.10)}
+.pair .tech{padding:44px 46px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--线)}
+.pair .tech .tn{font-size:11px;letter-spacing:.34em;color:var(--红);font-weight:700;margin-bottom:14px}
+.pair .tech h3{font-family:var(--衬线);font-size:26px;letter-spacing:.04em;margin-bottom:10px}
+.pair .tech p{font-size:13.5px;color:var(--灰);line-height:2}
+.pair .prod{display:grid;grid-template-columns:200px 1fr;min-height:230px}
+.pair .prod .im{overflow:hidden}
+.pair .prod .im img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:.8s}
+.pair:hover .prod .im img{transform:scale(1.05)}
+.pair .prod .bd{padding:30px 32px;display:flex;flex-direction:column;justify-content:center}
+.pair .prod .k{font-size:10.5px;letter-spacing:.26em;color:var(--灰);margin-bottom:8px}
+.pair .prod h4{font-family:var(--衬线);font-size:21px;margin-bottom:6px}
+.pair .prod p{font-size:13px;color:var(--灰);margin-bottom:12px}
+.pair .prod .go{font-size:12px;letter-spacing:.18em;color:var(--红);font-weight:700}
+.pair .prod .go::after{content:" →"}
+.pair.rev .tech{border-right:none;border-left:1px solid var(--线);order:2}
+.pair.rev .prod{order:1}
+.pair.rev .prod{grid-template-columns:1fr 200px}
+.pair.rev .prod .im{order:2}
+/* LensLab 技术库 */
+.lablib{margin-top:80px}
+.lablib h3{font-family:var(--衬线);font-size:24px;margin-bottom:6px}
+.lablib .d2{font-size:13.5px;color:var(--灰);margin-bottom:24px}
+.ptabs{display:flex;border:1px solid var(--线);width:fit-content;margin-bottom:30px;background:#fff;flex-wrap:wrap}
+.ptab{padding:13px 32px;border:none;border-left:1px solid var(--线);background:none;cursor:pointer;font-size:14.5px;font-family:var(--黑体);letter-spacing:.06em;transition:.2s}
+.ptab:first-child{border-left:none}
+.ptab.on{background:var(--墨);color:#fff}
+.ppanel{display:none}
+.ppanel.on{display:block;animation:fade .4s}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(186px,1fr));gap:1px;background:var(--线);border:1px solid var(--线)}
+.tch{background:#fff;padding:24px 20px;cursor:pointer;transition:.22s}
+.tch:hover{background:var(--墨)}
+.tch:hover b,.tch:hover .no{color:#fff}
+.tch .no{font-family:var(--衬线);font-size:13px;color:var(--红);display:block;margin-bottom:8px;letter-spacing:.1em}
+.tch b{font-size:14.5px;display:block;font-weight:600;transition:.22s}
+.tdetail{margin-top:26px;background:#fff;border:1px solid var(--线);border-left:3px solid var(--红);padding:30px 34px;font-size:14.5px;color:var(--灰);line-height:2;display:grid;grid-template-columns:320px 1fr;gap:34px;align-items:center}
+.tdetail .tsvg{border:1px solid var(--线);background:var(--纸);padding:14px}
+.tdetail .tsvg svg{width:100%;height:auto;display:block}
+.tdetail b{color:var(--墨);display:block;font-family:var(--衬线);font-size:19px;margin-bottom:6px}
+.tprod{display:inline-flex;align-items:center;gap:8px;margin-top:14px;border:1px solid var(--红);color:var(--红);font-size:12px;letter-spacing:.12em;padding:8px 18px;font-weight:700;transition:.25s}
+.tprod:hover{background:var(--红);color:#fff}
+@media (max-width:960px){.tdetail{grid-template-columns:1fr}}
+.coatt{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--线)}
+.coatt th,.coatt td{padding:15px;font-size:13.5px;text-align:center;border-bottom:1px solid var(--线)}
+.coatt th{background:var(--纸);color:var(--灰);font-weight:500;letter-spacing:.1em;font-size:12px}
+.coatt td:first-child{font-family:var(--衬线);font-weight:700;text-align:left;padding-left:24px;font-size:15px}
+.coatt tr:hover td{background:#FBF0F2}
+.stars{color:var(--红);letter-spacing:3px;font-size:11px}
+.lay{display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:stretch}
+/* ── 镜片3D爆炸图 ── */
+.x3d{position:relative;background:radial-gradient(640px 360px at 50% 38%,#1C232E 0%,#0B0D11 70%);border:1px solid #1F242C;display:flex;align-items:center;justify-content:center;min-height:500px;perspective:1200px;cursor:pointer;overflow:hidden}
+.x3d .hint3{position:absolute;bottom:18px;left:0;right:0;text-align:center;font-size:11.5px;letter-spacing:.26em;color:#7c828d}
+.stack3{position:relative;width:290px;height:290px;transform-style:preserve-3d;transform:rotateX(64deg) rotateZ(-14deg);margin-top:-30px}
+.l3{position:absolute;inset:0;border-radius:50%;cursor:pointer;transition:transform .8s cubic-bezier(.35,.1,.2,1),box-shadow .4s,border .3s;border:1.5px solid rgba(255,255,255,.35)}
+.l3:nth-child(1){background:radial-gradient(circle at 38% 32%,rgba(255,255,255,.5),rgba(255,255,255,.07) 60%)}
+.l3:nth-child(2){background:radial-gradient(circle at 40% 35%,rgba(86,212,170,.45),rgba(86,212,170,.08) 65%);border-color:rgba(86,212,170,.5)}
+.l3:nth-child(3){background:radial-gradient(circle at 40% 35%,rgba(208,214,224,.42),rgba(208,214,224,.08) 65%)}
+.l3:nth-child(4){background:radial-gradient(circle at 40% 35%,rgba(96,156,255,.45),rgba(96,156,255,.1) 65%);border-color:rgba(96,156,255,.55)}
+.l3:nth-child(5){background:radial-gradient(circle at 42% 38%,rgba(225,230,240,.6),rgba(160,170,190,.22) 70%);box-shadow:0 10px 0 rgba(140,150,170,.25)}
+.l3.on{border-color:var(--红);box-shadow:0 0 36px 6px rgba(207,10,44,.55)!important}
+.x3d .shadow3{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,0,0,.55),transparent 65%);transform:rotateX(64deg) rotateZ(-14deg) translateZ(-90px);pointer-events:none}
+.lyr{padding:17px 24px;font-size:14.5px;cursor:pointer;border:1px solid var(--线);border-top:none;background:#fff;transition:.2s;display:flex;justify-content:space-between;align-items:center}
+.lyr:first-child{border-top:1px solid var(--线)}
+.lyr span{color:var(--灰);font-size:12px}
+.lyr:hover{background:var(--纸)}
+.lyr.on{background:var(--墨);color:#fff;border-color:var(--墨)}
+.lyr.on span{color:#9aa0ab}
+.linfo{background:var(--纸);border:1px solid var(--线);padding:34px;font-size:15px;min-height:150px;line-height:2}
+.linfo b{display:block;font-family:var(--衬线);font-size:20px;margin-bottom:8px;color:var(--红)}
+
+/* 经典系列：悬停换面 */
+.classic{margin-top:80px}
+.classic .chead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px}
+.classic h3{font-family:var(--衬线);font-size:24px;letter-spacing:.04em}
+.classic .hint{font-size:12px;color:var(--灰);letter-spacing:.14em}
+.rail{display:flex;gap:18px;overflow-x:auto;padding-bottom:14px;scroll-snap-type:x mandatory}
+.rcard{min-width:252px;scroll-snap-align:start;cursor:pointer;display:block;perspective:1100px}
+.rcard .face{height:290px;position:relative;transform-style:preserve-3d;transition:transform .75s cubic-bezier(.4,.1,.2,1)}
+.rcard:hover .face{transform:rotateY(180deg)}
+.rcard .side{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;border:1px solid var(--线)}
+.rcard .side img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rcard .front img{object-position:center 78%;}
+.rcard .front .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,11,14,.18) 0%,rgba(10,11,14,.82) 72%);color:#fff;padding:26px 24px;display:flex;flex-direction:column;justify-content:flex-end}
+.rcard .front .ov i{font-style:normal;font-family:var(--衬线);font-size:12px;color:var(--金);letter-spacing:.22em;display:block;margin-bottom:8px}
+.rcard .front .ov b{font-family:var(--衬线);font-size:19.5px;line-height:1.6;display:block;margin-bottom:6px}
+.rcard .front .ov span{font-size:12.5px;color:#cfd3da;line-height:1.85}
+.rcard .back{transform:rotateY(180deg)}
+.rcard .back img{object-position:center top}
+.rcard .back .tag{position:absolute;left:0;bottom:0;background:var(--红);color:#fff;font-size:11px;letter-spacing:.2em;padding:8px 16px}
+.rcard .bd{padding:16px 18px 18px;position:relative;min-height:84px;border:1px solid var(--线);border-top:none;background:#fff}
+.rcard .bd .t1,.rcard .bd .t2{transition:opacity .35s}
+.rcard .bd .t1 b,.rcard .bd .t2 b{font-family:var(--衬线);font-size:16.5px;display:block}
+.rcard .bd .t1 span,.rcard .bd .t2 span{font-size:12px;color:var(--灰)}
+.rcard .bd .t2{position:absolute;inset:16px 18px auto;opacity:0}
+.rcard .bd .t2 b{color:var(--红)}
+.rcard:hover .bd .t1{opacity:0}
+.rcard:hover .bd .t2{opacity:1}
+
+/* ════ Q3 寻找阿波罗：向导式 ════ */
+.finder{background:var(--纸)}
+.wizard{background:#fff;border:1px solid var(--线);padding:50px;position:relative}
+.wsteps{display:flex;gap:10px;margin-bottom:36px}
+.wdot{flex:1;height:3px;background:var(--线);position:relative;transition:.4s}
+.wdot.on{background:var(--红)}
+.wq{display:none}
+.wq.on{display:block;animation:fade .45s}
+.wq .wt{font-family:var(--衬线);font-size:23px;margin-bottom:6px}
+.wq .wd{font-size:13px;color:var(--灰);margin-bottom:26px}
+.wopts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border:1px solid var(--线)}
+.wopt{padding:26px 18px;text-align:center;cursor:pointer;transition:.25s;border-left:1px solid var(--线);font-size:15px}
+.wopt:first-child{border-left:none}
+.wopt small{display:block;color:var(--灰);font-size:12px;margin-top:5px}
+.wopt:hover{background:var(--纸)}
+.wback{margin-top:22px;background:none;border:none;font-size:12.5px;letter-spacing:.14em;color:var(--灰);cursor:pointer;font-family:var(--黑体);display:none}
+.wback:hover{color:var(--墨)}
+/* 结果 */
+.wres{display:none}
+.wres.on{display:block;animation:fade .5s}
+.wres .rtag{font-size:11.5px;letter-spacing:.3em;color:var(--红);font-weight:700;margin-bottom:18px}
+.prime{display:grid;grid-template-columns:240px 1fr;border:1px solid var(--墨);margin-bottom:18px;background:#fff}
+.prime .im{overflow:hidden}
+.prime .im img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.prime .bd{padding:30px 34px}
+.prime .why{font-size:12px;color:var(--金深);letter-spacing:.08em;margin-bottom:8px}
+.prime h4{font-family:var(--衬线);font-size:25px;margin-bottom:8px}
+.prime p{font-size:13.5px;color:var(--灰);margin-bottom:14px}
+.prime .pr{font-size:13px;color:var(--红);font-weight:700;letter-spacing:.08em}
+.alts{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:26px}
+.alt{border:1px solid var(--线);padding:22px 26px;background:#fff;transition:.25s;display:block}
+.alt:hover{border-color:var(--墨)}
+.alt b{font-family:var(--衬线);font-size:17px;display:block;margin-bottom:4px}
+.alt p{font-size:12.5px;color:var(--灰)}
+.alt span{font-size:11.5px;color:var(--红);letter-spacing:.14em;font-weight:700}
+.nextacts{display:flex;gap:14px;flex-wrap:wrap}
+/* 门店/验真折叠 */
+.fext{margin-top:34px;display:none;border-top:1px dashed var(--线);padding-top:34px}
+.fext.show{display:block;animation:fade .4s}
+.fext h4{font-family:var(--衬线);font-size:19px;margin-bottom:16px}
+.fext select,.fext input[type=text]{width:100%;padding:13px;border:1px solid var(--线);font-size:14.5px;font-family:inherit;background:var(--纸);margin-bottom:14px}
+.store{padding:13px 0;border-bottom:1px solid var(--线);font-size:14px}
+.store b{display:block;font-size:15px}
+.store span{color:var(--灰);font-size:12.5px}
+.vrow{display:flex;gap:12px}
+.vrow input{flex:1;margin-bottom:0}
+.vout{margin-top:14px;font-size:13.5px;color:var(--灰);min-height:22px}
+.vout b{color:var(--红)}
+
+/* ════ Q4 阿波罗学院 ════ */
+.academy{padding:0;position:relative;color:#fff;overflow:hidden}
+.academy .bg{position:absolute;inset:0;background:url("demo-assets/bg-academy.jpg") center/cover no-repeat #081226}
+.academy .wrap{position:relative;z-index:2;padding-top:120px;padding-bottom:120px}
+.academy .qnum{color:#7FB6E8}
+.academy .qnum::before{background:#7FB6E8}
+.academy h2.t{color:#fff}
+.academy p.d{color:#8FA6C8}
+.acgrid{display:grid;grid-template-columns:1.02fr .98fr;gap:60px;align-items:center}
+.academy .big{font-family:var(--衬线);font-size:29px;line-height:1.95;letter-spacing:.05em}
+.academy .big em{font-style:normal;color:var(--金)}
+.acbadge{display:inline-block;border:1px solid var(--金);color:var(--金);font-size:11px;letter-spacing:.34em;padding:8px 20px;margin:26px 0 26px}
+.aclist{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14)}
+.acitem{background:rgba(8,14,28,.78);backdrop-filter:blur(3px);padding:24px 28px;display:flex;justify-content:space-between;align-items:center;transition:.25s;cursor:pointer}
+.acitem:hover{background:rgba(207,10,44,.18)}
+.acitem .l b{font-family:var(--衬线);font-size:18px;display:block;letter-spacing:.04em}
+.acitem .l span{font-size:12px;color:#8FA6C8}
+.acitem .soon{font-size:10.5px;letter-spacing:.22em;border:1px solid rgba(255,255,255,.3);padding:5px 12px;color:#c8ccd4;white-space:nowrap}
+
+/* ════ Q5 今日Apollo ════ */
+.c3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.card{border:1px solid var(--线);overflow:hidden;transition:.3s;background:#fff}
+.card:hover{box-shadow:0 24px 60px rgba(22,24,29,.12);transform:translateY(-4px)}
+.card .im{height:215px;overflow:hidden}
+.card .im img{width:100%;height:100%;object-fit:cover;transition:.9s}
+.card:hover .im img{transform:scale(1.05)}
+.card .bd{padding:24px 26px 28px}
+.card .k{font-size:11px;color:var(--红);font-weight:700;letter-spacing:.26em}
+.card h4{font-family:var(--衬线);font-size:18px;margin:10px 0 8px;line-height:1.6}
+.card p{font-size:13px;color:var(--灰)}
+
+/* ════ 服务带 + 页脚 ════ */
+.svcband{background:var(--墨);color:#fff;padding:0}
+.svcband .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.sv{padding:42px 26px;border-left:1px solid rgba(255,255,255,.1);transition:.25s;cursor:pointer}
+.sv:first-child{border-left:none}
+.sv:hover{background:var(--红)}
+.sv b{font-family:var(--衬线);font-size:17px;display:block;margin-bottom:6px;letter-spacing:.06em}
+.sv p{font-size:12px;color:#9aa0ab;line-height:1.8;transition:.25s}
+.sv:hover p{color:rgba(255,255,255,.85)}
+.sv span{display:inline-block;margin-top:10px;font-size:11px;letter-spacing:.2em}
+footer{background:var(--夜);color:#8a909b;padding:70px 0 36px;font-size:13.5px}
+.fg{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;margin-bottom:46px}
+footer h5{color:#fff;font-size:13px;margin-bottom:18px;letter-spacing:.2em;font-weight:600}
+footer li{list-style:none;margin:10px 0}
+footer a:hover{color:#fff}
+.flogo img{height:44px;margin-bottom:18px}
+.fslogan{font-family:var(--衬线);font-size:15px;color:#c8ccd4;letter-spacing:.1em;line-height:2.2}
+.fbot{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;font-size:12px;flex-wrap:wrap;gap:8px}
+.demo-note{background:#141008;color:#B99745;font-size:12px;text-align:center;padding:11px;letter-spacing:.06em}
+
+@media (max-width:960px){
+  h2.t{font-size:29px}
+  .hero h1{font-size:40px}
+  .hero{min-height:74vh}
+  .moon .grid,.acgrid,.lay,.pair,.prime{grid-template-columns:1fr}
+  .pair .tech{border-right:none;border-bottom:1px solid var(--线)}
+  .pair.rev .tech{order:0;border-left:none}
+  .pair.rev .prod{order:1;grid-template-columns:1fr}
+  .pair .prod{grid-template-columns:1fr}
+  .pair .prod .im{height:200px}
+  .c3,.alts{grid-template-columns:1fr}
+  .keywords{grid-template-columns:1fr 1fr}
+  .lightlines{grid-template-columns:1fr}
+  .svcband .wrap{grid-template-columns:1fr 1fr}
+  .sv{border-left:none;border-top:1px solid rgba(255,255,255,.1)}
+  .fg{grid-template-columns:1fr 1fr}
+  nav ul{display:none;position:absolute;top:76px;left:0;right:0;background:#fff;flex-direction:column;padding:14px;border-bottom:1px solid var(--线)}
+  nav ul.open{display:flex}
+  .burger{display:block}
+  .nav-cta,.topbar{display:none}
+  .bridge p{font-size:18px}
+  .sun .sungrid{grid-template-columns:1fr;gap:40px}
+  .mfacts{grid-template-columns:1fr}
+  .moon,.story .chapterhead{padding:70px 0}
+  .wizard{padding:28px 20px}
+  .sline{left:24px}
+  .mfacts{flex-wrap:wrap}
+  .mfacts div{flex:1 1 40%}
+}
+
+/* ═══ THEME C 深空黑 ═══ */
+:root{--墨:#E8EAEF;--纸:#11141B;--白:#0C0E12;--灰:#959CA8;--线:#262B35;}
+body{background:#0C0E12;color:#E8EAEF}
+header{background:rgba(12,14,18,.96);border-bottom:1px solid #262B35}
+.nav-cta{border-color:#E8EAEF;color:#E8EAEF}
+.nav-cta:hover{background:#E8EAEF;color:#0C0E12}
+nav ul.open{background:#11141B}
+.pair,.wizard,.card,.tch,.tdetail,.lyr,.coatt,.ptabs,.prime,.alt,.rcard .bd{background:#14181F}
+.tdetail .tsvg{background:#fff;border-color:#262B35}
+.pair .tech{border-color:#262B35}
+.prime{border-color:#E8EAEF}
+.wopt:hover{background:#1A1F28}
+.coatt th{background:#11141B}
+.coatt tr:hover td{background:#2A1218}
+.tch:hover{background:var(--红)}
+.tdetail{color:#959CA8}.tdetail b{color:#E8EAEF}
+.lyr:hover{background:#1A1F28}
+.lyr.on{background:var(--红);color:#fff;border-color:var(--红)}
+.linfo{background:#11141B}
+.fext select,.fext input[type=text]{background:#11141B;color:#E8EAEF;border-color:#262B35}
+.btn.dark{background:#E8EAEF;color:#0C0E12}
+.rcard .bd .t2 b{color:#FF5C77}
+.svcband{background:#11141B}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap"><span>APOLLO LENS · SINCE 1972 HONG KONG</span><span>全国客服热线 9:00–18:00 全年无休</span></div></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top"><img src="demo-assets/logo-03.png" alt="阿波罗镜片 APOLLO"></a>
+    <nav>
+      <button class="burger" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+      <ul id="menu">
+        <li><a href="#story">品牌故事</a></li>
+        <li><a href="#q2">产品与技术</a></li>
+        <li><a href="网站Demo-产品中心.html">全部产品</a></li>
+        <li><a href="#finder">寻找阿波罗</a></li>
+        <li><a href="#academy">阿波罗学院</a></li>
+        <li><a href="#today">今日Apollo</a></li>
+      </ul>
+    </nav>
+    <a class="nav-cta" href="#finder">找到我的镜片</a>
+  </div>
+</header>
+
+<!-- ════ 首屏 ════ -->
+<section class="hero" id="top">
+  <div class="bg"></div>
+  <div class="wrap">
+    <div class="en">Global Vision · China Focus</div>
+    <h1>全球经验<br>服务<em>中国</em></h1>
+    <p class="since">命名源自<b>阿波罗11号</b>登月计划。自1972年香港启程，成长为<b>亚太地区最大光学镜片制造商之一</b>。</p>
+    <div class="actions">
+      <a class="btn" href="#finder">找到适合我的镜片</a>
+      <a class="btn line" href="#story">我们的故事</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════ Q1 · 品牌故事：一条星线串起两段旅程 ════ -->
+<div class="story" id="story">
+  <div class="sline" id="sline"><div class="fill" id="sfill"></div><div class="star" id="sstar"></div></div>
+
+  <div class="chapterhead">
+    <div class="qnum rv" style="justify-content:center">壹 · Who is Apollo</div>
+    <h2 class="rv">一个名字，两段旅程</h2>
+    <p class="rv">1969年，人类把脚印留在月球上。<br>三年后，一家以「阿波罗」为名的镜片工厂在香港点亮了第一炉光学玻璃。<br>这个名字里，藏着我们的两段旅程。</p>
+  </div>
+
+  <!-- 登月篇 -->
+  <div class="moon">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <div class="cbadge rv"><i>第一篇</i> 登月篇 · TO THE MOON</div>
+          <h3 class="rv">每一片镜片，<br>都是一次精密的登月。</h3>
+          <p class="verse rv">阿波罗11号登月，靠的不是奇迹——<br>是数十万个零件的严丝合缝，是亿万次计算的分毫不差，<br>是一群人对「不可能」的不服气。<br><br>1972年，创始人以「阿波罗」为品牌命名，<br>把这种精神装进了每一片镜片。<br>镜片和登月舱一样，容不得侥幸：<br>一片合格的镜片要经过上百道工序，<br><b>曲率差之毫厘，视界谬以千里。</b></p>
+          <div class="keywords rv">
+            <div class="kw"><b>探索</b><span>EXPLORE</span></div>
+            <div class="kw"><b>创新</b><span>INNOVATE</span></div>
+            <div class="kw"><b>无畏</b><span>FEARLESS</span></div>
+            <div class="kw"><b>协作</b><span>TOGETHER</span></div>
+          </div>
+        </div>
+        <div class="imwrap rv">
+          <img src="demo-assets/hero-tall.jpg" alt="阿波罗登月">
+          <div class="cap">SINCE 1972 · HONG KONG</div>
+        </div>
+      </div>
+      <div class="mfacts rv" id="mfacts">
+        <div class="mg">
+          <div><b data-n="1972">0</b><span>年 创立APOLLO品牌</span></div>
+          <div><b data-n="50" data-suf="+">0</b><span>年 光学制造经验</span></div>
+        </div>
+        <div></div>
+        <div class="mg">
+          <div><b data-n="15">0</b><span>间工厂 遍布亚洲</span></div>
+          <div><b data-n="2800" data-suf="+">0</b><span>名员工 五大洲网络</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 星线转场：滚动日出 -->
+  <div class="bridge" id="bridge">
+    <div class="glow" id="bglow"></div>
+    <p class="rv">月亮，是人类到过最远的地方。<br><b>但我们真正追逐的，从来都是光。</b></p>
+  </div>
+
+  <!-- 逐日篇 -->
+  <div class="sun" id="sunch">
+    <div class="rays" id="rays"></div>
+    <div class="wrap">
+      <div class="sungrid">
+        <div>
+          <div class="cbadge rv"><i>第二篇</i> 逐日篇 · CHASING THE SUN</div>
+          <h3 class="rv">阿波罗是太阳神。<br>而镜片，生来就是<br>为了驾驭光。</h3>
+          <p class="verse rv">在希腊神话里，阿波罗驾着金色战车，<br>每天把太阳带给人间。<br>这是我们名字的另一半含义——<br><b>光明的守护者</b>。<br><br>镜片的全部学问，就是驾驭光：</p>
+        </div>
+        <div class="lightlines">
+          <a class="ll rv" href="网站Demo-产品中心.html#danjiao"><b>让光，精准地折射</b><p>于是有了1.49–1.90的完整折射率体系</p><span>经典光学系列</span></a>
+          <a class="ll rv" href="网站Demo-产品中心.html#lerui"><b>让光，均匀地散开</b><p>于是有了L.A.R.I.匀光技术，为孩子管理近视</p><span>全适·乐蕊®</span></a>
+          <a class="ll rv" href="网站Demo-产品中心.html#shikewei"><b>让光，改变方向</b><p>于是有了渐变棱镜，为屏幕时代缓解疲劳</p><span>适可维™</span></a>
+          <a class="ll rv" href="网站Demo-产品中心.html#shibotai"><b>让光，只留下该留的</b><p>于是有了偏光、变色与四级膜层科技</p><span>视博泰 · 膜层科技</span></a>
+        </div>
+      </div>
+      <div class="sunend rv">
+        <div class="box">
+          <p>全球经验 · 服务中国</p>
+          <small>让人人体会 —— 视，有不同</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ Q2 · LensLab：技术×明星产品 ════ -->
+<section class="q2" id="q2">
+  <div class="wrap">
+    <div class="qnum rv">贰 · Apollo LensLab</div>
+    <h2 class="t rv">技术，和它点亮的产品</h2>
+    <p class="d rv">Apollo LensLab 不讲参数堆砌——每一项技术，都对应一个解决真实问题的明星产品。点击产品可查看详情。</p>
+
+    <div class="pair rv">
+      <div class="tech"><div class="tn">TECH 01 · 渐变棱镜技术</div><h3>矫正双眼协同失调</h3><p>Contoured Prism Technology™：个性化定制远/中/近距棱镜度数，从神经层面缓解头痛、颈肩痛等数字视觉综合征（DVS）症状。配套N3检测仪获美国FDA批准。</p></div>
+      <a class="prod" href="网站Demo-产品中心.html#shikewei"><div class="im"><img src="demo-assets/p-shikewei-15.jpg" alt="适可维"></div><div class="bd"><div class="k">NEUROLENS · 2026新品</div><h4>适可维™</h4><p>首款曲面棱镜镜片，93%配戴者重获舒适视觉</p><span class="go">查看产品详情</span></div></a>
+    </div>
+    <div class="pair rev rv">
+      <div class="tech"><div class="tn">TECH 02 · 会聚增效™技术</div><h3>给疲劳的双眼松绑</h3><p>长时间近距用眼造成会聚过度。会聚增效™专利（US 10048512 B2）让双眼回归自然位置，搭配舒适调节技术，全年龄段抗疲劳。</p></div>
+      <a class="prod" href="网站Demo-产品中心.html#shikede"><div class="im"><img src="demo-assets/kv-shikede-11.jpg" alt="视可得"></div><div class="bd"><div class="k">SEQUEL · 抗疲劳</div><h4>视可得™</h4><p>眼睛累，戴视可得™ ｜ 四种眼模型，满意度97%</p><span class="go">查看产品详情</span></div></a>
+    </div>
+    <div class="pair rv">
+      <div class="tech"><div class="tn">TECH 03 · L.A.R.I. 匀光技术</div><h3>用「匀光」管理近视</h3><p>凹透镜匀光微结构降低视网膜周边对比度信号，光效区填充面积高达67%。六边形全适网阵排列，视区通透、配戴更美观。</p></div>
+      <a class="prod" href="网站Demo-产品中心.html#lerui"><div class="im"><img src="demo-assets/p-lerui-19.jpg" alt="全适乐蕊"></div><div class="bd"><div class="k">儿童近视管理</div><h4>全适·乐蕊®</h4><p>温医大双盲临床：近视管理效果68%</p><span class="go">查看产品详情</span></div></a>
+    </div>
+    <div class="pair rev rv">
+      <div class="tech"><div class="tn">TECH 04 · 离焦技术家族</div><h3>给成长中的眼睛踩刹车</h3><p>从非对称周边离焦＋T型明视区（利于读写），到港理工双专利DISC多环离焦（18环区持续抑制信号）——同一个目标：延缓眼轴增长。</p></div>
+      <a class="prod" href="网站Demo-产品中心.html#xintongxue"><div class="im"><img src="demo-assets/p-xintongxue-23.jpg" alt="新瞳学/睛鹰"></div><div class="bd"><div class="k">儿童近视管理</div><h4>新瞳学™ / 睛鹰MyoDISC</h4><p>中山眼科50.9% ｜ 日内瓦发明展特别大奖</p><span class="go">查看产品详情</span></div></a>
+    </div>
+    <div class="pair rv">
+      <div class="tech"><div class="tn">TECH 05 · 自由曲面渐进设计</div><h3>一副眼镜，看遍远中近</h3><p>后表面自由曲面研磨贴近眼球，配合自动通道设计、个人视觉偏好、波面修正等13项渐进技术，远中近平滑过渡不晕眩。</p></div>
+      <a class="prod" href="网站Demo-产品中心.html#zhihuijing"><div class="im"><img src="demo-assets/scene-45.jpg" alt="智慧镜"></div><div class="bd"><div class="k">渐进系列</div><h4>智慧镜 B / I / S PRO / U</h4><p>四档渐进矩阵＋智阅办公渐进</p><span class="go">查看产品详情</span></div></a>
+    </div>
+
+    <!-- LensLab 技术库 -->
+    <div class="lablib rv">
+      <h3>LensLab 技术库</h3>
+      <p class="d2">23项核心技术 · 四级膜层 · 镜片分层结构，点开慢慢看。</p>
+      <div class="ptabs">
+        <button class="ptab on" data-p="p1">技术矩阵</button>
+        <button class="ptab" data-p="p2">膜层科技</button>
+        <button class="ptab" data-p="p3">镜片结构</button>
+      </div>
+      <div class="ppanel on" id="p1">
+        <div class="tgrid" id="techGrid"></div>
+        <div class="tdetail" id="techDetail"><b>点击任意技术</b>用一句人话讲明白它解决什么问题。</div>
+      </div>
+      <div class="ppanel" id="p2">
+        <table class="coatt">
+          <tr><th style="text-align:left;padding-left:24px">膜层</th><th>耐磨损</th><th>易清洁</th><th>防UV</th><th>高透光</th><th>减反射</th><th>防眩光</th><th>高清晰</th></tr>
+          <tr><td>优朗膜</td><td class="stars">★★</td><td class="stars">★★</td><td class="stars">★★</td><td class="stars">★★</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td>钻朗膜</td><td class="stars">★★★</td><td class="stars">★★★</td><td class="stars">★★★</td><td class="stars">★★★</td><td class="stars">★★★</td><td>—</td><td>—</td></tr>
+          <tr><td>蜂朗膜</td><td class="stars">★★★★</td><td class="stars">★★★★</td><td class="stars">★★★★</td><td class="stars">★★★★</td><td class="stars">★★★★</td><td class="stars">★★★★</td><td>—</td></tr>
+          <tr><td>清朗膜</td><td class="stars">★★★★★</td><td class="stars">★★★★★</td><td class="stars">★★★★★</td><td class="stars">★★★★★</td><td class="stars">★★★★★</td><td class="stars">★★★★★</td><td class="stars">★★★★★</td></tr>
+        </table>
+        <p style="margin-top:14px;font-size:12.5px;color:var(--灰)">符合QB/T 2506-2025、GB10810等国标 ｜ 数据来自2026价目册</p>
+      </div>
+      <div class="ppanel" id="p3">
+        <div class="lay">
+          <div class="x3d" id="x3d">
+            <div class="shadow3"></div>
+            <div class="stack3" id="stack3">
+              <div class="l3 on" data-i="0"></div>
+              <div class="l3" data-i="1"></div>
+              <div class="l3" data-i="2"></div>
+              <div class="l3" data-i="3"></div>
+              <div class="l3" data-i="4"></div>
+            </div>
+            <div class="hint3">移入展开镜片结构 · 点击各层查看说明</div>
+          </div>
+          <div>
+            <div id="lensStack">
+              <div class="lyr on" data-i="0">顶膜 · 防水防污层<span>最外层</span></div>
+              <div class="lyr" data-i="1">减反射膜<span>多层真空离子镀膜</span></div>
+              <div class="lyr" data-i="2">加硬层<span>耐磨抗刮</span></div>
+              <div class="lyr" data-i="3">功能片基<span>防蓝光 / 变色 / 偏光</span></div>
+              <div class="lyr" data-i="4">光学基片<span>1.49–1.90 折射率</span></div>
+            </div>
+            <div class="linfo" id="layerInfo" style="min-height:120px"><b>顶膜 · 防水防污层</b>水珠角度112–116度，防水、易清洁、防油污。雨天和油烟环境也容易擦拭干净。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 经典系列：悬停换面 -->
+    <div class="classic rv">
+      <div class="chead">
+        <h3>经典光学系列</h3>
+        <span class="hint">先看人群场景 · 悬停看产品 · 点击进详情</span>
+      </div>
+      <div class="rail" id="rail"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ Q3 · 寻找阿波罗：向导式选镜 ════ -->
+<section class="finder" id="finder">
+  <div class="wrap">
+    <div class="qnum rv">叁 · Find Your Apollo</div>
+    <h2 class="t rv">三道选择题，找到你的阿波罗</h2>
+    <p class="d rv">答完出推荐，然后找到最近的门店、验证正品——一条路走完。</p>
+    <div class="wizard rv">
+      <div class="wsteps"><div class="wdot on" id="d0"></div><div class="wdot" id="d1"></div><div class="wdot" id="d2"></div></div>
+
+      <div class="wq on" id="wq0">
+        <div class="wt">这副眼镜，给谁戴？</div>
+        <div class="wd">第 1 / 3 题</div>
+        <div class="wopts">
+          <div class="wopt" data-v="kid">孩子<small>6–18岁 · 近视防控</small></div>
+          <div class="wopt" data-v="work">学生 / 上班族<small>18–40岁</small></div>
+          <div class="wopt" data-v="mid">40岁以上<small>远近都要清晰</small></div>
+        </div>
+      </div>
+      <div class="wq" id="wq1">
+        <div class="wt">平时主要在什么场景用眼？</div>
+        <div class="wd">第 2 / 3 题</div>
+        <div class="wopts" id="w1opts"></div>
+        <button class="wback" onclick="wback(0)">← 上一题</button>
+      </div>
+      <div class="wq" id="wq2">
+        <div class="wt">最关心什么？</div>
+        <div class="wd">第 3 / 3 题</div>
+        <div class="wopts">
+          <div class="wopt" data-v="effect">效果有临床验证<small>要看得到数据</small></div>
+          <div class="wopt" data-v="comfort">佩戴舒适<small>适应快 不晕眩</small></div>
+          <div class="wopt" data-v="value">高性价比<small>预算友好</small></div>
+        </div>
+        <button class="wback" onclick="wback(1)">← 上一题</button>
+      </div>
+
+      <div class="wres" id="wres">
+        <div class="rtag">你的答案 → 为你推荐</div>
+        <div class="prime" id="prime"></div>
+        <div class="alts" id="alts"></div>
+        <div class="nextacts">
+          <button class="btn" onclick="openExt('storeExt')">找最近的视光中心</button>
+          <button class="btn dark" onclick="openExt('verifyExt')">验证正品</button>
+          <button class="wback" style="display:inline;margin:0;padding:14px 10px" onclick="wreset()">↻ 重新选择</button>
+        </div>
+        <div class="fext" id="storeExt">
+          <h4>找到最近的视光中心</h4>
+          <select id="citySel">
+            <option value="">选择城市（demo占位数据）</option>
+            <option>广州</option><option>北京</option><option>成都</option>
+            <option>郑州</option><option>深圳</option><option>沈阳</option><option>青岛</option>
+          </select>
+          <div id="storeList"></div>
+        </div>
+        <div class="fext" id="verifyExt">
+          <h4>验证正品</h4>
+          <div class="vrow">
+            <input type="text" id="vcode" placeholder="输入包装防伪码（demo示意）">
+            <button class="btn dark" style="white-space:nowrap" onclick="verify()">立即验证</button>
+          </div>
+          <div class="vout" id="vout"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ Q4 · 阿波罗学院 ════ -->
+<section class="academy" id="academy">
+  <div class="bg"></div>
+  <div class="wrap">
+    <div class="qnum rv">肆 · Apollo Academy</div>
+    <h2 class="t rv">阿波罗学院</h2>
+    <p class="d rv">面向视光师与门店伙伴的专业成长平台——也欢迎每一位想看懂镜片的人。</p>
+    <div class="acgrid">
+      <div>
+        <p class="big rv">看见，是一门<br>值得一生研习的学问。<br><em>五十年经验，倾囊相授。</em></p>
+        <div class="acbadge rv">COMING SOON · 学院即将上线</div>
+        <p class="rv" style="color:#8FA6C8;font-size:14px;max-width:440px;line-height:2.1">阿波罗学院把五十年制造经验与临床循证成果，沉淀为体系化课程：从验光配镜的专业实战，到门店经营的方法论，陪伴每一位视光人成长。</p>
+        <br><a class="btn rv" href="javascript:alert('Demo示意：此处为学院合作/咨询入口')">成为首批学员</a>
+      </div>
+      <div class="aclist rv">
+        <div class="acitem"><div class="l"><b>渐进验配实战营</b><span>渐进镜片的验配流程、试戴沟通与销售方法</span></div><span class="soon">筹备中</span></div>
+        <div class="acitem"><div class="l"><b>近视管理技术原理课</b><span>三大技术讲透：L.A.R.I.匀光 / 离焦设计 / DISC</span></div><span class="soon">筹备中</span></div>
+        <div class="acitem"><div class="l"><b>DVS与双眼视觉专题</b><span>数字视觉综合征：N3检测与棱镜处方入门</span></div><span class="soon">筹备中</span></div>
+        <div class="acitem"><div class="l"><b>门店经营课</b><span>产品陈列、顾客沟通与会员运营实战</span></div><span class="soon">筹备中</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ Q5 · 今日Apollo ════ -->
+<section id="today">
+  <div class="wrap">
+    <div class="qnum rv">伍 · Apollo Today</div>
+    <h2 class="t rv">今日 Apollo</h2>
+    <p class="d rv">展会、发布会与品牌动态。</p>
+    <div class="c3">
+      <div class="card rv"><div class="im"><img src="demo-assets/photo-expo2.jpg" alt="发布会现场"></div><div class="bd"><span class="k">2026 · 03</span><h4>适可维™中国发布会 · 上海国际眼镜展</h4><p>Neurolens曲面棱镜镜片正式登陆中国市场。</p></div></div>
+      <div class="card rv"><div class="im"><img src="demo-assets/photo-expo1.jpg" alt="展会现场"></div><div class="bd"><span class="k">2026</span><h4>阿波罗镜片亮相COOC国际眼科视光会议</h4><p>视觉健康产品体系完整亮相。</p></div></div>
+      <div class="card rv"><div class="im"><img src="demo-assets/photo-expo3.jpg" alt="展位活动"></div><div class="bd"><span class="k">2025</span><h4>视可得™新一代抗疲劳镜片发布</h4><p>「眼睛累，戴视可得™」，四种眼模型覆盖全年龄。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 服务带 ════ -->
+<div class="svcband">
+  <div class="wrap">
+    <div class="sv" onclick="location.href='#finder'"><b>门店查询</b><p>爱尔 / 宝岛 / 普瑞等全国合作渠道</p><span>查找 →</span></div>
+    <div class="sv" onclick="location.href='#finder'"><b>正品验证</b><p>输入防伪码，验证产品真伪</p><span>验证 →</span></div>
+    <div class="sv" onclick="alert('Demo示意：质保服务说明')"><b>质保服务</b><p>产品质保认证体系与售后支持</p><span>了解 →</span></div>
+    <div class="sv" onclick="alert('Demo示意：B2B合作表单')"><b>经销商合作</b><p>7×24在线订单平台 · 专属客服</p><span>申请 →</span></div>
+  </div>
+</div>
+
+<!-- ════ 页脚 ════ -->
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div class="flogo">
+        <img src="demo-assets/logo-03.png" alt="阿波罗镜片">
+        <p class="fslogan">全球经验 服务中国<br>Global Vision · China Focus</p>
+      </div>
+      <div><h5>品牌</h5><ul><li><a href="#story">品牌故事</a></li><li><a href="#q2">产品与技术</a></li><li><a href="#today">今日Apollo</a></li></ul></div>
+      <div><h5>找到我们</h5><ul><li><a href="#finder">选镜指南</a></li><li><a href="网站Demo-产品中心.html">全部产品</a></li><li><a href="#finder">正品验证</a></li></ul></div>
+      <div><h5>专业服务</h5><ul><li><a href="#academy">阿波罗学院</a></li><li><a href="javascript:alert('Demo示意')">经销商合作</a></li><li><a href="javascript:alert('Demo示意')">联系我们</a></li></ul></div>
+    </div>
+    <div class="fbot"><span>Copyright © 阿波罗镜片 APOLLO</span><span>备案号占位：粤ICP备XXXXXXXX号</span></div>
+  </div>
+</footer>
+<div class="demo-note">内部演示 Demo C · 深空黑 ｜ 图文引自内部资料，对外发布前需审核</div>
+
+<script>
+/* 滚动浮现 */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* 数字滚动 */
+const animNums=()=>{document.querySelectorAll('#mfacts b').forEach(el=>{
+  const t=+el.dataset.n,suf=el.dataset.suf||'';let c=0;const step=Math.max(1,Math.floor(t/70));
+  const iv=setInterval(()=>{c+=step;if(c>=t){c=t;clearInterval(iv)}el.innerHTML=c+(suf?'<i>'+suf+'</i>':'')},16)})};
+let played=false;
+new IntersectionObserver(e=>{if(e[0].isIntersecting&&!played){played=true;animNums()}}).observe(document.getElementById('mfacts'));
+
+/* 星线随滚动生长（终点=「全球经验·服务中国」金框前的星点）+ 日出光晕 + 日冕旋转 */
+const story=document.getElementById('story'),sline=document.getElementById('sline'),sfill=document.getElementById('sfill'),sstar=document.getElementById('sstar'),rays=document.getElementById('rays'),bglow=document.getElementById('bglow'),bridge=document.getElementById('bridge');
+let lineH=0;
+function calcLine(){
+  const endBox=document.querySelector('.sunend .box');
+  if(!endBox)return;
+  let y=0,el=endBox;
+  while(el&&el!==story){y+=el.offsetTop;el=el.offsetParent}
+  lineH=Math.max(0,y-26);           /* 线止于金框上方的星点 */
+  sline.style.height=lineH+'px'}
+addEventListener('load',calcLine);
+addEventListener('resize',calcLine);
+addEventListener('scroll',()=>{
+  if(!lineH)calcLine();
+  const r=story.getBoundingClientRect();
+  const vh=innerHeight;
+  const total=Math.max(1,lineH-vh*.25);
+  const passed=Math.min(Math.max(vh*.6-r.top,0),total);
+  const pct=passed/total*100;
+  sfill.style.height=pct+'%';
+  sstar.style.top=pct+'%';
+  /* 日出：经过转场段时，金色光晕从星线尽头升起 */
+  if(bglow&&bridge){const rb=bridge.getBoundingClientRect();
+    const prog=Math.min(Math.max((vh*.9-rb.top)/(rb.height+vh*.6),0),1);
+    bglow.style.opacity=prog;
+    bglow.style.transform=`translateX(-50%) scale(${.45+prog*1.05})`;
+    sstar.style.boxShadow=`0 0 ${14+prog*30}px ${3+prog*8}px rgba(232,194,104,${.75})`}
+  if(rays){const sr=document.getElementById('sunch').getBoundingClientRect();
+    rays.style.transform='rotate('+((vh-sr.top)*.02)+'deg)'}
+},{passive:true});
+
+/* LensLab 三联面板 */
+document.querySelectorAll('.ptab').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.ptab').forEach(x=>x.classList.remove('on'));t.classList.add('on');
+  document.querySelectorAll('.ppanel').forEach(x=>x.classList.remove('on'));
+  document.getElementById(t.dataset.p).classList.add('on')});
+
+/* 技术墙：名称+原理详解+原理示意图+对应产品 */
+const TECHS=[
+['L.A.R.I. 匀光技术','在镜片前表面形成独特凹透镜微结构，光线通过后形成散焦面，降低视网膜周边对比度信号。光效区填充面积高达67%，光信号刺激更充分，近视管理更有效。','全适·乐蕊®','lerui'],
+['六边形全适网阵微结构','六边形微透镜以1:6比例规则排列，比散点式排布产生更高效、更均匀的光信号刺激；同时视区更通透，镜片外观更自然美观。','全适·乐蕊®','lerui'],
+['T型光学区设计','把无离焦干扰的明视区做成「T」字形：水平8mm符合孩子左右扫视的阅读习惯，垂直6mm以下采用缓解疲劳设计——写作业时既清晰又不易累。','新瞳学™ / PRO','xintongxue'],
+['降低对比度','视网膜依靠周边对比度信号「感知」眼轴该不该生长。通过弥散圈干扰这一信号的辨别，从源头管理近视发展——这是匀光类技术的底层原理。','全适·乐蕊®','lerui'],
+['Lensight 光学引擎','针对眼球运动轨迹与用眼习惯，逐点计算镜片每个光学点的修正光度。眼睛转到哪里，哪里就是优化过的清晰区，实现稳定的动态视觉。','智慧镜渐进系列','zhihuijing'],
+['PVA 偏光技术','路面、水面的反射眩光是水平方向的偏振光。PVA偏光层像百叶窗一样只允许垂直方向光线进入，阻隔眩光、还原真实色彩，驾驶更安全。','视博泰 / 偏光系列','shibotai'],
+['人眼光学非球面优化','不孤立设计镜片，而是把「镜片＋角膜＋晶状体＋视网膜」当作一个整体光学系统，用光线追迹模拟传播路径，优化非球面参数，扩展有效视场。','单焦点系列','danjiao'],
+['自由曲面','把所有光学设计放在镜片后表面（贴近眼球的一面）进行点对点研磨，光学面更贴近眼球转动轨迹，远、中、近三个区域的可视范围都更大。','智慧镜渐进系列','zhihuijing'],
+['波面修正技术','夜间瞳孔放大后，光波经过镜片边缘会产生波浪式变形，造成光晕与失真。对镜片前后表面做点对点计算研磨，把变形「熨平」。','智慧镜 S PRO','zhihuijing'],
+['个人优化参数','同一个处方，戴在不同脸型、不同配戴位置上效果并不相同。根据实际配戴位置对处方做光学修正，新眼镜适应更快。','适可维™ / 定制镜片','shikewei'],
+['自动通道设计','根据配戴位置、瞳高瞳距、镜框尺寸自动计算最佳渐进通道长度，初戴渐进的人能更快「找到」阅读区，降低眩晕感。','无忧渐进','wuyou'],
+['斜向散光修正','眼球向侧方转动时，斜向入射会产生额外散光。通过光学运算预先补偿度数差与轴位偏差，让镜片周边视野依然清晰。','智慧镜渐进系列','zhihuijing']];
+/* 原理示意图（SVG线稿，可后续替换为正式技术插画） */
+const S='stroke="#16181D" stroke-width="2" fill="none"',R='stroke="#CF0A2C" stroke-width="2" fill="none"';
+const SVGS=[
+`<svg viewBox="0 0 220 150"><ellipse cx="110" cy="75" rx="78" ry="62" ${S}/>${[...Array(5)].map((_,r)=>[...Array(7)].map((_,c)=>{const x=68+c*14,y=47+r*14;return Math.hypot(x-110,y-75)<55?`<circle cx="${x}" cy="${y}" r="3.2" ${R}/>`:''}).join('')).join('')}<text x="110" y="142" text-anchor="middle" font-size="10" fill="#6E737C">凹透镜微结构 · 匀光散焦</text></svg>`,
+`<svg viewBox="0 0 220 150">${[[110,70],[86,56],[134,56],[86,84],[134,84],[110,42],[110,98]].map(p=>`<polygon points="${[...Array(6)].map((_,i)=>{const a=Math.PI/3*i+Math.PI/6;return (p[0]+13*Math.cos(a)).toFixed(1)+','+(p[1]+13*Math.sin(a)).toFixed(1)}).join(' ')}" ${R}/>`).join('')}<ellipse cx="110" cy="72" rx="80" ry="58" ${S}/><text x="110" y="142" text-anchor="middle" font-size="10" fill="#6E737C">六边形微透镜 1:6 网阵排列</text></svg>`,
+`<svg viewBox="0 0 220 150"><circle cx="110" cy="70" r="56" ${S}/><path d="M70 56 h80 v18 h-31 v34 h-18 v-34 h-31 z" ${R}/><text x="110" y="142" text-anchor="middle" font-size="10" fill="#6E737C">T型明视区 · 水平8mm×垂直6mm</text></svg>`,
+`<svg viewBox="0 0 220 150"><circle cx="65" cy="68" r="34" ${S}/><circle cx="65" cy="68" r="22" ${S}/><circle cx="155" cy="68" r="34" stroke="#CF0A2C" stroke-width="2" fill="none" opacity=".95"/><circle cx="155" cy="68" r="26" ${R} opacity=".55"/><circle cx="155" cy="68" r="18" ${R} opacity=".3"/><text x="65" y="120" text-anchor="middle" font-size="10" fill="#6E737C">普通：高对比</text><text x="155" y="120" text-anchor="middle" font-size="10" fill="#6E737C">匀光：低对比</text></svg>`,
+`<svg viewBox="0 0 220 150"><path d="M30 75 q40 -45 80 0 q-40 45 -80 0 z" ${S}/><circle cx="70" cy="75" r="14" ${S}/><path d="M118 45 L190 30 M118 75 L190 75 M118 105 L190 120" ${R}/><circle cx="190" cy="30" r="3" fill="#CF0A2C"/><circle cx="190" cy="75" r="3" fill="#CF0A2C"/><circle cx="190" cy="120" r="3" fill="#CF0A2C"/><text x="110" y="142" text-anchor="middle" font-size="10" fill="#6E737C">逐点追踪眼球运动 · 逐点修正</text></svg>`,
+`<svg viewBox="0 0 220 150">${[0,1,2,3,4].map(i=>`<line x1="${78+i*16}" y1="30" x2="${78+i*16}" y2="110" ${S}/>`).join('')}<path d="M20 50 h44 M20 70 h44 M20 90 h44" ${R} stroke-dasharray="6 5"/><path d="M110 30 v-0 M110 118 v0" /><path d="M152 70 h44" ${R}/><polygon points="196,66 206,70 196,74" fill="#CF0A2C"/><text x="110" y="142" text-anchor="middle" font-size="10" fill="#6E737C">偏光层阻隔水平眩光</text></svg>`,
+`<svg viewBox="0 0 220 150"><path d="M60 20 q26 55 0 110" ${S}/><path d="M88 20 q14 55 0 110" ${R}/><circle cx="160" cy="75" r="26" ${S}/><circle cx="168" cy="75" r="7" fill="#16181D"/><path d="M96 55 L134 68 M96 95 L134 82" stroke="#6E737C" stroke-width="1.5" stroke-dasharray="4 4" fill="none"/><text x="110" y="142" text-anchor="middle" font-size="10" fill="#6E737C">镜片+人眼 整体光学系统</text></svg>`,
+`<svg viewBox="0 0 220 150"><path d="M80 20 q30 55 0 110" ${S}/><path d="M80 20 q30 55 0 110" transform="translate(14 0)" ${R}/>${[0,1,2,3].map(i=>`<path d="M94 ${34+i*22} q12 8 0 ${18}" stroke="#CF0A2C" stroke-width="1.3" fill="none" opacity=".6"/>`).join('')}<circle cx="170" cy="75" r="22" ${S}/><text x="110" y="142" text-anchor="middle" font-size="10" fill="#6E737C">后表面自由曲面研磨</text></svg>`,
+`<svg viewBox="0 0 220 150"><path d="M20 60 q10 -16 20 0 t20 0 t20 0 t20 0" ${S}/><path d="M30 100 h160" ${R}/><polygon points="184,96 194,100 184,104" fill="#CF0A2C"/><path d="M120 60 l30 0" stroke="#6E737C" stroke-width="1.5" stroke-dasharray="4 4"/><text x="110" y="142" text-anchor="middle" font-size="10" fill="#6E737C">波浪形光波 → 修正后平整</text></svg>`,
+`<svg viewBox="0 0 220 150"><circle cx="80" cy="62" r="30" ${S}/><circle cx="150" cy="62" r="30" ${S}/><path d="M110 62 h10" ${S}/><path d="M80 24 v-8 M150 24 v-8 M44 62 h-14 M186 62 h14" ${R}/><path d="M80 100 v18 M150 100 v18" ${R} stroke-dasharray="5 4"/><text x="110" y="142" text-anchor="middle" font-size="10" fill="#6E737C">按配戴位置修正处方</text></svg>`,
+`<svg viewBox="0 0 220 150"><path d="M110 18 c-44 0 -64 30 -64 56 c0 34 28 58 64 58 c36 0 64 -24 64 -58 c0 -26 -20 -56 -64 -56 z" ${S}/><path d="M96 40 q14 10 10 34 q-4 26 12 40" ${R} stroke-width="10" opacity=".25"/><path d="M96 40 q14 10 10 34 q-4 26 12 40" ${R}/><text x="110" y="146" text-anchor="middle" font-size="10" fill="#6E737C">个性化渐进通道</text></svg>`,
+`<svg viewBox="0 0 220 150"><circle cx="110" cy="70" r="52" ${S}/><path d="M74 34 L146 106" stroke="#6E737C" stroke-width="1.5" stroke-dasharray="5 4"/><path d="M74 106 L146 34" ${R}/><circle cx="110" cy="70" r="8" ${R}/><text x="110" y="142" text-anchor="middle" font-size="10" fill="#6E737C">斜向轴位偏差 · 预先补偿</text></svg>`];
+/* 有真实技术图的用价目册裁图，其余暂用线稿示意（待设计部出图替换） */
+const TIMG={0:'tech-lari.jpg',1:'tech-hex.jpg',2:'tech-tzone.jpg',3:'tech-contrast.jpg',9:'tech-custom.jpg'};
+function showTech(i){
+  const t=TECHS[i];
+  const visual=TIMG[i]?`<img src="demo-assets/${TIMG[i]}" alt="${t[0]}" style="width:100%;display:block">`:(SVGS[i]||SVGS[0]);
+  document.getElementById('techDetail').innerHTML=
+  `<div class="tsvg">${visual}</div>
+   <div><b>${t[0]}</b>${t[1]}<br>
+   <a class="tprod" href="网站Demo-产品中心.html#${t[3]}">应用产品 ｜ ${t[2]} →</a></div>`;
+  document.querySelectorAll('.tch').forEach((c,j)=>c.style.background=j===i?'var(--墨)':'');
+  document.querySelectorAll('.tch').forEach((c,j)=>{c.querySelector('b').style.color=j===i?'#fff':'';c.querySelector('.no').style.color=j===i?'#fff':''});
+}
+document.getElementById('techGrid').innerHTML=TECHS.map((t,i)=>
+  `<div class="tch" data-i="${i}"><span class="no">${String(i+1).padStart(2,'0')}</span><b>${t[0]}</b></div>`).join('');
+document.getElementById('techGrid').addEventListener('click',e=>{
+  const c=e.target.closest('.tch');if(!c)return;showTech(+c.dataset.i)});
+showTech(0);
+
+/* 分层 */
+const LAYERS=[
+['顶膜 · 防水防污层','水珠角度112–116度，防水、易清洁、防油污。雨天和油烟环境也容易擦拭干净。'],
+['减反射膜','真空离子技术复合多层膜，减少镜片表面反光，夜间开车更少眩光，拍照不反光。'],
+['加硬层','提升耐磨抗刮性能，符合QB/10810.4与GB10810.4标准，日常使用更耐久。'],
+['功能片基','防蓝光（星蓝：片基防蓝光，底色洁白）、变色、偏光等功能在这一层实现。'],
+['光学基片','1.49–1.90完整折射率体系。度数越高可选越高折射率，镜片更薄更美观。']];
+function showLayer(i){
+  document.querySelectorAll('.lyr').forEach((x,j)=>x.classList.toggle('on',j===i));
+  document.querySelectorAll('.l3').forEach((x,j)=>x.classList.toggle('on',j===i));
+  const d=LAYERS[i];
+  document.getElementById('layerInfo').innerHTML=`<b>${d[0]}</b>${d[1]}`}
+document.getElementById('lensStack').addEventListener('click',e=>{
+  const l=e.target.closest('.lyr');if(!l)return;showLayer(+l.dataset.i)});
+/* 3D爆炸图：悬停展开，点击层联动 */
+const x3d=document.getElementById('x3d');
+const setZ=(spread)=>{document.querySelectorAll('.l3').forEach((l,i)=>{
+  l.style.transform=`translateZ(${(4-i)*spread}px)`})};
+setZ(13);
+x3d.addEventListener('mouseenter',()=>setZ(56));
+x3d.addEventListener('mouseleave',()=>setZ(13));
+x3d.addEventListener('click',e=>{const l=e.target.closest('.l3');if(!l)return;showLayer(+l.dataset.i)});
+
+/* 经典系列：人群场景为先，悬停换产品面 */
+const RAIL=[
+['scene-30.jpg','年轻白领 · 高度数','想要镜片更薄更美，拍照侧脸没有圈','双非淳薄','球柱双非球面 · 淳薄淳美','shuangfei'],
+['scene-37.jpg','数码工作者','一天10小时盯屏，眼睛又干又胀','新数码','为数码世代缓解视疲劳','xinshuma'],
+['scene-39.jpg','初戴渐进的45+','第一副渐进镜，怕晕怕不适应','无忧渐进','5维定制 · 清晰舒适','wuyou'],
+['scene-45.jpg','商务精英 · 45+','开会看屏看文件，全天切换要从容','智慧镜 S PRO','专业型渐进 · 自由曲面','zhihuijing'],
+['scene-47.jpg','60+ 阅读爱好者','看报读书写字，远近都要舒服','智慧镜 U','尊尚型渐进','zhihuijing'],
+['scene-51.jpg','自驾通勤族','逆光、反光、隧道明暗交替','偏光系列','处方太阳镜 · 阻隔眩光','shibotai'],
+['scene-53.jpg','骑行运动派','高速运动中要稳定清晰的视野','视博泰','运动太阳镜片 · 高弯美学','shibotai'],
+['scene-55.jpg','带娃的祖辈','看孙子看手机，一副镜全搞定','双光镜片','远近兼顾 一目了然','shuangguang']];
+document.getElementById('rail').innerHTML=RAIL.map(r=>
+`<a class="rcard" href="网站Demo-产品中心.html#${r[5]}">
+  <div class="face">
+    <div class="side front">
+      <img src="demo-assets/${r[0]}" alt="">
+      <div class="ov"><i>WHO · 使用场景</i><b>${r[1]}</b><span>${r[2]}</span></div>
+    </div>
+    <div class="side back">
+      <img src="demo-assets/${r[0]}" alt="${r[3]}">
+      <div class="tag">对应产品</div>
+    </div>
+  </div>
+  <div class="bd">
+    <div class="t1"><b>这是谁的场景？</b><span>悬停翻转看产品 →</span></div>
+    <div class="t2"><b>${r[3]}</b><span>${r[4]}</span></div>
+  </div>
+</a>`).join('');
+
+/* 向导式选镜 */
+const W2OPTS={
+  kid:[['study','上学读写为主','课堂+作业，近距用眼多'],['screen','电子屏幕多','网课/平板时间长'],['sport','户外运动多','跑跳碰撞难避免']],
+  work:[['office','电脑办公','一天8小时屏幕'],['drive','通勤驾驶','开车多 路面反光'],['mix','学习+娱乐混合','书本屏幕来回切换']],
+  mid:[['office','办公阅读多','文件屏幕切换频繁'],['drive','户外驾驶多','阳光眩光困扰'],['life','全天生活混合','买菜带娃看手机']]};
+const PICK={
+  'kid-study':[['全适·乐蕊®','L.A.R.I.匀光技术，视区通透利于读写','¥1,980 起','p-lerui-19.jpg','lerui','双盲临床近视管理效果68%'],['新瞳学™/PRO','T型明视区，利于阅读写作','¥1,580 起'],['睛鹰MyoDISC','港理工双专利旗舰','¥4,390 起']],
+  'kid-screen':[['新瞳学™/PRO','片基防蓝光＋T型离焦设计','¥1,580 起','p-xintongxue-23.jpg','xintongxue','中山眼科临床：延缓近视进展50.9%'],['全适·乐蕊®','匀光技术，满意度98.7%','¥1,980 起'],['视可得™ SEQUEL 0','学龄版抗疲劳','¥2,880 起']],
+  'kid-sport':[['睛鹰MyoDISC','聚碳酸酯抗冲击，运动也放心','¥4,390 起','p-jingying-25.jpg','jingying','港理工双专利 · 日内瓦发明展大奖'],['全适·乐蕊®','匀光技术近视管理','¥1,980 起'],['新瞳学™/PRO','高性价比之选','¥1,580 起']],
+  'work-office':[['视可得™','会聚增效™专利，专为屏幕疲劳设计','¥2,880 起','kv-shikede-11.jpg','shikede','满意度97% · 四种眼模型'],['适可维™','头痛颈肩痛？可能是DVS','¥8,380 起'],['新数码','入门级数码型','门店咨询']],
+  'work-drive':[['视博泰偏光','PVA偏光阻隔路面反光','门店咨询','scene-51.jpg','shibotai','驾驶更安全'],['唯光变色','室内室外一镜切换','¥880 起'],['视可得™','下班继续抗疲劳','¥2,880 起']],
+  'work-mix':[['视可得™','全场景抗疲劳，年龄选型','¥2,880 起','kv-shikede-11.jpg','shikede','眼睛累 戴视可得™'],['双非淳薄','高度数也轻薄美观','门店咨询'],['星蓝·单焦点','片基防蓝光','¥780 起']],
+  'mid-office':[['智慧镜 S PRO','专业型渐进＋办公距离优化','门店咨询','scene-45.jpg','zhihuijing','自由曲面 · 13项渐进技术'],['智阅办公渐进','专为室内办公设计','门店咨询'],['SEQUEL PAL','渐进版抗疲劳','¥3,680 起']],
+  'mid-drive':[['智慧镜渐进＋变色','渐进与阳光防护兼得','门店咨询','scene-47.jpg','zhihuijing','远中近平滑过渡'],['视博泰偏光渐进','偏光+渐进二合一','门店咨询'],['无忧渐进','初戴渐进推荐','门店咨询']],
+  'mid-life':[['无忧渐进','5维定制，初戴渐进不晕眩','门店咨询','scene-39.jpg','wuyou','自动通道设计快速适应'],['智慧镜 B/I','轻松型/悦享型渐进','门店咨询'],['双光镜片','远近兼顾经济之选','门店咨询']]};
+let wa=[null,null,null];
+function wgo(n){document.querySelectorAll('.wq').forEach(q=>q.classList.remove('on'));
+  document.getElementById('wq'+n).classList.add('on');
+  document.querySelectorAll('.wdot').forEach((d,i)=>d.classList.toggle('on',i<=n));
+  document.querySelectorAll('.wq .wback').forEach(b=>b.style.display='block')}
+function wback(n){document.getElementById('wres').classList.remove('on');wgo(n)}
+function wreset(){wa=[null,null,null];document.getElementById('wres').classList.remove('on');
+  document.querySelectorAll('.fext').forEach(f=>f.classList.remove('show'));wgo(0)}
+document.getElementById('wq0').addEventListener('click',e=>{
+  const o=e.target.closest('.wopt');if(!o)return;wa[0]=o.dataset.v;
+  document.getElementById('w1opts').innerHTML=W2OPTS[wa[0]].map(x=>
+    `<div class="wopt" data-v="${x[0]}">${x[1]}<small>${x[2]}</small></div>`).join('');
+  wgo(1)});
+document.getElementById('wq1').addEventListener('click',e=>{
+  const o=e.target.closest('.wopt');if(!o)return;wa[1]=o.dataset.v;wgo(2)});
+document.getElementById('wq2').addEventListener('click',e=>{
+  const o=e.target.closest('.wopt');if(!o)return;wa[2]=o.dataset.v;
+  let key=wa[0]+'-'+wa[1];if(!PICK[key])key=wa[0]+'-'+Object.keys(W2OPTS[wa[0]]).length;
+  let arr=(PICK[key]||PICK[wa[0]+'-office']||Object.values(PICK)[0]).slice();
+  /* 第三题影响排序：性价比→低价优先 */
+  if(wa[2]==='value'){arr.sort((a,b)=>{const pa=parseInt((a[2]||'').replace(/[^\d]/g,''))||99999;
+    const pb=parseInt((b[2]||'').replace(/[^\d]/g,''))||99999;return pa-pb});}
+  const p=arr[0],alts=arr.slice(1,3);
+  const img=p[3]||'p-danjiao-27.jpg',pid=p[4]||'danjiao',why=p[5]||'';
+  document.getElementById('prime').innerHTML=
+   `<div class="im"><img src="demo-assets/${img}"></div>
+    <div class="bd"><div class="why">${why?'✓ '+why:''}</div><h4>${p[0]}</h4><p>${p[1]}</p>
+    <span class="pr">${p[2]}</span><br><br><a class="btn" href="网站Demo-产品中心.html#${pid}">查看产品详情</a></div>`;
+  document.getElementById('alts').innerHTML=alts.map(a=>
+   `<a class="alt" href="网站Demo-产品中心.html"><b>${a[0]}</b><p>${a[1]}</p><span>${a[2]}</span></a>`).join('');
+  document.querySelectorAll('.wq').forEach(q=>q.classList.remove('on'));
+  document.getElementById('wres').classList.add('on')});
+function openExt(id){document.querySelectorAll('.fext').forEach(f=>f.classList.toggle('show',f.id===id));
+  document.getElementById(id).scrollIntoView({behavior:'smooth',block:'nearest'})}
+document.getElementById('citySel').onchange=function(){
+  const c=this.value;if(!c)return;
+  document.getElementById('storeList').innerHTML=
+  [['爱尔眼科 '+c+'视光中心','近视管理合作渠道 ｜ 地址数据待接入'],
+   ['宝岛眼镜 '+c+'旗舰店','阿波罗授权零售 ｜ 地址数据待接入'],
+   ['普瑞眼科 '+c+'院区','视觉健康产品合作 ｜ 地址数据待接入']]
+  .map(s=>`<div class="store"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')};
+function verify(){
+  const v=document.getElementById('vcode').value.trim();
+  const o=document.getElementById('vout');
+  o.innerHTML=v.length<8?'请输入完整防伪码（demo示意）。':
+  `<b>✓ 验证通过（demo示意）</b> ｜ 阿波罗镜片正品 · 正式版将接入防伪系统显示产品型号与出厂信息`}
+
+/* 导航高亮 */
+const secs=[...document.querySelectorAll('section[id],div[id="story"]')];
+addEventListener('scroll',()=>{
+  const y=scrollY+150;let cur='';
+  secs.forEach(s=>{if(s.offsetTop<=y)cur=s.id});
+  document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+cur))},{passive:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>阿波罗官网 · 字体方案对比</title>
+<style>
+/* 网络字体：经由 jsdelivr CDN（大陆可访问）。若某行字体未生效=该CDN字重未加载，以说明为准 */
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.5/index.css');
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.5/700.css');
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.5/900.css');
+@import url('https://cdn.jsdelivr.net/npm/misans@4.0.0/lib/Normal/MiSans-Bold.min.css');
+@import url('https://cdn.jsdelivr.net/npm/misans@4.0.0/lib/Normal/MiSans-Regular.min.css');
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F4F3F0;color:#16181D;padding:50px 6vw;line-height:1.8}
+.head{margin-bottom:40px}
+.head h1{font-size:28px;font-family:"PingFang SC","Microsoft YaHei",sans-serif;letter-spacing:.05em}
+.head p{color:#777;font-size:14px}
+.spec{background:#fff;border:1px solid #E2DFD9;margin-bottom:28px;display:grid;grid-template-columns:240px 1fr}
+.meta{padding:30px;border-right:1px solid #E2DFD9;background:#FAF9F7}
+.meta b{font-size:16px;display:block;margin-bottom:8px}
+.meta span{font-size:12.5px;color:#888;display:block;line-height:1.9}
+.meta .tag{display:inline-block;font-size:11px;padding:3px 10px;margin-top:10px;border:1px solid #CF0A2C;color:#CF0A2C;letter-spacing:.1em}
+.demo{padding:36px 40px}
+.demo .h{font-size:54px;font-weight:900;line-height:1.3;letter-spacing:.04em}
+.demo .h em{font-style:normal;background:linear-gradient(100deg,#CF0A2C,#E8C268);-webkit-background-clip:text;background-clip:text;color:transparent}
+.demo .s{font-size:21px;font-weight:700;margin:10px 0 12px;color:#333}
+.demo .p{font-size:16.5px;color:#555;max-width:760px}
+.f1{font-family:"PingFang SC","Microsoft YaHei",sans-serif}
+.f2{font-family:"Noto Sans SC",sans-serif}
+.f3{font-family:"MiSans","PingFang SC",sans-serif}
+.f4{font-family:"PingFang SC",sans-serif;font-weight:600}
+.f4 .h{font-weight:600;letter-spacing:.1em}
+.f5{font-family:"Noto Serif SC","Songti SC","STSong",serif}
+.note{background:#16181D;color:#cbd0d8;padding:26px 32px;font-size:13.5px;line-height:2;font-family:"PingFang SC","Microsoft YaHei",sans-serif}
+.note b{color:#fff}
+@media(max-width:900px){.spec{grid-template-columns:1fr}.demo .h{font-size:34px}}
+</style>
+</head>
+<body>
+<div class="head">
+  <h1>阿波罗官网 · 大标题字体方案对比</h1>
+  <p>同一段文案五种方案。竞品规律：蔡司/依视路/HOYA/Zenni 全部使用无衬线大字重，中文站落地为大字重黑体。</p>
+</div>
+
+<div class="spec">
+  <div class="meta"><b>方案1 · 系统苹方/雅黑 加粗</b><span>Mac=苹方 PingFang ｜ Win=微软雅黑<br>零加载、零版权风险<br>HOYA中文站实际就是这个效果</span><span class="tag">最稳</span></div>
+  <div class="demo f1"><div class="h">全球经验 服务<em>中国</em></div><div class="s">每一片镜片，都是一次精密的登月。</div><div class="p">命名源自阿波罗11号登月计划。自1972年香港启程，成长为亚太地区最大光学镜片制造商之一。曲率差之毫厘，视界谬以千里。</div></div>
+</div>
+
+<div class="spec">
+  <div class="meta"><b>方案2 · 思源黑体 Black</b><span>Adobe+Google开源，免费商用<br>人文无衬线，最接近蔡司/依视路的 Frutiger 气质<br>字重最全(7档)，大字号最有冲击力</span><span class="tag">推荐 · 最像国际大牌</span></div>
+  <div class="demo f2"><div class="h" style="font-weight:900">全球经验 服务<em>中国</em></div><div class="s">每一片镜片，都是一次精密的登月。</div><div class="p">命名源自阿波罗11号登月计划。自1972年香港启程，成长为亚太地区最大光学镜片制造商之一。曲率差之毫厘，视界谬以千里。</div></div>
+</div>
+
+<div class="spec">
+  <div class="meta"><b>方案3 · MiSans Bold</b><span>小米开源，免费商用<br>极简中性、现代感强，笔画更利落<br>科技感比思源更冷一点</span><span class="tag">最现代</span></div>
+  <div class="demo f3"><div class="h" style="font-weight:700">全球经验 服务<em>中国</em></div><div class="s">每一片镜片，都是一次精密的登月。</div><div class="p">命名源自阿波罗11号登月计划。自1972年香港启程，成长为亚太地区最大光学镜片制造商之一。曲率差之毫厘，视界谬以千里。</div></div>
+</div>
+
+<div class="spec">
+  <div class="meta"><b>方案4 · 苹方中字重+大字距</b><span>不用极粗，用 Medium/Semibold + 加宽字距<br>蔡司集团站的「克制高级」路线<br>适合走轻奢极简风</span><span class="tag">最克制</span></div>
+  <div class="demo f4"><div class="h">全球经验 服务<em>中国</em></div><div class="s" style="font-weight:500;letter-spacing:.08em">每一片镜片，都是一次精密的登月。</div><div class="p">命名源自阿波罗11号登月计划。自1972年香港启程，成长为亚太地区最大光学镜片制造商之一。曲率差之毫厘，视界谬以千里。</div></div>
+</div>
+
+<div class="spec">
+  <div class="meta"><b>方案5 · 现状（宋体衬线）</b><span>当前demo使用的方案<br>作为对照：文学感强但发「旧」，<br>四个竞品站无一使用</span><span class="tag">对照组</span></div>
+  <div class="demo f5"><div class="h" style="font-weight:700">全球经验 服务<em>中国</em></div><div class="s">每一片镜片，都是一次精密的登月。</div><div class="p">命名源自阿波罗11号登月计划。自1972年香港启程，成长为亚太地区最大光学镜片制造商之一。曲率差之毫厘，视界谬以千里。</div></div>
+</div>
+
+<div class="note"><b>说明：</b>「服务中国」四字的红→金渐变就是改版后大标题的动态用色示例（正式版会加流动动画）。方案2/3需要联网加载字体，打开后等两秒；如果方案2/3看起来和方案1一样，说明CDN没加载成功，告诉我换源。正式上线时字体文件会下载后随网站自托管（约1-3MB子集化后），不依赖外部CDN。</div>
+</body>
+</html>

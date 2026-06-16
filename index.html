@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>阿波罗 APOLLO ｜ 网站设计预览总览</title>
+<style>
+  :root{
+    --红:#CF0A2C; --红深:#A30822; --墨:#16181D; --夜:#0B0D11;
+    --纸:#FAF9F7; --灰:#6E737C; --线:#E7E4DE; --金:#E8C268;
+    --黑体:"PingFang SC","Microsoft YaHei","Source Han Sans CN",sans-serif;
+    --衬线:"Noto Serif SC","Songti SC","STSong",serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:var(--黑体);color:var(--墨);background:var(--纸);line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  header{background:var(--夜);color:#fff;padding:64px 0 56px;position:relative;overflow:hidden}
+  header::after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%,var(--金),transparent 60%);opacity:.18}
+  .kicker{font-family:var(--衬线);font-size:13px;letter-spacing:.5em;color:var(--金);text-transform:uppercase;display:flex;align-items:center;gap:14px}
+  .kicker::before{content:"";width:38px;height:1px;background:var(--金)}
+  h1{font-family:var(--衬线);font-size:46px;font-weight:700;letter-spacing:.04em;margin:18px 0 10px}
+  header p{color:#9aa0ab;max-width:680px;font-size:15px}
+  .meta{margin-top:22px;font-size:12px;color:#6b7280;letter-spacing:.04em}
+
+  section{padding:54px 0 10px}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:6px}
+  .sec-num{font-family:var(--衬线);font-size:13px;letter-spacing:.4em;color:var(--红);font-weight:700}
+  h2{font-family:var(--衬线);font-size:30px;font-weight:700;letter-spacing:.03em}
+  .sec-desc{color:var(--灰);max-width:680px;margin:8px 0 28px;font-size:14px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+  .card{display:block;background:#fff;border:1px solid var(--线);border-radius:14px;padding:24px;transition:.25s;position:relative}
+  .card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(0,0,0,.10);border-color:transparent}
+  .tag{display:inline-block;font-size:11px;letter-spacing:.1em;padding:4px 10px;border-radius:999px;margin-bottom:14px;font-weight:600}
+  .tag.red{background:rgba(207,10,44,.10);color:var(--红)}
+  .tag.dark{background:var(--夜);color:#fff}
+  .tag.white{background:#f1f0ec;color:var(--墨)}
+  .tag.gold{background:rgba(232,194,104,.22);color:var(--红深)}
+  .card h3{font-size:19px;font-weight:700;margin-bottom:6px}
+  .card p{font-size:13px;color:var(--灰);line-height:1.6}
+  .card .go{margin-top:16px;font-size:13px;color:var(--红);font-weight:600;display:flex;align-items:center;gap:8px;transition:gap .25s}
+  .card:hover .go{gap:14px}
+
+  .note{background:#fff;border:1px solid var(--线);border-left:3px solid var(--金);border-radius:10px;padding:18px 22px;margin:14px 0 0;font-size:13px;color:var(--灰)}
+
+  footer{margin-top:60px;padding:30px 0 56px;border-top:1px solid var(--线);color:var(--灰);font-size:12px;text-align:center}
+  @media(max-width:600px){h1{font-size:34px}h2{font-size:24px}header{padding:48px 0 40px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="kicker">APOLLO ｜ 全球经验 服务中国</div>
+    <h1>阿波罗 网站设计预览</h1>
+    <p>这是阿波罗两个并行项目的设计预览总览：品牌官网（多风格 demo）与渐进镜片电商站（功能 MVP）。点击下方任意卡片即可在线浏览对应版本。</p>
+    <div class="meta">演示 / 内部评审用 · 内容为设计稿，部分按钮为示意</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <div class="sec-head"><span class="sec-num">01</span><h2>阿波罗品牌官网</h2></div>
+    <p class="sec-desc">围绕"五个必答问题"组织的品牌官网，三种视觉风格供挑选，另含产品中心页与转场/字体方案预览。</p>
+    <div class="grid">
+      <a class="card" href="网站Demo-A-登月红.html">
+        <span class="tag red">风格 A · 登月红</span>
+        <h3>登月红版</h3>
+        <p>红色主视觉 + 登月叙事，品牌情绪最强的一版。</p>
+        <span class="go">在线浏览 →</span>
+      </a>
+      <a class="card" href="网站Demo-B-临床白.html">
+        <span class="tag white">风格 B · 临床白</span>
+        <h3>临床白版</h3>
+        <p>白底大留白、专业克制，突出临床循证与信任感。</p>
+        <span class="go">在线浏览 →</span>
+      </a>
+      <a class="card" href="网站Demo-C-深空黑.html">
+        <span class="tag dark">风格 C · 深空黑</span>
+        <h3>深空黑版</h3>
+        <p>深色科技调性，沉浸式登月氛围。</p>
+        <span class="go">在线浏览 →</span>
+      </a>
+      <a class="card" href="网站Demo-产品中心.html">
+        <span class="tag red">产品中心</span>
+        <h3>产品中心页</h3>
+        <p>明星子品牌与经典光学镜片的二级展示页。</p>
+        <span class="go">在线浏览 →</span>
+      </a>
+      <a class="card" href="转场预览-日月交食.html">
+        <span class="tag gold">动效预览</span>
+        <h3>转场动画 · 日月交食</h3>
+        <p>章节转场方案 C 预览（黑色月盘滑开露出金色日冕）。</p>
+        <span class="go">在线浏览 →</span>
+      </a>
+      <a class="card" href="字体方案对比.html">
+        <span class="tag gold">字体方案</span>
+        <h3>大标题字体对比</h3>
+        <p>五个标题字体方案并排对比（推荐方案2 思源黑体 Black）。</p>
+        <span class="go">在线浏览 →</span>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">02</span><h2>阿波罗渐进镜片电商站</h2></div>
+    <p class="sec-desc">帮 40-65 岁用户 3 分钟选到合适渐进镜片的垂直电商站。当前为 MVP v0.1，已完成"测试幕 + 产品幕"两幕全功能，移动端优先。</p>
+    <div class="grid">
+      <a class="card" href="渐进电商站/MVP/index.html">
+        <span class="tag red">MVP v0.1 · 最新版</span>
+        <h3>渐进电商站 MVP</h3>
+        <p>双入口测试向导（问卷+校准+视力/散光自测）+ 智能推荐结果页 + 6 款产品翻转卡与完整价格矩阵。建议用手机打开体验。</p>
+        <span class="go">在线浏览 →</span>
+      </a>
+      <a class="card" href="渐进电商站/方案样张/方向B-v2-Zenni风.html">
+        <span class="tag white">视觉定稿样张</span>
+        <h3>方向 B-v2 · Zenni 风</h3>
+        <p>已定稿的视觉基准样张（MVP 视觉以此为准）。</p>
+        <span class="go">在线浏览 →</span>
+      </a>
+    </div>
+    <div class="note">提示：电商站 MVP 为移动端优先设计，用手机浏览效果最佳；测试结果为筛查参考，实际配镜以门店验光为准。</div>
+  </section>
+
+  <footer>
+    阿波罗 APOLLO · 网站设计预览 · 内部评审用<br>
+    Global Vision, China Focus
+  </footer>
+</div>
+</body>
+</html>
