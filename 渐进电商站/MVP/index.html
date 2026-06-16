@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>阿波罗渐进镜片 · 找到我的镜片（MVP）</title>
+<script src="../data/prices.js"></script>
+<script src="../data/rules.js"></script>
+<style>
+/* ============================================================
+   ★ 配置区（视觉基准=方案样张/方向B-v2-Zenni风，改肤只动这里）
+   ============================================================ */
+:root{
+  --墨:#111; --白:#fff; --卡灰:#F4F4F2; --描边:#E8E8E6;
+  --薄荷:#D9F0E6; --薄荷字:#0B5C43; --红:#C8102E; --黄:#FFD84D;
+  --浅蓝:#CFE8F0; --深青:#0E4F48; --灰:#6E6E6E; --警示底:#FDECEE;
+  --字-巨:40px; --字-大:24px; --字-中:18px; --字-正文:17px;
+  --行高:1.7; --圆角-砖:18px; --圆角-卡:12px; --间距:18px;
+  --字体:-apple-system,"PingFang SC","HarmonyOS Sans SC","MiSans","Source Han Sans SC","Noto Sans SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--字体);font-size:var(--字-正文);line-height:var(--行高);color:var(--墨);background:var(--白);padding-bottom:70px}
+img{max-width:100%;display:block} a{text-decoration:none;color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 var(--间距)}
+.mega{font-size:var(--字-巨);font-weight:900;letter-spacing:-.02em;line-height:1.05}
+.pill{display:inline-flex;align-items:center;gap:7px;background:var(--墨);color:#fff;font-weight:700;font-size:15px;padding:11px 22px;border-radius:999px;border:1.5px solid var(--墨);cursor:pointer}
+.pill:hover{background:#333}.pill.white{background:#fff;color:var(--墨)}.pill.sm{padding:8px 16px;font-size:13.5px}
+.note-bar{background:var(--墨);color:#fff;text-align:center;font-size:12.5px;padding:5px;font-weight:600}
+
+/* 顶栏 */
+.topbar{display:flex;align-items:center;gap:18px;padding:13px var(--间距);max-width:1120px;margin:0 auto}
+.topbar img{height:26px}
+.topnav{margin-left:auto;display:flex;gap:20px;font-size:14.5px;font-weight:600}
+header{border-bottom:1px solid var(--描边);position:sticky;top:0;background:#fff;z-index:8}
+
+/* 迷你hero */
+.mini-hero{padding:34px 0 30px;text-align:center}
+.mini-hero .tag{display:inline-block;background:var(--警示底);color:var(--红);font-size:13px;font-weight:700;padding:4px 14px;border-radius:999px;margin-bottom:10px}
+.mini-hero p{color:var(--灰);margin:8px auto 20px;max-width:32em}
+.entry{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* —— 测试向导 —— */
+.quiz-sec{background:var(--卡灰);padding:40px 0 50px}
+.quiz{max-width:620px;margin:0 auto;background:#fff;border-radius:var(--圆角-砖);padding:28px 24px 26px;box-shadow:0 4px 24px rgba(0,0,0,.05)}
+.qbar{height:6px;background:var(--描边);border-radius:3px;margin-bottom:20px;overflow:hidden}
+.qbar i{display:block;height:100%;background:var(--墨);border-radius:3px;transition:width .3s}
+.qstep h3{font-size:21px;font-weight:900;margin-bottom:4px}
+.qstep .qsub{color:var(--灰);font-size:14px;margin-bottom:18px}
+.opts{display:grid;gap:10px}
+.opt{border:1.8px solid var(--描边);border-radius:12px;padding:13px 16px;cursor:pointer;font-weight:600;font-size:16px;display:flex;align-items:center;gap:10px;background:#fff}
+.opt small{font-weight:400;color:var(--灰);font-size:13px;display:block}
+.opt.on{border-color:var(--墨);background:#F7F7F5}
+.opt .ck{width:20px;height:20px;border-radius:50%;border:2px solid #C9C9C9;flex:none;display:flex;align-items:center;justify-content:center}
+.opt.on .ck{border-color:var(--墨);background:var(--墨)}
+.opt.on .ck::after{content:"";width:8px;height:8px;border-radius:50%;background:#fff}
+.qnav{display:flex;justify-content:space-between;margin-top:22px;align-items:center}
+.qnav .skip{color:var(--灰);font-size:13.5px;cursor:pointer;text-decoration:underline}
+.qhint{background:var(--浅蓝);border-radius:10px;padding:10px 14px;font-size:13.5px;margin-bottom:16px}
+
+/* 校准 */
+.cardbox{margin:14px auto;border:2.5px dashed var(--红);border-radius:8px;height:108px;display:flex;align-items:center;justify-content:center;color:var(--红);font-size:13px;font-weight:700}
+input[type=range]{width:100%;margin:8px 0 4px;accent-color:var(--墨)}
+
+/* 近视力表 */
+.nvrow{border:1.8px solid var(--描边);border-radius:10px;padding:8px 14px;margin-bottom:8px;cursor:pointer;text-align:center;overflow:hidden;white-space:nowrap}
+.nvrow.on{border-color:var(--墨);background:#F7F7F5}
+
+/* 散光盘 */
+.astig{display:flex;justify-content:center;margin:6px 0 14px}
+
+/* 结果页 */
+.result .rcard{background:var(--卡灰);border-radius:14px;padding:18px;margin-bottom:12px}
+.result .rcard h4{font-size:19px;font-weight:900}
+.result .rcard .rp{color:var(--红);font-weight:900;font-size:24px}
+.result .rrow{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+.result .chip{background:var(--浅蓝);border-radius:999px;padding:5px 14px;font-size:13.5px;font-weight:700}
+.result ul{margin:8px 0 0 18px;font-size:13.5px;color:#444}
+.warn{background:var(--警示底);border-left:4px solid var(--红);border-radius:8px;padding:12px 14px;font-size:13.5px;color:#7A1020;margin:14px 0;font-weight:600}
+
+/* —— 产品区 —— */
+.sec{padding:44px 0}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:20px;flex-wrap:wrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.pcard{background:var(--卡灰);border-radius:var(--圆角-卡);padding:14px;position:relative;display:flex;flex-direction:column;border:2px solid transparent}
+.pcard.hot{border-color:var(--红)}
+.pcard .tag{position:absolute;top:12px;left:12px;background:var(--薄荷);color:var(--薄荷字);font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;z-index:2}
+.pcard .tag.red{background:var(--警示底);color:var(--红)}
+.pcard .ph{height:170px;margin:26px 0 8px;perspective:900px}
+.pcard .flip{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s}
+.pcard:hover .flip,.pcard .flip.flipped{transform:rotateY(180deg)}
+.pcard .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.pcard .face.front img{width:100%;height:100%;object-fit:cover;object-position:center 22%}
+.pcard .face.back{transform:rotateY(180deg);background:#fff}
+.pcard .face.back img{max-height:88%;width:auto;mix-blend-mode:multiply}
+.pcard h3{font-size:16px;font-weight:800}
+.pcard .who{font-size:12.5px;color:var(--灰);margin-bottom:6px}
+.pcard .pr b{font-size:21px;font-weight:900}.pcard .pr b::before{content:"¥";font-size:13px}
+.pcard .pr span{font-size:12px;color:var(--灰)}
+.pcard ul{list-style:none;margin:6px 0 10px}
+.pcard li{font-size:13px;color:#3A3F47;padding-left:18px;position:relative;margin-bottom:2px}
+.pcard li::before{content:"✓";position:absolute;left:0;color:var(--薄荷字);font-weight:900}
+.pcard .pill{justify-content:center;margin-top:auto}
+
+/* 价格矩阵 */
+.matrix{grid-column:1/-1;background:#fff;border:1.5px solid var(--描边);border-radius:12px;padding:18px;overflow-x:auto}
+.matrix h4{font-size:17px;font-weight:900;margin-bottom:4px}
+.matrix .meta{font-size:12.5px;color:var(--灰);margin-bottom:12px}
+.matrix table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+.matrix th,.matrix td{border:1px solid var(--描边);padding:8px 10px;text-align:center}
+.matrix th{background:var(--卡灰);font-weight:800}
+.matrix td.has{font-weight:700}
+.matrix td.hl,.matrix th.hl{background:#FFF4D6}
+.matrix .vtabs{display:flex;gap:8px;margin-bottom:10px}
+.matrix .vtab{padding:6px 16px;border-radius:999px;border:1.5px solid var(--描边);cursor:pointer;font-size:13.5px;font-weight:700}
+.matrix .vtab.on{background:var(--墨);color:#fff;border-color:var(--墨)}
+.extras{background:var(--卡灰);border-radius:12px;padding:14px 18px;font-size:13px;color:#444;margin-top:14px}
+.extras b{display:block;margin-bottom:4px}
+
+/* dock & footer */
+.dock{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--描边);padding:9px var(--间距);display:flex;gap:10px;align-items:center;z-index:9}
+.dock .p{font-size:12px;color:var(--灰)}.dock .p b{display:block;color:var(--墨);font-size:17px;font-weight:900}
+.dock a{flex:1;text-align:center;background:var(--墨);color:#fff;font-weight:700;padding:13px;border-radius:999px;font-size:15px}
+footer{text-align:center;font-size:13px;color:var(--灰);padding:26px 0 18px}
+@media(max-width:760px){:root{--字-巨:30px}.topnav{display:none}}
+</style>
+</head>
+<body>
+<div class="note-bar">MVP v0.1 · 测试+产品两幕 · 完整8幕见v1.0</div>
+<header>
+  <div class="topbar">
+    <img src="../assets/logo-02.png" alt="阿波罗镜片">
+    <nav class="topnav"><a href="#quiz">找到我的镜片</a><a href="#products">产品价格</a></nav>
+  </div>
+</header>
+
+<!-- 入口 -->
+<section class="mini-hero wrap">
+  <span class="tag">工厂直营 · 渐进定制镜片 ¥1280 起</span>
+  <div class="mega">找到我的渐进镜片</div>
+  <p>看远看近一副搞定。两条路，选一条开始：</p>
+  <div class="entry">
+    <a class="pill" href="#quiz" onclick="startQuiz()">我没验光过 · 3分钟测试</a>
+    <a class="pill white" href="#products" onclick="hasRx()">我有验光单 · 直接选产品</a>
+  </div>
+</section>
+
+<!-- 第4幕：测试 -->
+<section class="quiz-sec" id="quiz">
+  <div class="wrap"><div class="quiz" id="quizBox"></div></div>
+</section>
+
+<!-- 第5幕：产品 -->
+<section class="sec wrap" id="products">
+  <div class="sec-head">
+    <div class="mega">渐进镜片价格一览</div>
+    <span style="font-size:13px;color:var(--灰)">点卡片看产品图 · 点按钮看完整价格表</span>
+  </div>
+  <div class="grid" id="pgrid"></div>
+  <div class="extras" id="extras"></div>
+</section>
+
+<footer>阿波罗镜片 · 1972年创立于香港 · 全球经验 服务中国<br>本页为MVP演示版，价格以实物包装最新参数为准</footer>
+<div class="dock"><div class="p">渐进镜片<b>¥1280 起</b></div><a href="#quiz" onclick="startQuiz()">3分钟测试 · 找到我的镜片</a></div>
+
+<script>
+/* ============================================================
+   ★ 产品展示配置（图片槽位+在线兜底+角标；加新品改这里+prices.js）
+   ============================================================ */
+const UI = {
+  "zh-b":   { tag:"超值入门", red:true,  who:"预算优先 · 轻度老花", frame:"#356859", pxm:"11989338", pxc:"7063515",
+              points:["入门级渐进之选","利斯廷法则设计","ADD +1.00~+2.50"] },
+  "wuyou":  { tag:"40-54岁最多人选 · 可退换", red:true, who:"渐进初戴者首选", frame:"#8A5A2B", pxm:"30976000", pxc:"1438409",
+              points:["5维个性化参数定制","不适应无忧退换","左右眼面弯相配"] },
+  "zh-i":   { tag:"55+推荐", red:false, who:"全年龄ADD · 换片升级", frame:"#274472", pxm:"8065097", pxc:"32398468",
+              points:["户外/均衡双设计","散光像差优化","ADD +0.50~+3.50"] },
+  "zh-spro":{ tag:"验光师推荐", red:false, who:"专为亚洲人眼型设计", frame:"#111", pxm:"7652508", pxc:"25389282",
+              points:["像散区优化","瞳孔环修正技术","夜间视觉优化"] },
+  "zh-u":   { tag:"旗舰定制", red:false, who:"全参数高端定制", frame:"#3E3A39", pxm:"10223872", pxc:"12585542",
+              points:["镜架参数全定制","自动通道设计","波面修正技术"] },
+  "zhiyue": { tag:"办公第二副", red:false, who:"室内专用 · 不可驾驶", frame:"#0F5A66", pxm:"9304662", pxc:"9201655",
+              points:["0.5-4米中近切换","第一视觉看屏幕","三种距离定制"] }
+};
+const ORDER = ["zh-b","wuyou","zh-i","zh-spro","zh-u","zhiyue"];
+const IDXS = ["1.50","1.60","1.67","1.74"];
+const PX=(id,sz)=>`https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&${sz}`;
+
+/* 最低价计算（"起"价） */
+function minPrice(p){
+  const pools = p.versions ? Object.values(p.versions) : [p.coatings];
+  let m = Infinity;
+  pools.forEach(c=>Object.values(c).forEach(r=>Object.values(r).forEach(v=>{ if(v&&v<m) m=v; })));
+  return m;
+}
+
+/* ============ 产品区渲染 ============ */
+function lensSVG(c){return `<svg viewBox="0 0 340 120" fill="none"><path d="M10 38 Q14 30 30 30 H90" stroke="${c}" stroke-width="7" stroke-linecap="round"/><path d="M330 38 Q326 30 310 30 H250" stroke="${c}" stroke-width="7" stroke-linecap="round"/><rect x="62" y="28" width="100" height="70" rx="26" stroke="${c}" stroke-width="7" fill="rgba(190,220,235,.35)"/><rect x="178" y="28" width="100" height="70" rx="26" stroke="${c}" stroke-width="7" fill="rgba(190,220,235,.35)"/><path d="M162 46 Q170 38 178 46" stroke="${c}" stroke-width="7" stroke-linecap="round"/></svg>`;}
+
+function matrixTable(coat, hlIdx){
+  const rows = Object.entries(coat);
+  return `<table><tr><th>膜层 \\ 折射率</th>${IDXS.map(i=>`<th class="${i===hlIdx?'hl':''}">${i}</th>`).join("")}</tr>
+  ${rows.map(([cn,r])=>`<tr><th style="text-align:left">${cn}</th>${IDXS.map(i=>{
+    const v=r[i]; return `<td class="${v?'has':''} ${i===hlIdx?'hl':''}">${v?'¥'+v:'—'}</td>`;}).join("")}</tr>`).join("")}</table>`;
+}
+function renderMatrix(id, hlIdx){
+  const p = PRICES[id];
+  let body;
+  if (p.versions){
+    const keys=Object.keys(p.versions);
+    body = `<div class="vtabs">${keys.map((k,i)=>`<span class="vtab ${i===0?'on':''}" onclick="switchV('${id}','${k}',this)">${k}</span>`).join("")}</div>
+            <div id="vbody-${id}">${matrixTable(p.versions[keys[0]], hlIdx)}</div>`;
+  } else body = matrixTable(p.coatings, hlIdx);
+  return `<div class="matrix" id="mx-${id}">
+    <h4>${p.name} 完整价格表</h4>
+    <div class="meta">ADD范围 +${p.addMin.toFixed(2)}~+${p.addMax.toFixed(2)} ｜ 渐进通道 ${p.channels} ｜ 验配需提供：${p.fitParams}<br>${p.fitNotes}</div>
+    ${body}</div>`;
+}
+let openMx = null, hlIdxGlobal = null;
+function toggleMatrix(id){
+  document.querySelectorAll(".matrix").forEach(m=>m.remove());
+  if (openMx === id){ openMx=null; return; }
+  openMx = id;
+  document.getElementById("pc-"+id).insertAdjacentHTML("afterend", renderMatrix(id, hlIdxGlobal));
+}
+function switchV(id, ver, el){
+  el.parentNode.querySelectorAll(".vtab").forEach(t=>t.classList.remove("on")); el.classList.add("on");
+  document.getElementById("vbody-"+id).innerHTML = matrixTable(PRICES[id].versions[ver], hlIdxGlobal);
+}
+function renderProducts(){
+  document.getElementById("pgrid").innerHTML = ORDER.map(id=>{
+    const p=PRICES[id], u=UI[id];
+    return `<div class="pcard" id="pc-${id}">
+      <span class="tag ${u.red?'red':''}">${u.tag}</span>
+      <div class="ph" onclick="this.querySelector('.flip').classList.toggle('flipped')"><div class="flip">
+        <div class="face front"><img src="../assets/products/${id}/main.jpg" alt="${p.short}模特图" onerror="this.onerror=null;this.src='${PX(u.pxm,"w=700&h=600&fit=crop")}'"></div>
+        <div class="face back"><img src="../assets/products/${id}/card.jpg" alt="${p.short}产品图" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='${PX(u.pxc,"w=700&h=600&fit=crop")}'}else if(this.dataset.f==1){this.dataset.f=2;this.src='../assets/products/${id}/card.svg'}else{this.outerHTML=lensSVG('${u.frame}')}"></div>
+      </div></div>
+      <h3>${p.name}</h3><div class="who">${p.pos} · ${u.who}</div>
+      <div class="pr"><b>${minPrice(p)}</b> <span>起</span></div>
+      <ul>${u.points.map(x=>`<li>${x}</li>`).join("")}</ul>
+      <button class="pill sm" onclick="toggleMatrix('${id}')">查看完整价格表</button>
+    </div>`;
+  }).join("");
+  document.getElementById("extras").innerHTML = `<b>附加费用与说明</b>` +
+    Object.entries(EXTRAS).map(([k,v])=>`${k}：${v}`).join("<br>");
+}
+
+/* ============ 测试向导 ============ */
+const QS = {
+  steps: ["q1","q2","q3","q4","q5","q6","cal","nv","astig","result"],
+  a: JSON.parse(localStorage.getItem("apollo_quiz")||"{}"),
+  i: 0
+};
+const save=()=>localStorage.setItem("apollo_quiz",JSON.stringify(QS.a));
+function startQuiz(){ QS.i=0; renderStep(); }
+function hasRx(){
+  hlIdxGlobal=null; renderProducts();
+  document.getElementById("quizBox").innerHTML =
+   `<div class="qstep"><h3>已有验光单？很好，这是最稳的路</h3>
+    <div class="qhint">对照验光单确认是否包含：<b>球镜SPH、柱镜CYL、轴位AXIS、单眼瞳距PD、瞳高PH、下加光ADD</b>。缺ADD或瞳高的话，下单前请回门店补测。</div>
+    <p style="font-size:14px;color:var(--灰)">直接浏览下方产品并展开价格表选择折射率与膜层；提交意向后验光师会与您电话核对光度（意向单功能在v1.0版本提供，当前可联系客服）。</p>
+    <div class="qnav"><span></span><button class="pill" onclick="location.hash='#products'">去选产品</button></div></div>`;
+}
+const OPT=(k,v,t,s,multi)=>`<div class="opt ${multi?(QS.a[k]||[]).includes(v)?'on':'':QS.a[k]===v?'on':''}" onclick="pick('${k}','${v}',${!!multi},this)"><span class="ck"></span><span>${t}${s?`<small>${s}</small>`:""}</span></div>`;
+function pick(k,v,multi,el){
+  if(multi){ QS.a[k]=QS.a[k]||[]; const ix=QS.a[k].indexOf(v); ix>-1?QS.a[k].splice(ix,1):QS.a[k].push(v); el.classList.toggle("on"); }
+  else { QS.a[k]=v; save(); next(); return; }
+  save();
+}
+function bar(){ return `<div class="qbar"><i style="width:${(QS.i)/(QS.steps.length-1)*100}%"></i></div>`; }
+function nav(skipable){
+  return `<div class="qnav">
+    <button class="pill white sm" onclick="prev()" ${QS.i===0?'style="visibility:hidden"':''}>上一步</button>
+    ${skipable?`<span class="skip" onclick="next(true)">跳过这一步</span>`:""}
+    <button class="pill sm" onclick="next()">下一步</button></div>`;
+}
+function prev(){ QS.i=Math.max(0,QS.i-1); renderStep(); }
+const REQUIRED={q1:"ageBand",q3:"experience",q4:"sphRange",q6:"budget"}; /* 关键单选必答 */
+function next(skip){
+  const s=QS.steps[QS.i];
+  if(!skip && REQUIRED[s] && !QS.a[REQUIRED[s]]){ alert("这道题对推荐很关键，请先选择一项"); return; }
+  if(skip){ if(s==="nv") QS.a.nearVisionLevel="skip"; if(s==="astig") QS.a.astigAns="unsure"; if(s==="cal") QS.a.cal=null; }
+  QS.i=Math.min(QS.steps.length-1,QS.i+1); save(); renderStep();
+}
+function renderStep(){
+  const box=document.getElementById("quizBox"); const s=QS.steps[QS.i]; let h="";
+  if(s==="q1") h=`<h3>您的年龄段？</h3><div class="qsub">老花是自然规律，年龄是估算下加光(ADD)的第一依据</div><div class="opts">
+    ${OPT("ageBand","under40","40岁以下")}${OPT("ageBand","40-44","40-44岁")}${OPT("ageBand","45-49","45-49岁")}
+    ${OPT("ageBand","50-54","50-54岁")}${OPT("ageBand","55-59","55-59岁")}${OPT("ageBand","60plus","60岁以上")}</div>${nav()}`;
+  if(s==="q2") h=`<h3>这些情况您有吗？（可多选）</h3><div class="qsub">选完点下一步</div><div class="opts">
+    ${OPT("symptoms","phone","手机要拿远一点才看得清",0,1)}${OPT("symptoms","squint","看药品说明书/标签要眯眼",0,1)}
+    ${OPT("symptoms","blur","看完近处抬头看远，要糊一下才清楚",0,1)}${OPT("symptoms","dark","光线一暗就看不清小字",0,1)}
+    ${OPT("symptoms","switch","近视镜/老花镜摘了戴、戴了摘",0,1)}${OPT("symptoms","none","以上都没有",0,1)}</div>${nav()}`;
+  if(s==="q3") h=`<h3>您现在戴什么眼镜？</h3><div class="qsub"></div><div class="opts">
+    ${OPT("experience","none","不戴眼镜")}${OPT("experience","myopia","只戴近视/远视镜")}
+    ${OPT("experience","reading","只戴老花镜")}${OPT("experience","both","近视镜+老花镜两副换着用")}
+    ${OPT("experience","wearing","已经在戴渐进镜片","想换/升级")}</div>${nav()}`;
+  if(s==="q4") h=`<h3>您的近视/远视度数大概是？</h3><div class="qsub">不记得就选「不清楚」，验光时会测</div><div class="opts">
+    ${OPT("sphRange","0-300","300度以内（或无度数）")}${OPT("sphRange","300-600","300-600度")}
+    ${OPT("sphRange","600-800","600-800度")}${OPT("sphRange","800plus","800度以上")}${OPT("sphRange","unknown","不清楚")}</div>${nav()}`;
+  if(s==="q5") h=`<h3>平时用眼最多的场景？（可多选）</h3><div class="qsub"></div><div class="opts">
+    ${OPT("scenes","computer","电脑办公为主",0,1)}${OPT("scenes","drive","经常开车",0,1)}
+    ${OPT("scenes","outdoor","户外活动多",0,1)}${OPT("scenes","read","室内阅读为主",0,1)}${OPT("scenes","sport","运动较多",0,1)}</div>${nav()}`;
+  if(s==="q6") h=`<h3>预算大概在什么范围？（单片副价）</h3><div class="qsub">我们按预算推荐，硬性参数不合适时会如实告知</div><div class="opts">
+    ${OPT("budget","under1500","1500元以内")}${OPT("budget","1500-3000","1500-3000元")}
+    ${OPT("budget","3000-5000","3000-5000元")}${OPT("budget","5000plus","5000元以上")}</div>${nav()}`;
+  if(s==="cal") h=`<h3>屏幕校准</h3><div class="qsub">接下来两个小测试需要先校准屏幕尺寸</div>
+    <div class="qhint">拿一张<b>银行卡</b>横着贴在下面虚线框上，拖动滑块让框和卡片一样宽。</div>
+    <div class="cardbox" id="calBox" style="width:${QS.a.cal||320}px">银行卡贴这里</div>
+    <input type="range" min="200" max="560" value="${QS.a.cal||320}" oninput="document.getElementById('calBox').style.width=this.value+'px';QS.a.cal=+this.value;save()">
+    ${nav(true)}`;
+  if(s==="nv"){
+    const pxmm=(QS.a.cal||320)/85.6; /* 银行卡标准宽85.6mm */
+    const rows=[[3.2,"大字：阿波罗镜片 视有不同"],[2.3,"中字：看远看近 一副就够"],[1.8,"小字：渐进镜片远中近自然过渡"],[1.4,"较小：清晰视界源于精准定制"],[1.0,"很小：全球经验服务中国"]];
+    h=`<h3>近视力自测</h3><div class="qsub">屏幕放在<b>40厘米</b>外（约一臂微屈），戴着您现在的眼镜，点选<b>能看清的最小一行</b></div>
+    ${rows.map((r,i)=>`<div class="nvrow ${QS.a.nv===i?'on':''}" style="font-size:${(r[0]*pxmm).toFixed(1)}px" onclick="QS.a.nv=${i};QS.a.nearVisionLevel=${i}>=3?'good':(${i}>=2?'mid':'bad');save();renderStep()">${r[1]}</div>`).join("")}
+    <div class="nvrow ${QS.a.nv===-1?'on':''}" onclick="QS.a.nv=-1;QS.a.nearVisionLevel='bad';save();renderStep()">最大那行也看不清</div>${nav(true)}`;
+  }
+  if(s==="astig") h=`<h3>散光自测</h3><div class="qsub">遮住一只眼看下面的放射线盘：有没有某个方向的线条<b>明显更黑更粗</b>？两只眼分别看一次</div>
+    <div class="astig"><svg width="190" height="190" viewBox="0 0 200 200">${Array.from({length:12},(_,i)=>{const a=i*Math.PI/12;return `<line x1="${100+85*Math.cos(a)}" y1="${100+85*Math.sin(a)}" x2="${100-85*Math.cos(a)}" y2="${100-85*Math.sin(a)}" stroke="#111" stroke-width="2.4"/>`;}).join("")}<circle cx="100" cy="100" r="14" fill="#fff" stroke="#111" stroke-width="2"/></svg></div>
+    <div class="opts">${OPT("astigAns","yes","有，某方向明显更黑更粗")}${OPT("astigAns","no","没有，粗细均匀")}${OPT("astigAns","unsure","不确定")}</div>${nav(true)}`;
+  if(s==="result"){ renderResult(box); return; }
+  box.innerHTML = bar()+`<div class="qstep">${h}</div>`;
+  /* 单选题自动进入下一步的题，不需nav按钮（q3/q4/q6/astig 由pick触发next） */
+}
+function renderResult(box){
+  QS.a.astigPositive = QS.a.astigAns === "yes";
+  if (QS.a.experience === "wearing") QS.a.experience = "wearing"; else QS.a.experience = QS.a.experience||"none";
+  const r = recommend(QS.a, PRICES);
+  window.__rec = r; hlIdxGlobal = r.index.main;
+  const p = PRICES[r.primary], u = UI[r.primary];
+  const sec = r.secondary ? PRICES[r.secondary] : null;
+  box.innerHTML = bar()+`<div class="qstep result">
+    <h3>您的专属推荐</h3><div class="qsub">基于 ${Object.keys(QS.a).length} 项作答的筛查估算</div>
+    <div class="rcard"><h4>${p.name}</h4><div style="font-size:13px;color:var(--灰)">${p.pos}</div>
+      <div class="rp">¥${minPrice(p)} 起</div>
+      <div class="rrow"><span class="chip">推荐折射率 ${r.index.main}</span><span class="chip">ADD预估 +${r.addRange[0].toFixed(2)}~+${r.addRange[1].toFixed(2)}</span>${p.guarantee?'<span class="chip" style="background:var(--警示底);color:var(--红)">无忧退换保障</span>':''}</div>
+      <div style="font-size:13px;color:#444">${r.index.note}</div>
+      ${r.reasons.length?`<ul>${r.reasons.map(x=>`<li>${x}</li>`).join("")}</ul>`:""}</div>
+    ${sec?`<div class="rcard" style="opacity:.85"><h4 style="font-size:16px">备选：${sec.name}</h4><div style="font-size:13px;color:var(--灰)">¥${minPrice(sec)}起 · ${sec.pos}</div></div>`:""}
+    ${r.addon?`<div class="rcard" style="background:var(--浅蓝)"><h4 style="font-size:16px">加配建议：${PRICES[r.addon].name}</h4><div style="font-size:13px">¥${minPrice(PRICES[r.addon])}起 · 办公室第二副，室内专用</div></div>`:""}
+    ${r.flags.length?`<ul style="margin-left:18px;font-size:13.5px;color:#7A4A00">${r.flags.map(x=>`<li>${x}</li>`).join("")}</ul>`:""}
+    <div class="warn">⚠ ${r.disclaimer}</div>
+    <div class="qnav">
+      <button class="pill white sm" onclick="copySummary()">复制推荐摘要</button>
+      <button class="pill" onclick="gotoProduct('${r.primary}')">查看该产品价格表</button></div>
+    <div style="text-align:center;margin-top:10px"><span class="skip" onclick="QS.a={};save();startQuiz()">重新测试</span></div></div>`;
+}
+function gotoProduct(id){
+  renderProducts();
+  document.querySelectorAll(".pcard").forEach(c=>c.classList.remove("hot"));
+  const el=document.getElementById("pc-"+id); el.classList.add("hot");
+  openMx=null; toggleMatrix(id);
+  el.scrollIntoView({behavior:"smooth",block:"center"});
+}
+function copySummary(){
+  const r=window.__rec; if(!r) return;
+  const p=PRICES[r.primary];
+  const txt=`【阿波罗渐进-测试推荐摘要】产品:${p.name}｜起价:¥${minPrice(p)}｜推荐折射率:${r.index.main}｜ADD预估:+${r.addRange[0].toFixed(2)}~+${r.addRange[1].toFixed(2)}｜${r.addon?"加配建议:"+PRICES[r.addon].short+"｜":""}来源:在线自测(需门店验光确认)`;
+  (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>alert("已复制，可直接发给客服")).catch(()=>{prompt("长按复制以下内容：",txt)});
+}
+/* 初始化 */
+renderProducts();
+document.getElementById("quizBox").innerHTML = `<div class="qstep" style="text-align:center">
+  <h3>3分钟 · 找到我的镜片</h3><div class="qsub">6道选择题 + 2个视觉小自测（可跳过），不懂度数也能完成</div>
+  <button class="pill" onclick="startQuiz()">开始测试</button>
+  <div style="margin-top:10px"><span class="skip" onclick="hasRx()">我有验光单，跳过测试</span></div></div>`;
+</script>
+</body>
+</html>
